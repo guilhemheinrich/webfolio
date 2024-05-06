@@ -1,0 +1,285 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.0.0",
+  "deps": {
+    "nx": "^19.0.0"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "shared-utilities": [
+        {
+          "file": "packages/shared-utilities/index.ts",
+          "hash": "12204342199892906961"
+        },
+        {
+          "file": "packages/shared-utilities/package.json",
+          "hash": "4209115303767806947"
+        },
+        {
+          "file": "packages/shared-utilities/src/math.ts",
+          "hash": "10580619861439044098"
+        },
+        {
+          "file": "packages/shared-utilities/tsconfig.json",
+          "hash": "2722992491457706703"
+        }
+      ],
+      "apps-webfolio": [
+        {
+          "file": "apps/webfolio/.editorconfig",
+          "hash": "5784436347579547078"
+        },
+        {
+          "file": "apps/webfolio/.eslintignore",
+          "hash": "7575286084817473949"
+        },
+        {
+          "file": "apps/webfolio/.eslintrc.cjs",
+          "hash": "3404425757374245862"
+        },
+        {
+          "file": "apps/webfolio/.gitignore",
+          "hash": "4448520840987711431"
+        },
+        {
+          "file": "apps/webfolio/.npmrc",
+          "hash": "9749914539510891455"
+        },
+        {
+          "file": "apps/webfolio/.prettierrc",
+          "hash": "8680560858046250684"
+        },
+        {
+          "file": "apps/webfolio/.vscode/extensions.json",
+          "hash": "9073201853097668159"
+        },
+        {
+          "file": "apps/webfolio/.vscode/settings.json",
+          "hash": "1586314392371433528"
+        },
+        {
+          "file": "apps/webfolio/README.md",
+          "hash": "14638104149155945360"
+        },
+        {
+          "file": "apps/webfolio/index.html",
+          "hash": "1371670199178603186"
+        },
+        {
+          "file": "apps/webfolio/package.json",
+          "hash": "17458882447751198396",
+          "deps": [
+            "npm:vue-i18n",
+            "npm:pinia",
+            "npm:@quasar/extras",
+            "npm:quasar",
+            "npm:vue",
+            "npm:vue-router",
+            "shared-utilities",
+            "npm:@typescript-eslint/eslint-plugin",
+            "npm:@typescript-eslint/parser",
+            "npm:vite-plugin-checker",
+            "npm:vue-tsc",
+            "npm:eslint",
+            "npm:eslint-plugin-vue",
+            "npm:eslint-config-prettier",
+            "npm:prettier",
+            "npm:@types/node",
+            "npm:@intlify/vite-plugin-vue-i18n",
+            "npm:@quasar/app-vite",
+            "npm:autoprefixer",
+            "npm:typescript"
+          ]
+        },
+        {
+          "file": "apps/webfolio/pnpm-lock.yaml",
+          "hash": "16321850756712714838"
+        },
+        {
+          "file": "apps/webfolio/postcss.config.cjs",
+          "hash": "2740467544327144190"
+        },
+        {
+          "file": "apps/webfolio/public/favicon.ico",
+          "hash": "16649946696092035299"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-128x128.png",
+          "hash": "6010949875601836554"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-16x16.png",
+          "hash": "9303002100199187508"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-32x32.png",
+          "hash": "13244977797167915263"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-96x96.png",
+          "hash": "18045940861069860744"
+        },
+        {
+          "file": "apps/webfolio/quasar.config.js",
+          "hash": "10435589607504756722"
+        },
+        {
+          "file": "apps/webfolio/src/App.vue",
+          "hash": "12153952672694225531"
+        },
+        {
+          "file": "apps/webfolio/src/assets/quasar-logo-vertical.svg",
+          "hash": "12447277999770490337"
+        },
+        {
+          "file": "apps/webfolio/src/boot/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/webfolio/src/boot/i18n.ts",
+          "hash": "11803877727126617874"
+        },
+        {
+          "file": "apps/webfolio/src/components/EssentialLink.vue",
+          "hash": "12821522844984909813"
+        },
+        {
+          "file": "apps/webfolio/src/components/ExampleComponent.vue",
+          "hash": "1468719210505753968"
+        },
+        {
+          "file": "apps/webfolio/src/components/models.ts",
+          "hash": "15765231543940931968"
+        },
+        {
+          "file": "apps/webfolio/src/css/app.scss",
+          "hash": "13536273642970357354"
+        },
+        {
+          "file": "apps/webfolio/src/css/quasar.variables.scss",
+          "hash": "15578742142625591290"
+        },
+        {
+          "file": "apps/webfolio/src/env.d.ts",
+          "hash": "17341166633973606413"
+        },
+        {
+          "file": "apps/webfolio/src/i18n/en-US/index.ts",
+          "hash": "3505754818272013909"
+        },
+        {
+          "file": "apps/webfolio/src/i18n/index.ts",
+          "hash": "5562933490994052260"
+        },
+        {
+          "file": "apps/webfolio/src/layouts/MainLayout.vue",
+          "hash": "1116485313213893662"
+        },
+        {
+          "file": "apps/webfolio/src/pages/ErrorNotFound.vue",
+          "hash": "8217887176559836436"
+        },
+        {
+          "file": "apps/webfolio/src/pages/IndexPage.vue",
+          "hash": "14507617520204504748"
+        },
+        {
+          "file": "apps/webfolio/src/quasar.d.ts",
+          "hash": "2531691115676525312"
+        },
+        {
+          "file": "apps/webfolio/src/router/index.ts",
+          "hash": "4672826852381925068"
+        },
+        {
+          "file": "apps/webfolio/src/router/routes.ts",
+          "hash": "12115379370088368379"
+        },
+        {
+          "file": "apps/webfolio/src/shims-vue.d.ts",
+          "hash": "469563205044373990"
+        },
+        {
+          "file": "apps/webfolio/src/stores/example-store.ts",
+          "hash": "12238747895824819658"
+        },
+        {
+          "file": "apps/webfolio/src/stores/index.ts",
+          "hash": "7317791907048480837"
+        },
+        {
+          "file": "apps/webfolio/src/stores/store-flag.d.ts",
+          "hash": "9332892168447468156"
+        },
+        {
+          "file": "apps/webfolio/tsconfig.json",
+          "hash": "12505668542955805761"
+        },
+        {
+          "file": "apps/webfolio/tsconfig.vue-tsc.json",
+          "hash": "848735846877946867"
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".gitignore",
+        "hash": "18318511172391054080"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "15979023676219791083"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "7743240597175242551"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "6269820474994480090"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "1539253793410688689"
+      },
+      {
+        "file": "README.md",
+        "hash": "9181530001161195805"
+      },
+      {
+        "file": "init/0_init_schema_supabase.sql",
+        "hash": "10694623131197743053"
+      },
+      {
+        "file": "init/README.md",
+        "hash": "15591567137413579260"
+      },
+      {
+        "file": "package.json",
+        "hash": "10999037452320216056"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "3276757013825839117"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "3097983303653545603"
+      },
+      {
+        "file": "supabase/.gitignore",
+        "hash": "11655384966607301079"
+      },
+      {
+        "file": "supabase/config.toml",
+        "hash": "16758243129272491164"
+      },
+      {
+        "file": "supabase/seed.sql",
+        "hash": "3244421341483603138"
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "webfolio",
+  "version": "1.0.0",
+  "description": "A webfolio project using Quasar, Supabase and Directus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd apps/webfolio && pnpm run dev",
+    "build:libs": "pnpm run build:libs:utilities",
+    "build:libs:utilities": "cd packages/shared-utilities && pnpm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ID2L/webfolio.git"
+  },
+  "keywords": [
+    "Supabase",
+    "Quasar",
+    "Webfolio"
+  ],
+  "author": "Guilhem Heinrich <guilhem.heinrich@id2l.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ID2L/webfolio/issues"
+  },
+  "homepage": "https://github.com/ID2L/webfolio#readme",
+  "devDependencies": {
+    "nx": "^19.0.0"
+  }
+}
