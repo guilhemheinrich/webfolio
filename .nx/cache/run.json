@@ -1,8 +1,8 @@
 {
   "run": {
     "command": "nx build shared-utilities",
-    "startTime": "2024-05-06T19:40:13.423Z",
-    "endTime": "2024-05-06T19:40:17.072Z",
+    "startTime": "2024-05-18T11:43:02.132Z",
+    "endTime": "2024-05-18T11:43:09.853Z",
     "inner": false
   },
   "tasks": [
@@ -11,8 +11,8 @@
       "target": "build",
       "projectName": "shared-utilities",
       "hash": "6924779386071750379",
-      "startTime": "2024-05-06T19:40:13.427Z",
-      "endTime": "2024-05-06T19:40:17.071Z",
+      "startTime": "2024-05-18T11:43:02.136Z",
+      "endTime": "2024-05-18T11:43:09.853Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0
