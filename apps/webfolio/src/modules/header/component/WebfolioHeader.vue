@@ -4,7 +4,8 @@
       <q-avatar>
         <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
       </q-avatar>
-      <div class="bg-teal-500">
+      <div class="tw-font-bold tw-mb-11 tw-text-primary tw-container">
+        {{ add2(3) }}
         My Webfolio
       </div>
     </q-toolbar-title>
@@ -17,8 +18,9 @@
   </q-tabs>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { add2 } from 'shared-utilities';
+add2(3)
 </script>
 
 <style lang="scss" scoped></style>
