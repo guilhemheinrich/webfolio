@@ -69,6 +69,10 @@ module.exports = configure(function (/* ctx */) {
 
       extendViteConf(viteConf, { isServer, isClient }) {
         viteConf.resolve.preserveSymlinks = true; // Ajout de la configuration preserveSymlinks
+        viteConf.resolve.alias = {
+          ...viteConf.resolve.alias, // Conserve les alias existants
+          modules: path.resolve(__dirname, './src/modules'),
+        };
       },
       // viteVuePluginOptions: {},
 

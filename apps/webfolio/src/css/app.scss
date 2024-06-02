@@ -2,3 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+// customize css and css class, as well as quasar related properties: https://quasar.dev/style/color-palette/
+.text-brand {
+  color: #f72585 !important;
+}
+.bg-brand {
+  background: #f72585 !important;
+}
