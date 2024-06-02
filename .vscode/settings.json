@@ -2,8 +2,8 @@
     "deno.enablePaths": ["supabase/functions"],
     "deno.lint": true,
     "deno.unstable": true,
-    "[typescript]": {
-        "editor.defaultFormatter": "denoland.vscode-deno"
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode" // Utilisation de Prettier pour formater les fichiers JSON
     },
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
     "files.associations": {
@@ -14,5 +14,8 @@
     "editor.formatOnSave": false, // optional
     "editor.formatOnSaveMode": "file", // required to format on save
     "files.autoSave": "onFocusChange", // optional but recommended
-    "vs-code-prettier-eslint.prettierLast": false // set as "true" to run 'prettier' last not first
+    "vs-code-prettier-eslint.prettierLast": false,
+    "[snippets]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    } // set as "true" to run 'prettier' last not first
 }
