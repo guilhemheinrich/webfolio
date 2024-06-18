@@ -109,7 +109,7 @@ SELECT
 CREATE TABLE IF NOT EXISTS webfolio_experience_description (
     _id uuid default uuid_generate_v4() primary key,
     experience_id uuid not null,
-    text_content uuid,
+    text_content uuid not null,
     FOREIGN KEY (experience_id) REFERENCES webfolio_experience(_id),
     FOREIGN KEY (text_content) REFERENCES webfolio_text_traduction(_id),
     unique (experience_id, text_content)
@@ -138,7 +138,7 @@ SELECT
 CREATE TABLE IF NOT EXISTS webfolio_categories_label (
     _id uuid default uuid_generate_v4() primary key,
     category_code text not null,
-    text_content uuid,
+    text_content uuid not null,
     FOREIGN KEY (category_code) REFERENCES webfolio_categories(code),
     FOREIGN KEY (text_content) REFERENCES webfolio_text_traduction(_id),
     unique (category_code, text_content)
