@@ -1,0 +1,18 @@
+{
+    "name": "api-service",
+    "version": "0.0.1",
+    "dependencies": {
+        "tslib": "^2.3.0",
+        "tsup": "^8.0.2",
+        "@supabase/supabase-js": "^2.39.7",
+        "configuration": "workspace:^",
+        "supabase-types": "workspace:^"
+    },
+    "scripts": {
+        "build": "tsup",
+        "build:watch": "tsc -w"
+    },
+    "type": "commonjs",
+    "main": "./index.js",
+    "private": true
+}

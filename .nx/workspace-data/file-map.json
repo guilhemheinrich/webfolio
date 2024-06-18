@@ -9,33 +9,6 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "configuration": [
-        {
-          "file": "packages/configuration/index.ts",
-          "hash": "434763607491267209"
-        },
-        {
-          "file": "packages/configuration/package.json",
-          "hash": "8413508474578056121",
-          "deps": [
-            "npm:zod",
-            "npm:tsup",
-            "npm:dotenv"
-          ]
-        },
-        {
-          "file": "packages/configuration/src/index.ts",
-          "hash": "13613637144803968071"
-        },
-        {
-          "file": "packages/configuration/tsconfig.json",
-          "hash": "2722992491457706703"
-        },
-        {
-          "file": "packages/configuration/tsup.config.ts",
-          "hash": "558931451591502493"
-        }
-      ],
       "webfolio": [
         {
           "file": "apps/webfolio/.editorconfig",
@@ -79,7 +52,7 @@
         },
         {
           "file": "apps/webfolio/package.json",
-          "hash": "6470742004381535345",
+          "hash": "4528217775595637133",
           "deps": [
             "npm:@intlify/vite-plugin-vue-i18n",
             "npm:@quasar/app-vite",
@@ -106,6 +79,7 @@
             "npm:quasar",
             "shared-utilities",
             "configuration",
+            "api-service",
             "npm:vue",
             "npm:vue-i18n",
             "npm:vue-router",
@@ -213,16 +187,12 @@
           "hash": "12086095939549339373"
         },
         {
-          "file": "apps/webfolio/src/modules/configuration/index.ts",
-          "hash": "16261900500544002463"
-        },
-        {
           "file": "apps/webfolio/src/modules/experience/components/ExperienceDisplayer.vue",
           "hash": "9466226750442307207"
         },
         {
           "file": "apps/webfolio/src/modules/home/components/CvContentContainer.vue",
-          "hash": "18403276425898799750"
+          "hash": "10300385223470556516"
         },
         {
           "file": "apps/webfolio/src/modules/home/pages/HomePage.vue",
@@ -238,7 +208,7 @@
         },
         {
           "file": "apps/webfolio/src/modules/supabase/index.ts",
-          "hash": "972996159703427442"
+          "hash": "9273726500634356998"
         },
         {
           "file": "apps/webfolio/src/pages/ErrorNotFound.vue",
@@ -307,6 +277,87 @@
           "hash": "2722992491457706703"
         }
       ],
+      "configuration": [
+        {
+          "file": "packages/configuration/index.ts",
+          "hash": "434763607491267209"
+        },
+        {
+          "file": "packages/configuration/package.json",
+          "hash": "2556383957178448456",
+          "deps": [
+            "npm:zod",
+            "npm:tsup"
+          ]
+        },
+        {
+          "file": "packages/configuration/src/index.ts",
+          "hash": "13613637144803968071"
+        },
+        {
+          "file": "packages/configuration/tsconfig.json",
+          "hash": "2722992491457706703"
+        },
+        {
+          "file": "packages/configuration/tsup.config.ts",
+          "hash": "558931451591502493"
+        }
+      ],
+      "api-service": [
+        {
+          "file": "packages/api-service/README.md",
+          "hash": "853159281612538891"
+        },
+        {
+          "file": "packages/api-service/index.ts",
+          "hash": "1454492107857333109"
+        },
+        {
+          "file": "packages/api-service/package.json",
+          "hash": "12300020461373359279",
+          "deps": [
+            "npm:tslib",
+            "npm:tsup",
+            "npm:@supabase/supabase-js",
+            "configuration",
+            "supabase-types"
+          ]
+        },
+        {
+          "file": "packages/api-service/src/ApiCall.ts",
+          "hash": "14144745419052357743"
+        },
+        {
+          "file": "packages/api-service/src/api-service.ts",
+          "hash": "9313400524655263051"
+        },
+        {
+          "file": "packages/api-service/src/client/FetchExperience/index.ts",
+          "hash": "1940832353197849680"
+        },
+        {
+          "file": "packages/api-service/src/supabase/index.ts",
+          "hash": "2441008901503686248"
+        },
+        {
+          "file": "packages/api-service/tsconfig.json",
+          "hash": "9714469635730006097"
+        },
+        {
+          "file": "packages/api-service/tsup.config.ts",
+          "hash": "558931451591502493"
+        }
+      ],
+      "typescript-config": [
+        {
+          "file": "packages/typescript-config/package.json",
+          "hash": "16230213021422189531"
+        },
+        {
+          "file": "packages/typescript-config/tsconfig.base.json",
+          "hash": "16946658990594650981"
+        }
+      ],
       "supabase-types": [
         {
           "file": "packages/supabase-types/.gitignore",
@@ -340,16 +391,6 @@
         {
           "file": "packages/supabase-types/tsup.config.ts",
           "hash": "558931451591502493"
-        }
-      ],
-      "typescript-config": [
-        {
-          "file": "packages/typescript-config/package.json",
-          "hash": "16230213021422189531"
-        },
-        {
-          "file": "packages/typescript-config/tsconfig.base.json",
-          "hash": "16946658990594650981"
         }
       ]
     },
@@ -396,7 +437,7 @@
       },
       {
         "file": "pnpm-lock.yaml",
-        "hash": "15857620548727415412"
+        "hash": "1620193615175518928"
       },
       {
         "file": "pnpm-workspace.yaml",

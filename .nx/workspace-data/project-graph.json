@@ -182,6 +182,50 @@
         "tags": []
       }
     },
+    "api-service": {
+      "name": "api-service",
+      "type": "lib",
+      "data": {
+        "root": "packages/api-service",
+        "sourceRoot": "packages/api-service",
+        "name": "api-service",
+        "projectType": "library",
+        "metadata": {
+          "targetGroups": {
+            "NPM Scripts": [
+              "build",
+              "build:watch"
+            ]
+          }
+        },
+        "targets": {
+          "build": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build"
+            },
+            "metadata": {
+              "scriptContent": "tsup",
+              "runCommand": "pnpm run build"
+            },
+            "configurations": {}
+          },
+          "build:watch": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "build:watch"
+            },
+            "metadata": {
+              "scriptContent": "tsc -w",
+              "runCommand": "pnpm run build:watch"
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": [],
+        "tags": []
+      }
+    },
     "webfolio": {
       "name": "webfolio",
       "type": "lib",
@@ -2172,36 +2216,36 @@
         "hash": "sha512-FMabTRlc5t5zjdenF6mS0MBeFZm0XqHqeOkcskKFb/LYCcRQ5fVgLOHVc4Lq9CqABd9zhjwPjMBCJvMCziSVtA=="
       }
     },
-    "npm:color-convert@1.9.3": {
+    "npm:color-convert": {
       "type": "npm",
-      "name": "npm:color-convert@1.9.3",
+      "name": "npm:color-convert",
       "data": {
         "version": "1.9.3",
         "packageName": "color-convert",
         "hash": "sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg=="
       }
     },
-    "npm:color-convert": {
+    "npm:color-convert@2.0.1": {
       "type": "npm",
-      "name": "npm:color-convert",
+      "name": "npm:color-convert@2.0.1",
       "data": {
         "version": "2.0.1",
         "packageName": "color-convert",
         "hash": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ=="
       }
     },
-    "npm:color-name@1.1.3": {
+    "npm:color-name": {
       "type": "npm",
-      "name": "npm:color-name@1.1.3",
+      "name": "npm:color-name",
       "data": {
         "version": "1.1.3",
         "packageName": "color-name",
         "hash": "sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw=="
       }
     },
-    "npm:color-name": {
+    "npm:color-name@1.1.4": {
       "type": "npm",
-      "name": "npm:color-name",
+      "name": "npm:color-name@1.1.4",
       "data": {
         "version": "1.1.4",
         "packageName": "color-name",
@@ -6406,10 +6450,32 @@
         "source": "configuration",
         "target": "npm:tsup",
         "type": "static"
+      }
+    ],
+    "api-service": [
+      {
+        "source": "api-service",
+        "target": "npm:tslib",
+        "type": "static"
       },
       {
-        "source": "configuration",
-        "target": "npm:dotenv",
+        "source": "api-service",
+        "target": "npm:tsup",
+        "type": "static"
+      },
+      {
+        "source": "api-service",
+        "target": "npm:@supabase/supabase-js",
+        "type": "static"
+      },
+      {
+        "source": "api-service",
+        "target": "configuration",
+        "type": "static"
+      },
+      {
+        "source": "api-service",
+        "target": "supabase-types",
         "type": "static"
       }
     ],
@@ -6537,6 +6603,11 @@
       {
         "source": "webfolio",
         "target": "configuration",
+        "type": "static"
+      },
+      {
+        "source": "webfolio",
+        "target": "api-service",
         "type": "static"
       },
       {
@@ -7956,14 +8027,14 @@
     "npm:ansi-styles@3.2.1": [
       {
         "source": "npm:ansi-styles@3.2.1",
-        "target": "npm:color-convert@1.9.3",
+        "target": "npm:color-convert",
         "type": "static"
       }
     ],
     "npm:ansi-styles": [
       {
         "source": "npm:ansi-styles",
-        "target": "npm:color-convert",
+        "target": "npm:color-convert@2.0.1",
         "type": "static"
       }
     ],
@@ -8512,17 +8583,17 @@
         "type": "static"
       }
     ],
-    "npm:color-convert@1.9.3": [
-      {
-        "source": "npm:color-convert@1.9.3",
-        "target": "npm:color-name@1.1.3",
-        "type": "static"
-      }
-    ],
     "npm:color-convert": [
       {
         "source": "npm:color-convert",
         "target": "npm:color-name",
+        "type": "static"
+      }
+    ],
+    "npm:color-convert@2.0.1": [
+      {
+        "source": "npm:color-convert@2.0.1",
+        "target": "npm:color-name@1.1.4",
         "type": "static"
       }
     ],
