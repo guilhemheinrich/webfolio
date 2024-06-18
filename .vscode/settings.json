@@ -17,5 +17,8 @@
     "vs-code-prettier-eslint.prettierLast": false,
     "[snippets]": {
         "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     } // set as "true" to run 'prettier' last not first
 }
