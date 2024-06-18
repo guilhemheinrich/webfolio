@@ -25,17 +25,17 @@ export type Database = {
         Row: {
           _id: string
           category_code: string
-          text_content: string | null
+          text_content: string
         }
         Insert: {
           _id?: string
           category_code: string
-          text_content?: string | null
+          text_content: string
         }
         Update: {
           _id?: string
           category_code?: string
-          text_content?: string | null
+          text_content?: string
         }
         Relationships: [
           {
@@ -82,17 +82,17 @@ export type Database = {
         Row: {
           _id: string
           experience_id: string
-          text_content: string | null
+          text_content: string
         }
         Insert: {
           _id?: string
           experience_id: string
-          text_content?: string | null
+          text_content: string
         }
         Update: {
           _id?: string
           experience_id?: string
-          text_content?: string | null
+          text_content?: string
         }
         Relationships: [
           {
