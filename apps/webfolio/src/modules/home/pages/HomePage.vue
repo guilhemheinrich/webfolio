@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import CvContentContainer from '../components/CvContentContainer.vue';
+  import CvContentContainer from '../components/CvContentContainer.vue';
 </script>
 
 <style scoped></style>
