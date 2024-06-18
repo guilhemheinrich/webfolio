@@ -1,14 +1,17 @@
 {
-  "name": "shared-utilities",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "private": true,
-  "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc -w"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "shared-utilities",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+        "build": "tsup",
+        "build:watch": "tsc -w"
+    },
+    "dependencies": {
+        "supabase-types": "workspace:^"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }
