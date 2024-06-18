@@ -60,7 +60,19 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: Object.assign(
+        require('dotenv').config({
+          path: [
+            path.resolve(__dirname, '../../.env'),
+            path.resolve(__dirname, '../../.env.local'),
+          ],
+        }).parsed,
+        // Strip out any environment variables with spaces or parentheses in the name, like in Windows `process.env.CommonProgramFiles(x86)`
+        Object.entries(process.env).reduce((acc, [key, value]) => {
+          if (!key.includes(' ') && !key.includes('(')) acc[key] = value;
+          return acc;
+        }, {})
+      ),
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { Config } from 'src/modules/configuration';
+import { Config } from 'configuration';
 import { Database } from 'supabase-types';
 
 export const supabase = createClient<Database>(

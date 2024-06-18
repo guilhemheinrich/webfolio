@@ -1,18 +1,12 @@
 <template>
   This is my CV
   <div>
-
+{{  Config }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const formations = ref([
-
-])
-
-
+import {Config} from 'configuration'
 </script>
 
 <style scoped>

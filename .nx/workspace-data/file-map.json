@@ -1,0 +1,423 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.2.2",
+  "deps": {
+    "nx": "19.2.2",
+    "supabase": "^1.136.3"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "configuration": [
+        {
+          "file": "packages/configuration/index.ts",
+          "hash": "434763607491267209"
+        },
+        {
+          "file": "packages/configuration/package.json",
+          "hash": "8413508474578056121",
+          "deps": [
+            "npm:zod",
+            "npm:tsup",
+            "npm:dotenv"
+          ]
+        },
+        {
+          "file": "packages/configuration/src/index.ts",
+          "hash": "13613637144803968071"
+        },
+        {
+          "file": "packages/configuration/tsconfig.json",
+          "hash": "2722992491457706703"
+        },
+        {
+          "file": "packages/configuration/tsup.config.ts",
+          "hash": "558931451591502493"
+        }
+      ],
+      "webfolio": [
+        {
+          "file": "apps/webfolio/.editorconfig",
+          "hash": "5784436347579547078"
+        },
+        {
+          "file": "apps/webfolio/.eslintignore",
+          "hash": "7575286084817473949"
+        },
+        {
+          "file": "apps/webfolio/.eslintrc.cjs",
+          "hash": "3404425757374245862"
+        },
+        {
+          "file": "apps/webfolio/.gitignore",
+          "hash": "4448520840987711431"
+        },
+        {
+          "file": "apps/webfolio/.npmrc",
+          "hash": "9749914539510891455"
+        },
+        {
+          "file": "apps/webfolio/.prettierrc",
+          "hash": "13579703730128952099"
+        },
+        {
+          "file": "apps/webfolio/.vscode/extensions.json",
+          "hash": "10695926527602904744"
+        },
+        {
+          "file": "apps/webfolio/.vscode/settings.json",
+          "hash": "1030630839170283832"
+        },
+        {
+          "file": "apps/webfolio/README.md",
+          "hash": "14638104149155945360"
+        },
+        {
+          "file": "apps/webfolio/index.html",
+          "hash": "1371670199178603186"
+        },
+        {
+          "file": "apps/webfolio/package.json",
+          "hash": "6470742004381535345",
+          "deps": [
+            "npm:@intlify/vite-plugin-vue-i18n",
+            "npm:@quasar/app-vite",
+            "npm:@types/node",
+            "npm:@typescript-eslint/eslint-plugin",
+            "npm:@typescript-eslint/parser",
+            "npm:autoprefixer",
+            "npm:eslint",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-vue",
+            "npm:prettier",
+            "npm:postcss",
+            "npm:typescript",
+            "npm:vite-plugin-checker",
+            "npm:prettier-plugin-tailwindcss",
+            "npm:vue-tsc",
+            "npm:tailwind-scrollbar",
+            "npm:tailwindcss",
+            "supabase-types",
+            "npm:zod",
+            "npm:@quasar/extras",
+            "npm:@supabase/supabase-js",
+            "npm:pinia",
+            "npm:quasar",
+            "shared-utilities",
+            "configuration",
+            "npm:vue",
+            "npm:vue-i18n",
+            "npm:vue-router",
+            "npm:dotenv"
+          ]
+        },
+        {
+          "file": "apps/webfolio/pnpm-lock.yaml",
+          "hash": "16321850756712714838"
+        },
+        {
+          "file": "apps/webfolio/postcss.config.cjs",
+          "hash": "1498537293381382424"
+        },
+        {
+          "file": "apps/webfolio/public/favicon.ico",
+          "hash": "16649946696092035299"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-128x128.png",
+          "hash": "6010949875601836554"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-16x16.png",
+          "hash": "9303002100199187508"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-32x32.png",
+          "hash": "13244977797167915263"
+        },
+        {
+          "file": "apps/webfolio/public/icons/favicon-96x96.png",
+          "hash": "18045940861069860744"
+        },
+        {
+          "file": "apps/webfolio/quasar.config.js",
+          "hash": "5593176525527515039"
+        },
+        {
+          "file": "apps/webfolio/src/App.vue",
+          "hash": "12153952672694225531"
+        },
+        {
+          "file": "apps/webfolio/src/assets/logo_full.png",
+          "hash": "14608394827285054271"
+        },
+        {
+          "file": "apps/webfolio/src/assets/logo_lite.png",
+          "hash": "18252997005293809016"
+        },
+        {
+          "file": "apps/webfolio/src/assets/other_logo.png",
+          "hash": "14627575077064472798"
+        },
+        {
+          "file": "apps/webfolio/src/assets/quasar-logo-vertical.svg",
+          "hash": "12447277999770490337"
+        },
+        {
+          "file": "apps/webfolio/src/boot/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/webfolio/src/boot/i18n.ts",
+          "hash": "11803877727126617874"
+        },
+        {
+          "file": "apps/webfolio/src/components/EssentialLink.vue",
+          "hash": "12821522844984909813"
+        },
+        {
+          "file": "apps/webfolio/src/components/ExampleComponent.vue",
+          "hash": "1468719210505753968"
+        },
+        {
+          "file": "apps/webfolio/src/components/models.ts",
+          "hash": "15765231543940931968"
+        },
+        {
+          "file": "apps/webfolio/src/css/app.scss",
+          "hash": "3522178463936869938"
+        },
+        {
+          "file": "apps/webfolio/src/css/quasar.variables.scss",
+          "hash": "17324818408360970185"
+        },
+        {
+          "file": "apps/webfolio/src/css/tailwind.css",
+          "hash": "11323486195857631820"
+        },
+        {
+          "file": "apps/webfolio/src/env.d.ts",
+          "hash": "17341166633973606413"
+        },
+        {
+          "file": "apps/webfolio/src/i18n/en-US/index.ts",
+          "hash": "3505754818272013909"
+        },
+        {
+          "file": "apps/webfolio/src/i18n/index.ts",
+          "hash": "5562933490994052260"
+        },
+        {
+          "file": "apps/webfolio/src/layouts/MainLayout.vue",
+          "hash": "12086095939549339373"
+        },
+        {
+          "file": "apps/webfolio/src/modules/configuration/index.ts",
+          "hash": "16261900500544002463"
+        },
+        {
+          "file": "apps/webfolio/src/modules/experience/components/ExperienceDisplayer.vue",
+          "hash": "9466226750442307207"
+        },
+        {
+          "file": "apps/webfolio/src/modules/home/components/CvContentContainer.vue",
+          "hash": "18403276425898799750"
+        },
+        {
+          "file": "apps/webfolio/src/modules/home/pages/HomePage.vue",
+          "hash": "7361006953811848280"
+        },
+        {
+          "file": "apps/webfolio/src/modules/layout/components/FooterComponent.vue",
+          "hash": "9449904252651543312"
+        },
+        {
+          "file": "apps/webfolio/src/modules/layout/components/HeaderComponent.vue",
+          "hash": "648634439572459585"
+        },
+        {
+          "file": "apps/webfolio/src/modules/supabase/index.ts",
+          "hash": "972996159703427442"
+        },
+        {
+          "file": "apps/webfolio/src/pages/ErrorNotFound.vue",
+          "hash": "8811068329963751800"
+        },
+        {
+          "file": "apps/webfolio/src/pages/IndexPage.vue",
+          "hash": "10746030968535981465"
+        },
+        {
+          "file": "apps/webfolio/src/quasar.d.ts",
+          "hash": "2531691115676525312"
+        },
+        {
+          "file": "apps/webfolio/src/router/index.ts",
+          "hash": "4672826852381925068"
+        },
+        {
+          "file": "apps/webfolio/src/router/routes.ts",
+          "hash": "17471747810317789366"
+        },
+        {
+          "file": "apps/webfolio/src/shims-vue.d.ts",
+          "hash": "469563205044373990"
+        },
+        {
+          "file": "apps/webfolio/src/stores/example-store.ts",
+          "hash": "12238747895824819658"
+        },
+        {
+          "file": "apps/webfolio/src/stores/index.ts",
+          "hash": "7317791907048480837"
+        },
+        {
+          "file": "apps/webfolio/src/stores/store-flag.d.ts",
+          "hash": "9332892168447468156"
+        },
+        {
+          "file": "apps/webfolio/tailwind.config.ts",
+          "hash": "8772048517879547767"
+        },
+        {
+          "file": "apps/webfolio/tsconfig.json",
+          "hash": "15793085716995199107"
+        },
+        {
+          "file": "apps/webfolio/tsconfig.vue-tsc.json",
+          "hash": "848735846877946867"
+        }
+      ],
+      "shared-utilities": [
+        {
+          "file": "packages/shared-utilities/index.ts",
+          "hash": "12204342199892906961"
+        },
+        {
+          "file": "packages/shared-utilities/package.json",
+          "hash": "4209115303767806947"
+        },
+        {
+          "file": "packages/shared-utilities/src/math.ts",
+          "hash": "10580619861439044098"
+        },
+        {
+          "file": "packages/shared-utilities/tsconfig.json",
+          "hash": "2722992491457706703"
+        }
+      ],
+      "supabase-types": [
+        {
+          "file": "packages/supabase-types/.gitignore",
+          "hash": "3820400493554763786"
+        },
+        {
+          "file": "packages/supabase-types/index.ts",
+          "hash": "3085116221783829202"
+        },
+        {
+          "file": "packages/supabase-types/package.json",
+          "hash": "6305953344808503994",
+          "deps": [
+            "npm:supabase",
+            "npm:tsup",
+            "npm:@supabase/supabase-js"
+          ]
+        },
+        {
+          "file": "packages/supabase-types/src/supabase-functions.ts",
+          "hash": "8605356981467538525"
+        },
+        {
+          "file": "packages/supabase-types/src/supabase.ts",
+          "hash": "10595209094672941789"
+        },
+        {
+          "file": "packages/supabase-types/tsconfig.json",
+          "hash": "2722992491457706703"
+        },
+        {
+          "file": "packages/supabase-types/tsup.config.ts",
+          "hash": "558931451591502493"
+        }
+      ],
+      "typescript-config": [
+        {
+          "file": "packages/typescript-config/package.json",
+          "hash": "16230213021422189531"
+        },
+        {
+          "file": "packages/typescript-config/tsconfig.base.json",
+          "hash": "16946658990594650981"
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "3017612678660737133"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13870002661522366999"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "15979023676219791083"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "1344277465044518634"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "13999188066310474377"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "1539253793410688689"
+      },
+      {
+        "file": "README.md",
+        "hash": "9181530001161195805"
+      },
+      {
+        "file": "init/0_init_schema_supabase.sql",
+        "hash": "10694623131197743053"
+      },
+      {
+        "file": "init/README.md",
+        "hash": "15591567137413579260"
+      },
+      {
+        "file": "package.json",
+        "hash": "13179821746814273119"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "15857620548727415412"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "3097983303653545603"
+      },
+      {
+        "file": "supabase/.gitignore",
+        "hash": "15984528517427601857"
+      },
+      {
+        "file": "supabase/config.toml",
+        "hash": "16758243129272491164"
+      },
+      {
+        "file": "supabase/migrations/20240601105236_setup.sql",
+        "hash": "7220262098145380732"
+      },
+      {
+        "file": "supabase/seed.sql",
+        "hash": "3244421341483603138"
+      }
+    ]
+  }
+}
