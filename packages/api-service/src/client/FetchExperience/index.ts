@@ -1,7 +1,7 @@
-import ApiCall from '../../ApiCall';
+import ApiCall, {ExtractInputType, ExtractOutputType} from '../../ApiCall';
 import { supabase } from '../../supabase';
 
-export const FetchExperience = new ApiCall(
+export const FetchExperiences = new ApiCall(
     async (parameters: object = {}) => {
     const { data: webfolio_experience_data, error: webfolio_experience_error } =
         await supabase.from('webfolio_experience').select(`
@@ -12,4 +12,8 @@ export const FetchExperience = new ApiCall(
     return webfolio_experience_data;
 });
 
-FetchExperience.call()
+
+
+// Utiliser le type helper pour obtenir le type `Input` de `FetchExperience`
+export type FetchExperienceInputType = ExtractInputType<typeof FetchExperiences>;
+export type FetchExperienceOutputType = ExtractOutputType<typeof FetchExperiences>;

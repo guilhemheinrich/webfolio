@@ -14,3 +14,7 @@ export default class ApiCall<Input extends { [key: string]: any }, Output> {
         return await this.callable(parameters);
     }
 }
+
+// Définir un type helper pour extraire le type générique `Input` et 'Output'
+export type ExtractInputType<T> = T extends ApiCall<infer I, any> ? I : never;
+export type ExtractOutputType<T> = T extends ApiCall<any, infer O> ? O : never;
