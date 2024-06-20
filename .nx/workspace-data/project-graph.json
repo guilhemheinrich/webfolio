@@ -216,7 +216,7 @@
               "script": "build:watch"
             },
             "metadata": {
-              "scriptContent": "tsc -w",
+              "scriptContent": "tsup src/**/*.ts --watch",
               "runCommand": "pnpm run build:watch"
             },
             "configurations": {}

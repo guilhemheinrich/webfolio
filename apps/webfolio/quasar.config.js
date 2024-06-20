@@ -14,22 +14,25 @@ const path = require('path');
 
 module.exports = configure(function (/* ctx */) {
   return {
+    supportTS: {
+      tsLoaderConfig: {
+        allowTsInNodeModules: true,
+      },
+      tsCheckerConfig: {
+        eslint: true,
+        vue: true,
+      },
+    },
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: [
-      'i18n',
-      'vue-query'
-    ],
+    boot: ['i18n', 'vue-query'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
-    css: [
-      'app.scss',
-      'tailwind.css',
-    ],
+    css: ['app.scss', 'tailwind.css'],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
@@ -72,7 +75,7 @@ module.exports = configure(function (/* ctx */) {
         Object.entries(process.env).reduce((acc, [key, value]) => {
           if (!key.includes(' ') && !key.includes('(')) acc[key] = value;
           return acc;
-        }, {})
+        }, {}),
       ),
       // rawDefine: {}
       // ignorePublicFolder: true,
@@ -90,25 +93,32 @@ module.exports = configure(function (/* ctx */) {
       // viteVuePluginOptions: {},
 
       vitePlugins: [
-        ['@intlify/vite-plugin-vue-i18n', {
-          // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
-          // compositionOnly: false,
+        [
+          '@intlify/vite-plugin-vue-i18n',
+          {
+            // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
+            // compositionOnly: false,
 
-          // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
-          // you need to set `runtimeOnly: false`
-          // runtimeOnly: false,
+            // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
+            // you need to set `runtimeOnly: false`
+            // runtimeOnly: false,
 
-          // you need to set i18n resource including paths !
-          include: path.resolve(__dirname, './src/i18n/**'),
-        }],
-        ['vite-plugin-checker', {
-          vueTsc: {
-            tsconfigPath: 'tsconfig.vue-tsc.json',
+            // you need to set i18n resource including paths !
+            include: path.resolve(__dirname, './src/i18n/**'),
           },
-          eslint: {
-            lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"',
+        ],
+        [
+          'vite-plugin-checker',
+          {
+            vueTsc: {
+              tsconfigPath: 'tsconfig.vue-tsc.json',
+            },
+            eslint: {
+              lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"',
+            },
           },
-        }, { server: false }],
+          { server: false },
+        ],
       ],
     },
 
@@ -208,13 +218,11 @@ module.exports = configure(function (/* ctx */) {
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
         // osxSign: '',
         // protocol: 'myapp://path',
-
         // Windows only
         // win32metadata: { ... }
       },
@@ -228,9 +236,7 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
     bex: {
-      contentScripts: [
-        'my-content-script',
-      ],
+      contentScripts: ['my-content-script'],
       // extendBexScriptsConf (esbuildConf) {}
       // extendBexManifestJson (json) {}
     },

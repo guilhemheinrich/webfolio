@@ -9,45 +9,6 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "typescript-config": [
-        {
-          "file": "packages/typescript-config/package.json",
-          "hash": "16230213021422189531"
-        },
-        {
-          "file": "packages/typescript-config/tsconfig.base.json",
-          "hash": "16946658990594650981"
-        }
-      ],
-      "shared-utilities": [
-        {
-          "file": "packages/shared-utilities/index.ts",
-          "hash": "10694208871299835121"
-        },
-        {
-          "file": "packages/shared-utilities/package.json",
-          "hash": "1407475145793947224",
-          "deps": [
-            "supabase-types"
-          ]
-        },
-        {
-          "file": "packages/shared-utilities/src/language_tools.ts",
-          "hash": "2336083318057883164"
-        },
-        {
-          "file": "packages/shared-utilities/src/math.ts",
-          "hash": "10580619861439044098"
-        },
-        {
-          "file": "packages/shared-utilities/tsconfig.json",
-          "hash": "2722992491457706703"
-        },
-        {
-          "file": "packages/shared-utilities/tsup.config.ts",
-          "hash": "558931451591502493"
-        }
-      ],
       "webfolio": [
         {
           "file": "apps/webfolio/.editorconfig",
@@ -160,7 +121,7 @@
         },
         {
           "file": "apps/webfolio/src/App.vue",
-          "hash": "5044994280966045166"
+          "hash": "12153952672694225531"
         },
         {
           "file": "apps/webfolio/src/assets/logo_full.png",
@@ -231,12 +192,16 @@
           "hash": "12086095939549339373"
         },
         {
-          "file": "apps/webfolio/src/modules/experience/components/ExperienceDisplayer.vue",
-          "hash": "9466226750442307207"
+          "file": "apps/webfolio/src/modules/home/components/CvContentContainer.vue",
+          "hash": "7670942363290595296"
         },
         {
-          "file": "apps/webfolio/src/modules/home/components/CvContentContainer.vue",
-          "hash": "18227852190609397615"
+          "file": "apps/webfolio/src/modules/home/components/ExperienceDisplayer.vue",
+          "hash": "16669075479463585037"
+        },
+        {
+          "file": "apps/webfolio/src/modules/home/model.ts",
+          "hash": "3445341486162331673"
         },
         {
           "file": "apps/webfolio/src/modules/home/pages/HomePage.vue",
@@ -338,48 +303,32 @@
           "hash": "558931451591502493"
         }
       ],
-      "api-service": [
+      "shared-utilities": [
         {
-          "file": "packages/api-service/README.md",
-          "hash": "853159281612538891"
+          "file": "packages/shared-utilities/index.ts",
+          "hash": "10694208871299835121"
         },
         {
-          "file": "packages/api-service/index.ts",
-          "hash": "1454492107857333109"
-        },
-        {
-          "file": "packages/api-service/package.json",
-          "hash": "12300020461373359279",
+          "file": "packages/shared-utilities/package.json",
+          "hash": "1407475145793947224",
           "deps": [
-            "npm:tslib",
-            "npm:tsup",
-            "npm:@supabase/supabase-js",
-            "configuration",
             "supabase-types"
           ]
         },
         {
-          "file": "packages/api-service/src/ApiCall.ts",
-          "hash": "14144745419052357743"
+          "file": "packages/shared-utilities/src/language_tools.ts",
+          "hash": "2336083318057883164"
         },
         {
-          "file": "packages/api-service/src/api-service.ts",
-          "hash": "9313400524655263051"
+          "file": "packages/shared-utilities/src/math.ts",
+          "hash": "10580619861439044098"
         },
         {
-          "file": "packages/api-service/src/client/FetchExperience/index.ts",
-          "hash": "1940832353197849680"
+          "file": "packages/shared-utilities/tsconfig.json",
+          "hash": "2722992491457706703"
         },
         {
-          "file": "packages/api-service/src/supabase/index.ts",
-          "hash": "2441008901503686248"
-        },
-        {
-          "file": "packages/api-service/tsconfig.json",
-          "hash": "9714469635730006097"
-        },
-        {
-          "file": "packages/api-service/tsup.config.ts",
+          "file": "packages/shared-utilities/tsup.config.ts",
           "hash": "558931451591502493"
         }
       ],
@@ -407,6 +356,61 @@
         {
           "file": "packages/configuration/tsup.config.ts",
           "hash": "558931451591502493"
+        }
+      ],
+      "typescript-config": [
+        {
+          "file": "packages/typescript-config/package.json",
+          "hash": "16230213021422189531"
+        },
+        {
+          "file": "packages/typescript-config/tsconfig.base.json",
+          "hash": "16946658990594650981"
+        }
+      ],
+      "api-service": [
+        {
+          "file": "packages/api-service/README.md",
+          "hash": "853159281612538891"
+        },
+        {
+          "file": "packages/api-service/index.ts",
+          "hash": "1454492107857333109"
+        },
+        {
+          "file": "packages/api-service/package.json",
+          "hash": "15024036490315739309",
+          "deps": [
+            "npm:tslib",
+            "npm:tsup",
+            "npm:@supabase/supabase-js",
+            "configuration",
+            "supabase-types"
+          ]
+        },
+        {
+          "file": "packages/api-service/src/ApiCall.ts",
+          "hash": "17972232640106437618"
+        },
+        {
+          "file": "packages/api-service/src/api-service.ts",
+          "hash": "9313400524655263051"
+        },
+        {
+          "file": "packages/api-service/src/client/FetchExperience/index.ts",
+          "hash": "7045213490812268088"
+        },
+        {
+          "file": "packages/api-service/src/supabase/index.ts",
+          "hash": "2441008901503686248"
+        },
+        {
+          "file": "packages/api-service/tsconfig.json",
+          "hash": "9714469635730006097"
+        },
+        {
+          "file": "packages/api-service/tsup.config.ts",
+          "hash": "3709434569192819864"
         }
       ]
     },
