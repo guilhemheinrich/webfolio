@@ -1,33 +1,49 @@
 <template>
-  This is my CV
-  <div>
-    {{ experiences }}
+  <div v-if="experiences" class="tw-w-full">
+    <q-list class="tw-flex tw-flex-col tw-items-center">
+      <div class="tw-relative tw-w-[800px] !tw-max-w-[80vw]">
+        <q-btn
+          v-if="editionStore.editable"
+          class="tw-absolute tw-h-[45px]"
+          style="transform: translateX(-100%)"
+        >
+          Edit
+        </q-btn>
+        <q-expansion-item
+          v-for="(experience, index) in experiences"
+          :key="index"
+          icon="explore"
+          :label="experience.title"
+          class="gt-sm tw-inline"
+        >
+          <!-- <ExperienceDisplayer v-bind:experience="experience" ></ExperienceDisplayer> -->
+          <q-card style="border-left-color: red; border-left-width: 4px">
+            <q-card-section>
+              <VMarkdownView
+                mode="lihgt"
+                :content="experience.description"
+              ></VMarkdownView>
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn flat :to="['experience', experience._id].join('/')"
+                >Voir plus</q-btn
+              >
+            </q-card-actions>
+          </q-card>
+        </q-expansion-item>
+      </div>
+    </q-list>
   </div>
 </template>
 
 <script setup lang="ts">
-import { FetchExperience } from 'api-service';
-import { useQuery } from '@tanstack/vue-query';
-import { getLanguage } from 'shared-utilities';
+import { useEditionStore } from 'src/stores/edition';
+import { useExperiences } from '../composables';
+import { VMarkdownView } from 'vue3-markdown';
 
-const { data: experiences, isFetching } = useQuery({
-  queryKey: ['experience'],
-  placeholderData: [],
-  queryFn: async () => {
-    const experiencesData = await FetchExperience.call();
-    return experiencesData.map((experience) => {
-      const {webfolio_experience_description, webfolio_experience_title, ...clean_experience} = experience
-      const description = getLanguage(webfolio_experience_description, 'fr');
-      const title = getLanguage(webfolio_experience_title, 'fr');
-      console.log(description)
-      return {
-        ...clean_experience,
-        title,
-        description
-      };
-    });
-  },
-});
+import 'vue3-markdown/dist/style.css';
+const { data: experiences } = useExperiences();
+const editionStore = useEditionStore();
 </script>
 
 <style scoped></style>

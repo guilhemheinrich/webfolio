@@ -4,12 +4,30 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{
-      path: '',
-      component: () => import('modules/home/pages/HomePage.vue'),
-    }],
+    children: [
+      {
+        path: '',
+        component: () => import('modules/home/pages/HomePage.vue'),
+      },
+    ],
   },
-
+  {
+    path: '/experience/:experience_id',
+    name: 'experience_page',
+    component: () => import('layouts/MainLayout.vue'),
+    // component: () =>
+    //   import(
+    //     ['xs', 'sm'].includes(Screen.name)
+    //       ? 'layouts/QanopeeHeaderlessLayout.vue'
+    //       : 'layouts/QanopeeLayout.vue'
+    //   ),
+    children: [
+      {
+        path: '',
+        component: () => import('modules/experience/pages/ExperiencePage.vue'),
+      },
+    ],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
