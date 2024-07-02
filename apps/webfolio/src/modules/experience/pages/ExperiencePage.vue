@@ -7,7 +7,19 @@
     <h2 class="tw-w-[700px] tw-text-lg">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
-          <q-btn class="tw-mx-4"> Edit </q-btn>
+          <q-btn class="tw-mx-4" @click="dialogTitleVisible = true">
+            Edit
+          </q-btn>
+          <q-dialog v-model="dialogTitleVisible">
+            <div class="tw-w-[700px]">
+              <TextInput
+                :initial_content="experience.title"
+                field_label="Title"
+                @form-validated="onValidateTitle"
+                @cancel="dialogTitleVisible = false"
+              ></TextInput>
+            </div>
+          </q-dialog>
         </template>
         <template #foreground>
           {{ experience.title }}
@@ -33,15 +45,16 @@
 
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
-import ExperienceView from './components/ExperienceView.vue';
-import ExperienceForm from './components/ExperienceForm.vue';
-import { useExperiences } from '../../home/composables';
+import { useQuasar } from 'quasar';
+import TextInput from 'src/modules/UI/components/form/TextInput.vue';
+import { useExperiences, ComputedExperienceType } from '../../home/composables';
 import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
-import { ref } from 'vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
+
+const $q = useQuasar();
 const editionStore = useEditionStore();
 const route = useRoute();
 const mkdTestString = `
@@ -60,6 +73,12 @@ const experience = computed(() => {
   });
 });
 const { data: experiences } = useExperiences();
+
+const dialogTitleVisible = ref(false);
+const onValidateTitle = () => {
+  console.log('Validating');
+  dialogTitleVisible.value = false;
+};
 </script>
 
 <style scoped></style>

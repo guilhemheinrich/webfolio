@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, computed, ref } from 'vue';
+import { computed } from 'vue';
 
 type Position =
   | 'top'
