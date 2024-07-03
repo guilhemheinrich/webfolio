@@ -72,8 +72,8 @@ Pendant que Mimsette est parfaite Pendant que Mimsette est parfaitePendant que M
 
 const experience = computed(() => {
   return experiences.value?.find((experience) => {
-    const id = route.path.split('experience/')[1];
-    return experience._id === id;
+    const slug = route.path.split('experience/')[1];
+    return experience.slug === slug;
   });
 });
 const { data: experiences } = useExperiences();

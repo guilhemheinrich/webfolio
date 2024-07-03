@@ -25,7 +25,7 @@
               ></VMarkdownView>
             </q-card-section>
             <q-card-actions align="right">
-              <q-btn flat :to="['experience', experience._id].join('/')"
+              <q-btn flat :to="['experience', experience.slug].join('/')"
                 >Voir plus</q-btn
               >
             </q-card-actions>
