@@ -23,19 +23,22 @@ export type Database = {
       }
       webfolio_categories_label: {
         Row: {
-          _id: string
           category_code: string
-          text_content: string
+          content: string
+          id: string
+          language_code: string
         }
         Insert: {
-          _id?: string
           category_code: string
-          text_content: string
+          content: string
+          id?: string
+          language_code: string
         }
         Update: {
-          _id?: string
           category_code?: string
-          text_content?: string
+          content?: string
+          id?: string
+          language_code?: string
         }
         Relationships: [
           {
@@ -46,101 +49,107 @@ export type Database = {
             referencedColumns: ["code"]
           },
           {
-            foreignKeyName: "webfolio_categories_label_text_content_fkey"
-            columns: ["text_content"]
+            foreignKeyName: "webfolio_categories_label_language_code_fkey"
+            columns: ["language_code"]
             isOneToOne: false
-            referencedRelation: "webfolio_text_traduction"
-            referencedColumns: ["_id"]
+            referencedRelation: "webfolio_languages"
+            referencedColumns: ["code"]
           },
         ]
       }
       webfolio_experience: {
         Row: {
-          _id: string
           created_date: string
           end_date: string | null
           modified_date: string
+          slug: string
           start_date: string
         }
         Insert: {
-          _id?: string
           created_date?: string
           end_date?: string | null
           modified_date?: string
+          slug: string
           start_date: string
         }
         Update: {
-          _id?: string
           created_date?: string
           end_date?: string | null
           modified_date?: string
+          slug?: string
           start_date?: string
         }
         Relationships: []
       }
       webfolio_experience_description: {
         Row: {
-          _id: string
-          experience_id: string
-          text_content: string
+          content: string
+          experience_slug: string
+          id: string
+          language_code: string
         }
         Insert: {
-          _id?: string
-          experience_id: string
-          text_content: string
+          content: string
+          experience_slug: string
+          id?: string
+          language_code: string
         }
         Update: {
-          _id?: string
-          experience_id?: string
-          text_content?: string
+          content?: string
+          experience_slug?: string
+          id?: string
+          language_code?: string
         }
         Relationships: [
           {
-            foreignKeyName: "webfolio_experience_description_experience_id_fkey"
-            columns: ["experience_id"]
+            foreignKeyName: "webfolio_experience_description_experience_slug_fkey"
+            columns: ["experience_slug"]
             isOneToOne: false
             referencedRelation: "webfolio_experience"
-            referencedColumns: ["_id"]
+            referencedColumns: ["slug"]
           },
           {
-            foreignKeyName: "webfolio_experience_description_text_content_fkey"
-            columns: ["text_content"]
+            foreignKeyName: "webfolio_experience_description_language_code_fkey"
+            columns: ["language_code"]
             isOneToOne: false
-            referencedRelation: "webfolio_text_traduction"
-            referencedColumns: ["_id"]
+            referencedRelation: "webfolio_languages"
+            referencedColumns: ["code"]
           },
         ]
       }
       webfolio_experience_title: {
         Row: {
-          _id: string
-          experience_id: string
-          text_content: string | null
+          content: string
+          experience_slug: string
+          id: string
+          language_code: string
         }
         Insert: {
-          _id?: string
-          experience_id: string
-          text_content?: string | null
+          content: string
+          experience_slug: string
+          id?: string
+          language_code: string
         }
         Update: {
-          _id?: string
-          experience_id?: string
-          text_content?: string | null
+          content?: string
+          experience_slug?: string
+          id?: string
+          language_code?: string
         }
         Relationships: [
           {
-            foreignKeyName: "webfolio_experience_title_experience_id_fkey"
-            columns: ["experience_id"]
+            foreignKeyName: "webfolio_experience_title_experience_slug_fkey"
+            columns: ["experience_slug"]
             isOneToOne: false
             referencedRelation: "webfolio_experience"
-            referencedColumns: ["_id"]
+            referencedColumns: ["slug"]
           },
           {
-            foreignKeyName: "webfolio_experience_title_text_content_fkey"
-            columns: ["text_content"]
+            foreignKeyName: "webfolio_experience_title_language_code_fkey"
+            columns: ["language_code"]
             isOneToOne: false
-            referencedRelation: "webfolio_text_traduction"
-            referencedColumns: ["_id"]
+            referencedRelation: "webfolio_languages"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -158,32 +167,6 @@ export type Database = {
           fr_display?: string | null
         }
         Relationships: []
-      }
-      webfolio_text_traduction: {
-        Row: {
-          _id: string
-          content: string
-          language_code: string
-        }
-        Insert: {
-          _id?: string
-          content: string
-          language_code: string
-        }
-        Update: {
-          _id?: string
-          content?: string
-          language_code?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "webfolio_text_traduction_language_code_fkey"
-            columns: ["language_code"]
-            isOneToOne: false
-            referencedRelation: "webfolio_languages"
-            referencedColumns: ["code"]
-          },
-        ]
       }
     }
     Views: {
