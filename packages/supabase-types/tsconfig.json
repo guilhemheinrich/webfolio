@@ -1,9 +1,4 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "target": "es2020",
-    "outDir": "./dist"
-  },
-  "include": ["src/**/*"]
+    "extends": "../../packages/typescript-config/tsconfig.base.json",
+    "include": ["src/**/*"]
 }
