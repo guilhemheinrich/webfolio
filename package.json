@@ -1,34 +1,37 @@
 {
-    "name": "webfolio",
-    "version": "1.0.0",
-    "description": "A webfolio project using Quasar, Supabase and Directus",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "cd apps/webfolio && pnpm run dev",
-        "build:libs": "pnpm run build:libs:utilities",
-        "build:libs:utilities": "cd packages/shared-utilities && pnpm run build",
-        "sp:data": "supabase db dump --data-only -s public -f supabase/data.sql",
-        "sp:ps-seed": "powershell Set-Content -Path \"supabase/seed.sql\" -Value (Get-Content -Path \"supabase/pre_seed.sql\" -Raw) && powershell Add-Content -Path \"supabase/seed.sql\" -Value (Get-Content -Path \"supabase/data.sql\" -Raw)",
-        "generate:local": "npx supabase gen types typescript --local --schema public > types/supabase.ts && npm run replace-symbols && powershell cp types/supabase.ts supabase/functions/_shared/types"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ID2L/webfolio.git"
-    },
-    "keywords": [
-        "Supabase",
-        "Quasar",
-        "Webfolio"
-    ],
-    "author": "Guilhem Heinrich <guilhem.heinrich@id2l.fr>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/ID2L/webfolio/issues"
-    },
-    "homepage": "https://github.com/ID2L/webfolio#readme",
-    "devDependencies": {
-        "nx": "19.2.2",
-        "supabase": "^1.136.3"
-    }
+  "name": "webfolio",
+  "version": "1.0.0",
+  "description": "A webfolio project using Quasar, Supabase and Directus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd apps/webfolio && pnpm run dev",
+    "build:libs": "pnpm run build:libs:utilities",
+    "build:libs:utilities": "cd packages/shared-utilities && pnpm run build",
+    "sp:data": "supabase db dump --data-only -s public -f supabase/data.sql",
+    "sp:ps-seed": "powershell Set-Content -Path \"supabase/seed.sql\" -Value (Get-Content -Path \"supabase/pre_seed.sql\" -Raw) && powershell Add-Content -Path \"supabase/seed.sql\" -Value (Get-Content -Path \"supabase/data.sql\" -Raw)",
+    "generate:local": "npx supabase gen types typescript --local --schema public > types/supabase.ts && npm run replace-symbols && powershell cp types/supabase.ts supabase/functions/_shared/types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ID2L/webfolio.git"
+  },
+  "keywords": [
+    "Supabase",
+    "Quasar",
+    "Webfolio"
+  ],
+  "author": "Guilhem Heinrich <guilhem.heinrich@id2l.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ID2L/webfolio/issues"
+  },
+  "homepage": "https://github.com/ID2L/webfolio#readme",
+  "devDependencies": {
+    "@nx/eslint": "19.2.2",
+    "eslint": "~8.57.0",
+    "nx": "19.2.2",
+    "supabase": "^1.136.3"
+  },
+  "dependencies": {}
 }
