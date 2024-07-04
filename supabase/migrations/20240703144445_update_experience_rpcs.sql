@@ -63,12 +63,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT
-    upsert_description (
-        'deepomics', -- ID de l'expérience
-        'en', -- Code de langue
-        '# Deepomics
-        Hello there' -- Contenu du titre
-    );
-
+-- SELECT
+--     upsert_description (
+--         'deepomics', -- ID de l'expérience
+--         'en', -- Code de langue
+--         '# Deepomics
+--         Hello there' -- Contenu du titre
+--     );
 --#endregion

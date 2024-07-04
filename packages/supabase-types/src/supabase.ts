@@ -173,7 +173,31 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      upsert_description: {
+        Args: {
+          query_experience_slug: string
+          language_tag: string
+          new_content: string
+        }
+        Returns: undefined
+      }
+      upsert_title:
+        | {
+            Args: {
+              query_experience_slug: string
+              language_tag: string
+              new_content: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              query_experience_slug: string
+              language_tag: string
+              new_content: string
+            }
+            Returns: undefined
+          }
     }
     Enums: {
       [_ in never]: never
