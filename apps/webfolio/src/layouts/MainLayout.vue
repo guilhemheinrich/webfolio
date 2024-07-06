@@ -4,7 +4,7 @@
       <webfolio-header></webfolio-header>
     </q-header>
 
-    <q-page-container class="tw-h-[100dvh]">
+    <q-page-container class="tw-min-h-[100dvh]">
       <router-view />
     </q-page-container>
 
