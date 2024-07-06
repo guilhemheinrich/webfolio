@@ -1,2 +1,3 @@
 export * from "./fetch";
-export * from "./update";
+export * from "./updateTitle";
+export * from "./updateDescription";
