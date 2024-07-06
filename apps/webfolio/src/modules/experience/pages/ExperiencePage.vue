@@ -57,6 +57,7 @@ import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
+import { updateExperienceTitle } from 'api-service';
 
 const $q = useQuasar();
 const editionStore = useEditionStore();
@@ -70,19 +71,27 @@ Pendant que Mimsette est parfaite Pendant que Mimsette est parfaitePendant que M
 ![Markdown Logo](https://markdown-here.com/img/icon256.png)
 `;
 
+const { data: experiences, refetch } = useExperiences();
+
 const experience = computed(() => {
   return experiences.value?.find((experience) => {
     const slug = route.path.split('experience/')[1];
     return experience.slug === slug;
   });
 });
-const { data: experiences } = useExperiences();
 
 const dialogTitleVisible = ref(false);
-const onValidateTitle = async () => {
+const onValidateTitle = async (value: string) => {
+  if (experience.value === undefined) return;
   console.log('Validating');
   dialogTitleVisible.value = false;
-  await supabase.from('webfolio_experience_title');
+  const success = await updateExperienceTitle(supabase).call({
+    experience_slug: experience.value.slug,
+    title: value,
+    lang: 'fr',
+  });
+  if (success) console.log('Successfully run update');
+  refetch();
 };
 </script>
 

@@ -1,13 +1,7 @@
 <template>
-  <div class="tw-h-[20vh] bg-primary">
-    My elegant footer
-  </div>
+  <div class="bg-primary tw-h-[20vh]">My elegant footer</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>
