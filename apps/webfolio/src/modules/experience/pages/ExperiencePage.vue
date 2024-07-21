@@ -4,11 +4,11 @@
     class="flex column content-center justify-center item-center tw-gap-8"
     v-if="experience"
   >
-    <div class="tw-w-[700px] tw-text-lg">
+    <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn
-            class="tw-mx-4 tw-w-[200px]"
+            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogTitleVisible = true"
           >
             Edit Title
@@ -33,11 +33,11 @@
       </RelativeOverlay>
     </div>
 
-    <div class="tw-w-[700px]">
+    <div class="tw-maxw-[700px] tw-w-[60vw]">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn
-            class="tw-mx-4 tw-w-[200px]"
+            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogDescriptionVisible = true"
           >
             Edit Description
@@ -49,6 +49,7 @@
               <MarkdownInput
                 :initial_content="experience.description"
                 field_label="Description"
+                :file_upload="saveMarkdownFile(experience.slug)"
                 @form-validated="onValidateDescription"
                 @cancel="dialogDescriptionVisible = false"
               ></MarkdownInput>
@@ -77,13 +78,17 @@ import { computed, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
-import { updateDescription, updateExperienceTitle } from 'api-service';
+import {
+  updateDescription,
+  updateExperienceTitle,
+  uploadMarkdownFile,
+} from 'api-service';
 
 const editionStore = useEditionStore();
 const route = useRoute();
 const { data: experiences, refetch } = useExperiences();
 
-const experience: Ref<ComputedExperienceType> = computed(() => {
+const experience: Ref<ComputedExperienceType | undefined> = computed(() => {
   return experiences.value?.find((experience) => {
     const slug = route.path.split('experience/')[1];
     return experience.slug === slug;
@@ -116,6 +121,17 @@ const onValidateDescription = async (value: string) => {
   });
   if (success) console.log('Successfully run update');
   refetch();
+};
+
+const saveMarkdownFile = (experience_slug: string) => {
+  return async (file: File) => {
+    console.log(file);
+    const fileOutput = await uploadMarkdownFile(supabase).call({
+      experience_slug: experience_slug,
+      file: file,
+    });
+    return fileOutput.publicUrl;
+  };
 };
 </script>
 

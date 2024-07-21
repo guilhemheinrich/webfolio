@@ -7,7 +7,7 @@
             <VMarkdownEditor
               v-model="content"
               locale="en"
-              :upload-action="saveMarkdown"
+              :upload-action="file_upload"
             ></VMarkdownEditor>
           </div>
         </q-form>
@@ -36,6 +36,9 @@ const props = defineProps({
   initial_content: {
     type: String as PropType<string>,
     default: '',
+  },
+  file_upload: {
+    type: Function,
   },
 });
 
@@ -81,12 +84,6 @@ const validateForm = () => {
   if (form.value) {
     form.value.submit();
   }
-};
-
-const saveMarkdown = async (file: File) => {
-  console.log(file);
-  // TODO handle file upload
-  return 'https://i.postimg.cc/52qCzTVw/pngwing-com.png';
 };
 </script>
 
