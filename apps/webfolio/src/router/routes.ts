@@ -12,6 +12,16 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/experience',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('modules/home/pages/HomePage.vue'),
+      },
+    ],
+  },
+  {
     path: '/experience/:experience_id',
     name: 'experience_page',
     component: () => import('layouts/MainLayout.vue'),

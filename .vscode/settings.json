@@ -26,5 +26,9 @@
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "files.eol": "\n"
     } // set as "true" to run 'prettier' last not first
 }
