@@ -27,12 +27,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- SELECT
---     upsert_title (
---         'deepomics', -- ID de l'expérience
---         'fr', -- Code de langue
---         'Deepomics : un système d''information pour les données méta-omics' -- Contenu du titre
---     );
+SELECT
+    upsert_title (
+        'deepomics', -- ID de l'expérience
+        'fr', -- Code de langue
+        'Deepomics : un système d''information pour les données méta-omics YAY' -- Contenu du titre
+    );
 --#endregion
 --#region update description
 CREATE

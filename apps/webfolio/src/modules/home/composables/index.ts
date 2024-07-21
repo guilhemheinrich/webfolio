@@ -1,7 +1,7 @@
-import { FetchExperiences, FetchExperienceOutputType } from 'api-service';
+import { FetchExperienceOutputType, FetchExperiences } from 'api-service';
 import { useQuery } from '@tanstack/vue-query';
 import { getLanguage } from 'shared-utilities';
-
+import { supabase } from 'src/modules/supabase';
 export type ComputedExperienceType = Omit<
   FetchExperienceOutputType[number],
   'webfolio_experience_description' | 'webfolio_experience_title'
@@ -15,7 +15,7 @@ export const useExperiences = () =>
     queryKey: ['experiences', 'fr'],
     placeholderData: [],
     queryFn: async () => {
-      const experiencesData = await FetchExperiences.call();
+      const experiencesData = await FetchExperiences(supabase).call();
       return experiencesData.map((experience) => {
         const {
           webfolio_experience_description,

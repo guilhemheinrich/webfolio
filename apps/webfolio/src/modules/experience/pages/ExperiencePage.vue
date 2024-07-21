@@ -4,7 +4,7 @@
     class="flex column content-center justify-center item-center tw-gap-8"
     v-if="experience"
   >
-    <h2 class="tw-w-[700px] tw-text-lg">
+    <div class="tw-w-[700px] tw-text-lg">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn
@@ -13,6 +13,7 @@
           >
             Edit Title
           </q-btn>
+
           <q-dialog v-model="dialogTitleVisible">
             <div class="tw-w-[700px]">
               <TextInput
@@ -25,21 +26,40 @@
           </q-dialog>
         </template>
         <template #foreground>
-          {{ experience.title }}
+          <h1>
+            {{ experience.title }}
+          </h1>
         </template>
       </RelativeOverlay>
-    </h2>
-
-    <div class="tw-w-[700px]">Tags</div>
-    <div class="tw-w-[700px]">Languages</div>
+    </div>
 
     <div class="tw-w-[700px]">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
-          <q-btn class="tw-mx-4"> Edit </q-btn>
+          <q-btn
+            class="tw-mx-4 tw-w-[200px]"
+            @click="dialogDescriptionVisible = true"
+          >
+            Edit Description
+          </q-btn>
+
+          <q-dialog v-model="dialogDescriptionVisible" full-width>
+            <div class="tw-max-w-[900px]! tw-w-[900px]">
+              <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
+              <MarkdownInput
+                :initial_content="experience.description"
+                field_label="Description"
+                @form-validated="onValidateDescription"
+                @cancel="dialogDescriptionVisible = false"
+              ></MarkdownInput>
+            </div>
+          </q-dialog>
         </template>
         <template #foreground>
-          <VMarkdownView mode="light" :content="mkdTestString"></VMarkdownView>
+          <VMarkdownView
+            mode="light"
+            :content="experience.description"
+          ></VMarkdownView>
         </template>
       </RelativeOverlay>
     </div>
@@ -48,41 +68,54 @@
 
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
-import { useQuasar } from 'quasar';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
-import { useExperiences } from '../../home/composables';
+import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
+import { ComputedExperienceType, useExperiences } from '../../home/composables';
 import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
-import { computed, ref } from 'vue';
+import { computed, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
+import { updateDescription, updateExperienceTitle } from 'api-service';
 
-const $q = useQuasar();
 const editionStore = useEditionStore();
 const route = useRoute();
-const mkdTestString = `
-# Mathématique fondamentale et appliquée
+const { data: experiences, refetch } = useExperiences();
 
-Pendant que Mimsette est parfaite Pendant que Mimsette est parfaitePendant que Mimsette est parfaitePendant que Mimsette est parfaite
-
-## Sous titre
-![Markdown Logo](https://markdown-here.com/img/icon256.png)
-`;
-
-const experience = computed(() => {
+const experience: Ref<ComputedExperienceType> = computed(() => {
   return experiences.value?.find((experience) => {
     const slug = route.path.split('experience/')[1];
     return experience.slug === slug;
   });
 });
-const { data: experiences } = useExperiences();
 
 const dialogTitleVisible = ref(false);
-const onValidateTitle = async () => {
+const onValidateTitle = async (value: string) => {
+  if (experience.value === undefined) return;
   console.log('Validating');
   dialogTitleVisible.value = false;
-  await supabase.from('webfolio_experience_title');
+  const success = await updateExperienceTitle(supabase).call({
+    experience_slug: experience.value.slug,
+    content: value,
+    lang: 'fr',
+  });
+  if (success) console.log('Successfully run update');
+  refetch();
+};
+
+const dialogDescriptionVisible = ref(false);
+const onValidateDescription = async (value: string) => {
+  if (experience.value === undefined) return;
+  console.log('Validating');
+  dialogDescriptionVisible.value = false;
+  const success = await updateDescription(supabase).call({
+    experience_slug: experience.value.slug,
+    content: value,
+    lang: 'fr',
+  });
+  if (success) console.log('Successfully run update');
+  refetch();
 };
 </script>
 

@@ -1,18 +1,25 @@
-export default class ApiCall<Input extends { [key: string]: any }, Output> {
-    private callable: (parameters: Input) => Promise<Output>;
-    private readonly defaultCall: Input
-    constructor(
-        callable: (parameters?: Input) => Promise<Output>,
-        defaultCall?: Input
-    ) {
-        this.defaultCall = {} as Input;
-        if (defaultCall) this.defaultCall = defaultCall;
-        this.callable = callable;
-    }
+import { SupabaseClient } from "@supabase/supabase-js";
 
-    async call(parameters: Input = this.defaultCall){
-        return await this.callable(parameters);
-    }
+export default class ApiCall<Input extends { [key: string]: any }, Output> {
+  private callable: (
+    parameters: Input,
+  ) => Promise<Output>;
+  private readonly defaultCall: Input;
+  private readonly configuration?: { [key: string]: any };
+  constructor(
+    callable: (parameters: Input) => Promise<Output>,
+    configuration?: { [key: string]: any },
+    defaultCall?: Input,
+  ) {
+    this.configuration = configuration;
+    this.defaultCall = {} as Input;
+    if (defaultCall) this.defaultCall = defaultCall;
+    this.callable = callable;
+  }
+
+  async call(parameters: Input = this.defaultCall) {
+    return await this.callable(parameters);
+  }
 }
 
 // Définir un type helper pour extraire le type générique `Input` et 'Output'
