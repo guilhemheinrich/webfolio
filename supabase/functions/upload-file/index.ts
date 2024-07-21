@@ -57,24 +57,51 @@ Deno.serve(async (req) => {
             console.log(`Taille du fichier : ${fileSize} octets`);
             console.log(`Extension du fichier : ${fileExtension}`);
 
-            if (picture_role === "main") {
-                const path = [project_slug, `main.png`].join("/");
-                // Upload if there is one, and set the proper path
-                const { data: data_storage, error: error_storage } =
-                    await authenticatedClient.storage
-                        .from("public")
-                        .upload(<string>path, file);
-                if (error_storage) throw error_storage;
-                console.log(
-                    JSON.stringify(
-                        authenticatedClient.storage
-                            .from("public")
-                            .getPublicUrl(path).data,
-                    ),
-                );
+            let path = "";
+            //* Preprocessing file upload
+            switch (picture_role) {
+                case "main":
+                    path = [project_slug, `main.png`].join("/");
+                    break;
+                case "markdown":
+                    path = [project_slug, "content", fileName].join("/");
+                    break;
+                default:
+                    break;
             }
 
-            return new Response(JSON.stringify(true), {
+            // Upload if there is one, and set the proper path
+            const { data: data_storage, error: error_storage } =
+                await authenticatedClient.storage
+                    .from("public")
+                    .upload(path, file);
+            if (error_storage) throw error_storage;
+
+            const { publicUrl } = authenticatedClient.storage
+                .from("public")
+                .getPublicUrl(path).data;
+
+            //* Postprocessing file upload
+            // Dans le cas de l'upload d'une image principale, on met à jour le lien public
+            if (picture_role === "main") {
+                const {
+                    data: webfolio_experience_data,
+                    error: webfolio_experience_error,
+                } = await authenticatedClient
+                    .from("webfolio_experience")
+                    .update({ picture: publicUrl });
+                if (webfolio_experience_error) throw webfolio_experience_error;
+            }
+
+            console.log(
+                JSON.stringify(
+                    authenticatedClient.storage
+                        .from("public")
+                        .getPublicUrl(path).data,
+                ),
+            );
+
+            return new Response(JSON.stringify({ publicUrl: publicUrl }), {
                 headers: { ...corsHeaders, "Content-Type": "application/json" },
                 status: 200,
             });

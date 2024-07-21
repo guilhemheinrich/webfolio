@@ -1,2 +1,2 @@
-export * from "./src/supabase-functions";
 export * from "./src/supabase";
+export * from "./src/edge-function";

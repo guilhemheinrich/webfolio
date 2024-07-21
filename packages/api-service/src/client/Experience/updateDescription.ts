@@ -1,7 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
 import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
+import { SupabaseTypedClient } from "../../supabase";
 
-export const updateDescription = (supabase: SupabaseClient) =>
+export const updateDescription = (supabase: SupabaseTypedClient) =>
     new ApiCall(
         async (parameters: {
             experience_slug: string;
@@ -24,9 +24,9 @@ export const updateDescription = (supabase: SupabaseClient) =>
     );
 
 // Utiliser le type helper pour obtenir le type `Input` de `FetchExperience`
-export type updateDescriptionInputType = ExtractInputType<
-    typeof updateDescription
+export type UpdateDescriptionInputType = ExtractInputType<
+    ReturnType<typeof updateDescription>
 >;
-export type updateDescriptionOutputType = ExtractOutputType<
-    typeof updateDescription
+export type UpdateDescriptionOutputType = ExtractOutputType<
+    ReturnType<typeof updateDescription>
 >;

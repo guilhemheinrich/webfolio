@@ -1,8 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-import { Config } from 'configuration';
-import { Database } from 'supabase-types';
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "supabase-types";
 
-export const supabase = createClient<Database>(
-  Config.SUPABASE_URL,
-  Config.SUPABASE_ANON_KEY
-);
+export type SupabaseTypedClient = SupabaseClient<Database>;

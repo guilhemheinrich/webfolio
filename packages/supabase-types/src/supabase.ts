@@ -62,6 +62,7 @@ export type Database = {
           created_date: string
           end_date: string | null
           modified_date: string
+          picture: string | null
           slug: string
           start_date: string
         }
@@ -69,6 +70,7 @@ export type Database = {
           created_date?: string
           end_date?: string | null
           modified_date?: string
+          picture?: string | null
           slug: string
           start_date: string
         }
@@ -76,6 +78,7 @@ export type Database = {
           created_date?: string
           end_date?: string | null
           modified_date?: string
+          picture?: string | null
           slug?: string
           start_date?: string
         }
