@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS
         slug text primary key,
         created_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
         modified_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
-        start_date timestamp with time zone not null,
+        start_date timestamp with time zone,
         end_date timestamp with time zone
     );
 

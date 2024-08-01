@@ -64,7 +64,7 @@ export type Database = {
           modified_date: string
           picture: string | null
           slug: string
-          start_date: string
+          start_date: string | null
         }
         Insert: {
           created_date?: string
@@ -72,7 +72,7 @@ export type Database = {
           modified_date?: string
           picture?: string | null
           slug: string
-          start_date: string
+          start_date?: string | null
         }
         Update: {
           created_date?: string
@@ -80,7 +80,7 @@ export type Database = {
           modified_date?: string
           picture?: string | null
           slug?: string
-          start_date?: string
+          start_date?: string | null
         }
         Relationships: []
       }
@@ -184,23 +184,14 @@ export type Database = {
         }
         Returns: undefined
       }
-      upsert_title:
-        | {
-            Args: {
-              query_experience_slug: string
-              language_tag: string
-              new_content: string
-            }
-            Returns: undefined
-          }
-        | {
-            Args: {
-              query_experience_slug: string
-              language_tag: string
-              new_content: string
-            }
-            Returns: undefined
-          }
+      upsert_title: {
+        Args: {
+          query_experience_slug: string
+          language_tag: string
+          new_content: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

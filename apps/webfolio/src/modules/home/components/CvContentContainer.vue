@@ -11,29 +11,64 @@
           >
             Add Experience
           </q-btn>
+          <div v-for="(experience, index) in experiences" :key="index">
+            <RelativeOverlay position="outside-top-right">
+              <template #overlay v-if="editionStore.editable">
+                <q-btn
+                  class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+                  @click="dialogDeleteExperienceVisible = true"
+                >
+                  Delete experience
+                </q-btn>
+
+                <q-dialog v-model="dialogDeleteExperienceVisible">
+                  <div class="tw-w-[700px]">
+                    <q-card>
+                      <q-card-section>
+                        This will delete the entire experience. Are you sure
+                        ?</q-card-section
+                      >
+                      <q-card-actions align="around">
+                        <q-btn
+                          color="secondary"
+                          @click="dialogDeleteExperienceVisible = false"
+                        >
+                          Nop, my bad
+                        </q-btn>
+                        <q-btn color="primary"> Yes, delete ! </q-btn>
+                      </q-card-actions>
+                    </q-card>
+                  </div>
+                </q-dialog>
+              </template>
+              <template #foreground>
+                <q-expansion-item
+                  icon="explore"
+                  :label="experience.title"
+                  class="gt-sm tw-inline"
+                >
+                  <q-card
+                    style="border-left-color: red; border-left-width: 4px"
+                  >
+                    <q-card-section>
+                      <VMarkdownView
+                        mode="lihgt"
+                        :content="experience.description"
+                      ></VMarkdownView>
+                    </q-card-section>
+                    <q-card-actions align="right">
+                      <q-btn
+                        flat
+                        :to="['experience', experience.slug].join('/')"
+                        >Voir plus</q-btn
+                      >
+                    </q-card-actions>
+                  </q-card>
+                </q-expansion-item>
+              </template>
+            </RelativeOverlay>
+          </div>
         </div>
-        <q-expansion-item
-          v-for="(experience, index) in experiences"
-          :key="index"
-          icon="explore"
-          :label="experience.title"
-          class="gt-sm tw-inline"
-        >
-          <!-- <ExperienceDisplayer v-bind:experience="experience" ></ExperienceDisplayer> -->
-          <q-card style="border-left-color: red; border-left-width: 4px">
-            <q-card-section>
-              <VMarkdownView
-                mode="lihgt"
-                :content="experience.description"
-              ></VMarkdownView>
-            </q-card-section>
-            <q-card-actions align="right">
-              <q-btn flat :to="['experience', experience.slug].join('/')"
-                >Voir plus</q-btn
-              >
-            </q-card-actions>
-          </q-card>
-        </q-expansion-item>
       </div>
     </q-list>
   </div>
@@ -43,29 +78,16 @@
 import { useEditionStore } from 'src/stores/edition';
 import { useExperiences } from '../composables';
 import { VMarkdownView } from 'vue3-markdown';
-import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import 'vue3-markdown/dist/style.css';
-import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import NewExperienceModal from 'src/modules/experience/components/NewExperienceModal.vue';
+import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
+
+import { ref } from 'vue';
 const $ = useQuasar();
-const { data: experiences, refetch } = useExperiences();
+const { data: experiences } = useExperiences();
 const editionStore = useEditionStore();
-
-const dialogNewExperienceVisible = ref(false);
-const onValidateNewModal = async (value: string) => {
-  console.log('Validating');
-  dialogNewExperienceVisible.value = false;
-  // const success = await updateExperienceTitle(supabase).call({
-  //   experience_slug: experience.value.slug,
-  //   content: value,
-  //   lang: 'fr',
-  // });
-  // if (success) console.log('Successfully run update');
-  refetch();
-  return;
-};
-
+const dialogDeleteExperienceVisible = ref<boolean>(false);
 const redirectToNewExperienceModal = () => {
   $.dialog({
     component: NewExperienceModal,

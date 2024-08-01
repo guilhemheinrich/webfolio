@@ -7,7 +7,6 @@
           ref="carouselRef"
           :padding="false"
           v-model="step"
-          :infinite="false"
           :autoplay="false"
           transition-prev="slide-left"
           transition-next="slide-right"
@@ -34,9 +33,9 @@
           </q-carousel-slide>
 
           <q-carousel-slide name="title" key="title">
-            Write a short title:
-            <div class="w-full">
-              <q-form ref="form" @submit="onCheckTitle">
+            <div>
+              <q-form ref="titleForm" @submit="onCheckTitle">
+                Write a short title:
                 <q-input
                   filled
                   v-model="title"
@@ -46,34 +45,36 @@
                     (val) =>
                       (val && val.length > 3) ||
                       'Title must be at least 3 character long',
-                    (val) =>
-                      (val && val.length < 200) ||
-                      'Title must be at most 200 character long',
                   ]"
                 />
               </q-form>
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide name="period" key="title">
-            When does the experience starts, and possibly when does it ends ?
+          <q-carousel-slide name="period" key="period">
             <div class="w-full">
-              <q-form ref="form" @submit="onCheckTitle">
-                <q-input
-                  filled
-                  v-model="title"
-                  label="Title"
-                  autofocus
-                  :rules="[
-                    (val) =>
-                      (val && val.length > 3) ||
-                      'Title must be at least 3 character long',
-                    (val) =>
-                      (val && val.length < 200) ||
-                      'Title must be at most 200 character long',
-                  ]"
+              When does the experience starts, and possibly when does it ends ?
+              <q-form
+                ref="periodForm"
+                @submit="onCheckPeriod"
+                class="tw-flex tw-flex-col tw-items-center"
+              >
+                <q-date
+                  v-model="period"
+                  falt
+                  :range="isRange"
+                  default-view="Years"
+                  years-in-month-view
+                  :landscape="$q.screen.gt.xs"
+                  today-btn
+                  :navigation-max-year-month="max_year_mounth"
                 />
               </q-form>
+              <q-toggle
+                v-model="isRange"
+                label="Is this experience a period ?"
+                left-label
+              />
             </div>
           </q-carousel-slide>
         </q-carousel>
@@ -86,13 +87,15 @@
           round
           dense
           @click="onDialogCancel"
+          :loading="loading"
         />
         <q-btn
-          v-if="step === 'title'"
+          v-if="step === 'title' || step === 'period'"
           label="Précédent"
           flat
           dense
           @click="carouselRef?.previous()"
+          :loading="loading"
         />
 
         <q-btn
@@ -101,6 +104,7 @@
           flat
           label="Suivant"
           @click="onCheckSlug"
+          :loading="loading"
         />
         <q-btn
           v-if="step === 'title'"
@@ -108,6 +112,15 @@
           flat
           label="Suivant"
           @click="onCheckTitle"
+          :loading="loading"
+        />
+        <q-btn
+          v-if="step === 'period'"
+          type="submit"
+          flat
+          label="Suivant"
+          @click="onCheckPeriod"
+          :loading="loading"
         />
       </q-card-actions>
     </q-card>
@@ -115,9 +128,16 @@
 </template>
 
 <script setup lang="ts">
+import {
+  updateDate,
+  UpdateDateInputType,
+  updateExperienceTitle,
+} from 'api-service';
+import { createOneExperience } from 'api-service/src/client/Experience/createOne';
 import { QForm, QInput, useDialogPluginComponent } from 'quasar';
 import { QCarousel } from 'quasar';
-import { Ref, ref } from 'vue';
+import { supabase } from 'src/modules/supabase';
+import { computed, Ref, ref } from 'vue';
 
 defineEmits(useDialogPluginComponent.emits);
 const { dialogRef, onDialogHide, onDialogCancel } = useDialogPluginComponent();
@@ -126,13 +146,20 @@ const carouselRef = ref<QCarousel | null>(null);
 const step: Ref<'slug' | 'title' | 'period'> = ref<'slug' | 'title' | 'period'>(
   'slug',
 );
-
+const loading = ref<boolean>(false);
 const slug: Ref<string> = ref('');
 const slugForm = ref<QForm>();
-const onCheckSlug = () => {
+const onCheckSlug = async () => {
   if (slugForm.value !== undefined) {
-    slugForm.value.validate().then((valid) => {
-      if (valid && carouselRef.value !== null) carouselRef.value.next();
+    slugForm.value.validate().then(async (valid) => {
+      if (valid && carouselRef.value !== null) {
+        loading.value = true;
+        await createOneExperience(supabase).call({
+          experience_slug: slug.value,
+        });
+        loading.value = false;
+        carouselRef.value.next();
+      }
     });
   }
   // onDialogOK(selectedItems.value);
@@ -140,10 +167,58 @@ const onCheckSlug = () => {
 
 const title: Ref<string> = ref('');
 const titleForm = ref<QForm>();
-const onCheckTitle = () => {
+
+const onCheckTitle = async () => {
   if (titleForm.value !== undefined) {
-    titleForm.value.validate().then((valid) => {
-      if (valid && carouselRef.value !== null) carouselRef.value.next();
+    titleForm.value.validate().then(async (valid) => {
+      if (valid && carouselRef.value !== null) {
+        loading.value = true;
+        await updateExperienceTitle(supabase).call({
+          experience_slug: slug.value,
+          content: title.value,
+          lang: 'fr',
+        });
+        loading.value = false;
+        carouselRef.value.next();
+      }
+    });
+  }
+  // onDialogOK(selectedItems.value);
+};
+
+type PeriodType = { from: string; to: string };
+const period: Ref<string | PeriodType> = ref('');
+const periodForm = ref<QForm>();
+const isRange = ref<boolean>(true);
+const max_year_mounth = computed(() => {
+  let max_date = new Date();
+  max_date.setFullYear(max_date.getFullYear() + 3);
+  return `${max_date.getFullYear()}/${(max_date.getMonth() + 1).toString().padStart(2, '0')}`;
+});
+
+const onCheckPeriod = async () => {
+  if (periodForm.value !== undefined) {
+    console.log(period.value);
+    periodForm.value.validate().then(async (valid) => {
+      if (valid && carouselRef.value !== null) {
+        loading.value = true;
+        if (period.value !== undefined) {
+          const payload: UpdateDateInputType = {
+            experience_slug: slug.value,
+            start_date: undefined,
+            end_date: undefined,
+          };
+          if (typeof period.value === 'string') {
+            payload.start_date = period.value;
+          } else {
+            payload.start_date = period.value.from;
+            payload.end_date = period.value.to;
+          }
+          await updateDate(supabase).call(payload);
+        }
+        loading.value = false;
+        carouselRef.value.next();
+      }
     });
   }
   // onDialogOK(selectedItems.value);
