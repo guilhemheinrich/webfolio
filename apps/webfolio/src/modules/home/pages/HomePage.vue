@@ -1,6 +1,5 @@
 <template>
   <div style="height: 200vh">
-    Hello There
     <CvContentContainer></CvContentContainer>
   </div>
 </template>
