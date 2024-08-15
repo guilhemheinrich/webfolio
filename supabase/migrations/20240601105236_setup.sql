@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS
         content text not null,
         language_code VARCHAR(2) not null,
         FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug),
+        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
         unique (experience_slug, language_code)
     );
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS
         content text not null,
         language_code VARCHAR(2) not null,
         FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug),
+        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
         unique (experience_slug, language_code)
     );
 
