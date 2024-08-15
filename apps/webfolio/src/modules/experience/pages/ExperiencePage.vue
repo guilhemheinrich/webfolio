@@ -87,20 +87,21 @@ import { ComputedExperienceType, useExperiences } from '../../home/composables';
 import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
 import { computed, Ref, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
 import DeleteExperienceModal from 'src/modules/experience/components/DeleteExperienceModal.vue';
+import { useQuasar } from 'quasar';
 
 import {
   updateDescription,
   updateExperienceTitle,
   uploadMarkdownFile,
 } from 'api-service';
-import { useQuasar } from 'quasar';
 
 const editionStore = useEditionStore();
 const route = useRoute();
+const router = useRouter();
 const { data: experiences, refetch } = useExperiences();
 
 const experience: Ref<ComputedExperienceType | undefined> = computed(() => {
@@ -135,7 +136,7 @@ const onValidateDescription = async (value: string) => {
     lang: 'fr',
   });
   if (success) console.log('Successfully run update');
-  refetch();
+  await refetch();
 };
 
 const saveMarkdownFile = (experience_slug: string) => {
@@ -154,11 +155,11 @@ const onDeleteExperience = async (experience_slug: string) => {
   $.dialog({
     component: DeleteExperienceModal,
     componentProps: { experience_slug: experience_slug },
-  }).onOk(() => {
-    refetch();
+  }).onOk(async () => {
+    await refetch();
+    router.push('/experience');
   });
 };
 </script>
-c
 
 <style scoped></style>
