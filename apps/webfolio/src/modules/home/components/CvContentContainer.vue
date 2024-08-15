@@ -16,30 +16,10 @@
               <template #overlay v-if="editionStore.editable">
                 <q-btn
                   class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-                  @click="dialogDeleteExperienceVisible = true"
+                  @click="onDeleteExperience(experience.slug)"
                 >
                   Delete experience
                 </q-btn>
-
-                <q-dialog v-model="dialogDeleteExperienceVisible">
-                  <div class="tw-w-[700px]">
-                    <q-card>
-                      <q-card-section>
-                        This will delete the entire experience. Are you sure
-                        ?</q-card-section
-                      >
-                      <q-card-actions align="around">
-                        <q-btn
-                          color="secondary"
-                          @click="dialogDeleteExperienceVisible = false"
-                        >
-                          Nop, my bad
-                        </q-btn>
-                        <q-btn color="primary"> Yes, delete ! </q-btn>
-                      </q-card-actions>
-                    </q-card>
-                  </div>
-                </q-dialog>
               </template>
               <template #foreground>
                 <q-expansion-item
@@ -82,16 +62,24 @@ import 'vue3-markdown/dist/style.css';
 import { useQuasar } from 'quasar';
 import NewExperienceModal from 'src/modules/experience/components/NewExperienceModal.vue';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
+import DeleteExperienceModal from 'src/modules/experience/components/DeleteExperienceModal.vue';
 
-import { ref } from 'vue';
 const $ = useQuasar();
-const { data: experiences } = useExperiences();
+const { data: experiences, refetch } = useExperiences();
 const editionStore = useEditionStore();
-const dialogDeleteExperienceVisible = ref<boolean>(false);
 const redirectToNewExperienceModal = () => {
   $.dialog({
     component: NewExperienceModal,
     componentProps: {},
+  });
+};
+
+const onDeleteExperience = async (experience_slug: string) => {
+  $.dialog({
+    component: DeleteExperienceModal,
+    componentProps: { experience_slug: experience_slug },
+  }).onOk(() => {
+    refetch();
   });
 };
 </script>

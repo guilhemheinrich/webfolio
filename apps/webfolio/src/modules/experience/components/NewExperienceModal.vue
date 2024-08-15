@@ -140,7 +140,8 @@ import { supabase } from 'src/modules/supabase';
 import { computed, Ref, ref } from 'vue';
 
 defineEmits(useDialogPluginComponent.emits);
-const { dialogRef, onDialogHide, onDialogCancel } = useDialogPluginComponent();
+const { dialogRef, onDialogHide, onDialogCancel, onDialogOK } =
+  useDialogPluginComponent();
 
 const carouselRef = ref<QCarousel | null>(null);
 const step: Ref<'slug' | 'title' | 'period'> = ref<'slug' | 'title' | 'period'>(
@@ -217,7 +218,7 @@ const onCheckPeriod = async () => {
           await updateDate(supabase).call(payload);
         }
         loading.value = false;
-        carouselRef.value.next();
+        onDialogOK();
       }
     });
   }

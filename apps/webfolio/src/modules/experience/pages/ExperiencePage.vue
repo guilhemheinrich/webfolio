@@ -1,11 +1,15 @@
 <template>
   <!-- <div class="flex column content-center justify-center tw-w-[900px] !tw-max-w-[80vw]"> -->
+
   <div
-    class="flex column content-center justify-center item-center tw-gap-8"
     v-if="experience"
+    class="flex column content-center justify-center item-center tw-gap-8"
   >
     <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
-      <RelativeOverlay position="outside-top-right">
+      <RelativeOverlay
+        position="outside-top-right"
+        position2="outside-top-left"
+      >
         <template #overlay v-if="editionStore.editable">
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
@@ -24,6 +28,14 @@
               ></TextInput>
             </div>
           </q-dialog>
+        </template>
+        <template #overlay2 v-if="editionStore.editable">
+          <q-btn
+            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+            @click="onDeleteExperience(experience.slug)"
+          >
+            Delete Experience
+          </q-btn>
         </template>
         <template #foreground>
           <h1>
@@ -78,11 +90,14 @@ import { computed, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
+import DeleteExperienceModal from 'src/modules/experience/components/DeleteExperienceModal.vue';
+
 import {
   updateDescription,
   updateExperienceTitle,
   uploadMarkdownFile,
 } from 'api-service';
+import { useQuasar } from 'quasar';
 
 const editionStore = useEditionStore();
 const route = useRoute();
@@ -133,6 +148,17 @@ const saveMarkdownFile = (experience_slug: string) => {
     return fileOutput.publicUrl;
   };
 };
+
+const $ = useQuasar();
+const onDeleteExperience = async (experience_slug: string) => {
+  $.dialog({
+    component: DeleteExperienceModal,
+    componentProps: { experience_slug: experience_slug },
+  }).onOk(() => {
+    refetch();
+  });
+};
 </script>
+c
 
 <style scoped></style>
