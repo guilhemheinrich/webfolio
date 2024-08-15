@@ -3,6 +3,15 @@
     <div class="tw-absolute" :class="overlayClass">
       <slot name="overlay"> </slot>
     </div>
+    <div v-if="position2" class="tw-absolute" :class="overlayClass2">
+      <slot name="overlay2"> </slot>
+    </div>
+    <div v-if="position3" class="tw-absolute" :class="overlayClass3">
+      <slot name="overlay3"> </slot>
+    </div>
+    <div v-if="position4" class="tw-absolute" :class="overlayClass4">
+      <slot name="overlay4"> </slot>
+    </div>
     <slot name="foreground"></slot>
   </div>
 </template>
@@ -27,14 +36,26 @@ type Position =
   | 'outside-bottom-left'
   | 'outside-bottom-right';
 
-// const position: Ref<Position> = ref('center');
-
 const props = defineProps<{
   position: Position;
+  position2?: Position;
+  position3?: Position;
+  position4?: Position;
 }>();
 
 // Générer la classe CSS à partir de la position
-const overlayClass = computed(() => `overlay-${props.position}`);
+const overlayClass = computed(() => {
+  return `overlay-${props.position}`;
+});
+const overlayClass2 = computed(() => {
+  return `overlay-${props.position2}`;
+});
+const overlayClass3 = computed(() => {
+  return `overlay-${props.position3}`;
+});
+const overlayClass4 = computed(() => {
+  return `overlay-${props.position4}`;
+});
 </script>
 
 <style scoped>
