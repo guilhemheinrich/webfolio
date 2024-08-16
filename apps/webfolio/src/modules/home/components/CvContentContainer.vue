@@ -71,7 +71,7 @@ const redirectToNewExperienceModal = () => {
   $.dialog({
     component: NewExperienceModal,
     componentProps: {},
-  });
+  }).onOk(async () => await refetch());
 };
 
 const onDeleteExperience = async (experience_slug: string) => {

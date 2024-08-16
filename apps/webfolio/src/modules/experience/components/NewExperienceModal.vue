@@ -26,6 +26,9 @@
                     (val) =>
                       (val && val.length > 3) ||
                       'Slug must be at least 3 character long',
+                    (val) =>
+                      /^[a-zA-Z0-9_\-]*$/.test(val) ||
+                      'Slug must contain only non-accented letters and numbers',
                   ]"
                 />
               </q-form>
@@ -91,7 +94,7 @@
         />
         <q-btn
           v-if="step === 'title' || step === 'period'"
-          label="Précédent"
+          label="Go back"
           flat
           dense
           @click="carouselRef?.previous()"
@@ -102,7 +105,7 @@
           v-if="step === 'slug'"
           type="submit"
           flat
-          label="Suivant"
+          label="Next"
           @click="onCheckSlug"
           :loading="loading"
         />
@@ -110,7 +113,7 @@
           v-if="step === 'title'"
           type="submit"
           flat
-          label="Suivant"
+          label="Next"
           @click="onCheckTitle"
           :loading="loading"
         />
@@ -118,7 +121,7 @@
           v-if="step === 'period'"
           type="submit"
           flat
-          label="Suivant"
+          label="Finalize"
           @click="onCheckPeriod"
           :loading="loading"
         />
@@ -203,6 +206,7 @@ const onCheckPeriod = async () => {
     periodForm.value.validate().then(async (valid) => {
       if (valid && carouselRef.value !== null) {
         loading.value = true;
+        console.log('date value', period.value);
         if (period.value !== undefined) {
           const payload: UpdateDateInputType = {
             experience_slug: slug.value,
@@ -215,6 +219,7 @@ const onCheckPeriod = async () => {
             payload.start_date = period.value.from;
             payload.end_date = period.value.to;
           }
+
           await updateDate(supabase).call(payload);
         }
         loading.value = false;

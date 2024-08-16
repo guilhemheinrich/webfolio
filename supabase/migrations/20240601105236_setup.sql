@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS
         created_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
         modified_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
         start_date timestamp with time zone,
-        end_date timestamp with time zone
+        end_date timestamp with time zone,
+        CONSTRAINT slug CHECK (slug ~ '^[a-zA-Z0-9_-]+$')
     );
 
 ALTER TABLE webfolio_experience ENABLE ROW LEVEL SECURITY;
