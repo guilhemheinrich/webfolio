@@ -45,7 +45,7 @@
       </RelativeOverlay>
     </div>
 
-    <div class="tw-maxw-[700px] tw-w-[60vw]">
+    <div v-if="editionStore.editable" class="tw-maxw-[700px] tw-w-[60vw]">
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn

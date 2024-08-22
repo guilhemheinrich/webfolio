@@ -19,16 +19,16 @@
           >
             <RelativeOverlay position="outside-top-right">
               <template #overlay v-if="editionStore.editable">
-                <div class="tw- tw-flex tw-flex-col tw-gap-4">
+                <div
+                  class="tw-maxw-[200px] tw-minw-[10vw] tw-mx-4 tw-flex tw-flex-col tw-gap-4"
+                >
                   <q-btn
-                    class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
                     :to="['experience', experience.slug].join('/')"
                     color="positive"
                   >
                     Edit experience
                   </q-btn>
                   <q-btn
-                    class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
                     @click="onDeleteExperience(experience.slug)"
                     color="negative"
                   >
