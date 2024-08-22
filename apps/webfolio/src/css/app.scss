@@ -10,3 +10,38 @@
 .bg-brand {
   background: #f72585 !important;
 }
+
+h2 {
+  /* Police */
+  /* font-family: "Arial", sans-serif; */
+  font-size: 24px; /* Taille de police */
+  font-weight: 600; /* Épaisseur légèrement plus gras */
+  font-style: normal; /* Peut être italic ou oblique */
+  font-variant: small-caps; /* Variante, comme small-caps */
+
+  /* Espacement */
+  /* line-height: 1.5; /* Interlignage */
+  /* letter-spacing: 0.5px; /* Espacement entre les lettres */
+  /* word-spacing: 1px; /* Espacement entre les mots */
+
+  /* Alignement du texte */
+  text-align: center; /* Centrage du texte */
+  text-indent: 20px; /* Indentation de la première ligne */
+
+  /* Décoration du texte */
+  /* text-decoration: underline; /* Souligné */
+  /* text-transform: uppercase; /* Transforme le texte en majuscules */
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombre portée sur le texte */
+
+  /* Couleur */
+  color: #333; /* Couleur du texte */
+
+  /* Découpage du texte */
+  white-space: normal; /* Gérer les espaces et retour à la ligne */
+  word-break: break-word; /* Forcer la coupure des mots si nécessaire */
+  overflow-wrap: break-word; /* Gestion du débordement de texte */
+
+  /* Autres */
+  /* direction: ltr; /* Direction du texte (de gauche à droite) */
+  /* vertical-align: baseline; /* Alignement vertical */
+}
