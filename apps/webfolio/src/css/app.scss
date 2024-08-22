@@ -45,3 +45,15 @@ h2 {
   /* direction: ltr; /* Direction du texte (de gauche à droite) */
   /* vertical-align: baseline; /* Alignement vertical */
 }
+
+.short-description {
+  overflow: hidden;
+  height: 8em;
+}
+
+@media (max-width: 600px) {
+  /* Pour les tailles plus grandes que small (sm) */
+  .short-description {
+    height: 20em;
+  }
+}

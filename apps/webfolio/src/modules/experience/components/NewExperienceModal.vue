@@ -132,7 +132,7 @@
 
 <script setup lang="ts">
 import {
-  updateDate,
+  updateExperienceDate,
   UpdateDateInputType,
   updateExperienceTitle,
 } from 'api-service';
@@ -220,7 +220,7 @@ const onCheckPeriod = async () => {
             payload.end_date = period.value.to;
           }
 
-          await updateDate(supabase).call(payload);
+          await updateExperienceDate(supabase).call(payload);
         }
         loading.value = false;
         onDialogOK();

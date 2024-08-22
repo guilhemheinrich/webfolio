@@ -50,6 +50,36 @@
         <template #overlay v-if="editionStore.editable">
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+            @click="dialogShortDescriptionVisible = true"
+          >
+            Edit Short Description
+          </q-btn>
+
+          <q-dialog v-model="dialogShortDescriptionVisible">
+            <div class="tw-w-[700px]">
+              <TextInput
+                :initial_content="experience.short_description"
+                :input-props="{ type: 'textarea' }"
+                field_label="Short Description"
+                @form-validated="onValidateShortDescription"
+                @cancel="dialogTitleVisible = false"
+              ></TextInput>
+            </div>
+          </q-dialog>
+        </template>
+        <template #foreground>
+          <p class="short-description">
+            {{ experience.short_description }}
+          </p>
+        </template>
+      </RelativeOverlay>
+    </div>
+
+    <div class="tw-maxw-[700px] tw-w-[60vw]">
+      <RelativeOverlay position="outside-top-right">
+        <template #overlay v-if="editionStore.editable">
+          <q-btn
+            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogDescriptionVisible = true"
           >
             Edit Description
@@ -94,7 +124,8 @@ import DeleteExperienceModal from 'src/modules/experience/components/DeleteExper
 import { useQuasar } from 'quasar';
 
 import {
-  updateDescription,
+  updateExperienceDescription,
+  updateExperienceShortDescription,
   updateExperienceTitle,
   uploadMarkdownFile,
 } from 'api-service';
@@ -125,12 +156,26 @@ const onValidateTitle = async (value: string) => {
   refetch();
 };
 
+const dialogShortDescriptionVisible = ref(false);
+const onValidateShortDescription = async (value: string) => {
+  if (experience.value === undefined) return;
+  console.log('Validating');
+  dialogShortDescriptionVisible.value = false;
+  const success = await updateExperienceShortDescription(supabase).call({
+    experience_slug: experience.value.slug,
+    content: value,
+    lang: 'fr',
+  });
+  if (success) console.log('Successfully run update');
+  refetch();
+};
+
 const dialogDescriptionVisible = ref(false);
 const onValidateDescription = async (value: string) => {
   if (experience.value === undefined) return;
   console.log('Validating');
   dialogDescriptionVisible.value = false;
-  const success = await updateDescription(supabase).call({
+  const success = await updateExperienceDescription(supabase).call({
     experience_slug: experience.value.slug,
     content: value,
     lang: 'fr',

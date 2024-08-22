@@ -7,10 +7,7 @@
     </q-card-section>
     <q-separator />
     <q-card-section class="short-description">
-      <VMarkdownView
-        mode="light"
-        :content="experience.description"
-      ></VMarkdownView>
+      {{ experience.short_description ?? '' }}
     </q-card-section>
     <q-card-actions align="right">
       <q-btn flat :to="['experience', experience.slug].join('/')"
@@ -22,7 +19,6 @@
 
 <script setup lang="ts">
 import { ComputedExperienceType } from '../../home/composables';
-import { VMarkdownView } from 'vue3-markdown';
 
 import 'vue3-markdown/dist/style.css';
 defineProps<{
@@ -30,16 +26,4 @@ defineProps<{
 }>();
 </script>
 
-<style scoped>
-.short-description {
-  overflow: hidden;
-  height: 8em;
-}
-
-@media (max-width: 600px) {
-  /* Pour les tailles plus grandes que small (sm) */
-  .short-description {
-    height: 20em;
-  }
-}
-</style>
+<style scoped></style>

@@ -1,7 +1,7 @@
 import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
 import { SupabaseTypedClient } from "../../supabase";
 
-export const updateDate = (supabase: SupabaseTypedClient) =>
+export const updateExperienceDate = (supabase: SupabaseTypedClient) =>
     new ApiCall(
         async (parameters: {
             experience_slug: string;
@@ -22,8 +22,8 @@ export const updateDate = (supabase: SupabaseTypedClient) =>
     );
 
 export type UpdateDateInputType = ExtractInputType<
-    ReturnType<typeof updateDate>
+    ReturnType<typeof updateExperienceDate>
 >;
 export type UpdateDateOutputType = ExtractOutputType<
-    ReturnType<typeof updateDate>
+    ReturnType<typeof updateExperienceDate>
 >;

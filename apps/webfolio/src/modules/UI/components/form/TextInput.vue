@@ -2,7 +2,13 @@
   <q-card>
     <q-card-section>
       <q-form ref="form" @submit="onSubmit">
-        <q-input filled v-model="content" :label="field_label" autofocus />
+        <q-input
+          filled
+          v-model="content"
+          v-bind="inputProps"
+          :label="field_label"
+          autofocus
+        />
       </q-form>
     </q-card-section>
     <q-card-actions align="around">
@@ -13,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { QForm } from 'quasar';
+import { QForm, QInputProps } from 'quasar';
 import { onMounted, ref, type PropType } from 'vue';
 
 const props = defineProps({
@@ -27,6 +33,11 @@ const props = defineProps({
   initial_content: {
     type: String as PropType<string>,
     default: '',
+  },
+  // Déclaration des props que vous souhaitez transmettre à q-input
+  inputProps: {
+    type: Object as PropType<Omit<QInputProps, 'modelValue'>>,
+    default: () => ({}),
   },
 });
 

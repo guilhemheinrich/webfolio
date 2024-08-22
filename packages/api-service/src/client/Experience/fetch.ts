@@ -8,6 +8,7 @@ export const FetchExperiences = (supabase: SupabaseTypedClient) =>
             error: webfolio_experience_error,
         } = await supabase.from("webfolio_experience").select(`
                 *
+                , webfolio_experience_short_description(*)
                 , webfolio_experience_description(*)
                 , webfolio_experience_title(*)`);
         if (webfolio_experience_error) throw webfolio_experience_error;

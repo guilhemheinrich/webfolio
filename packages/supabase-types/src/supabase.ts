@@ -120,6 +120,42 @@ export type Database = {
           },
         ]
       }
+      webfolio_experience_short_description: {
+        Row: {
+          content: string
+          experience_slug: string
+          id: string
+          language_code: string
+        }
+        Insert: {
+          content: string
+          experience_slug: string
+          id?: string
+          language_code: string
+        }
+        Update: {
+          content?: string
+          experience_slug?: string
+          id?: string
+          language_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webfolio_experience_short_description_experience_slug_fkey"
+            columns: ["experience_slug"]
+            isOneToOne: false
+            referencedRelation: "webfolio_experience"
+            referencedColumns: ["slug"]
+          },
+          {
+            foreignKeyName: "webfolio_experience_short_description_language_code_fkey"
+            columns: ["language_code"]
+            isOneToOne: false
+            referencedRelation: "webfolio_languages"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       webfolio_experience_title: {
         Row: {
           content: string
@@ -177,6 +213,14 @@ export type Database = {
     }
     Functions: {
       upsert_description: {
+        Args: {
+          query_experience_slug: string
+          language_tag: string
+          new_content: string
+        }
+        Returns: undefined
+      }
+      upsert_short_description: {
         Args: {
           query_experience_slug: string
           language_tag: string

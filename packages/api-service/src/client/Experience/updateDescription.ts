@@ -1,7 +1,7 @@
 import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
 import { SupabaseTypedClient } from "../../supabase";
 
-export const updateDescription = (supabase: SupabaseTypedClient) =>
+export const updateExperienceDescription = (supabase: SupabaseTypedClient) =>
     new ApiCall(
         async (parameters: {
             experience_slug: string;
@@ -25,8 +25,8 @@ export const updateDescription = (supabase: SupabaseTypedClient) =>
 
 // Utiliser le type helper pour obtenir le type `Input` de `FetchExperience`
 export type UpdateDescriptionInputType = ExtractInputType<
-    ReturnType<typeof updateDescription>
+    ReturnType<typeof updateExperienceDescription>
 >;
 export type UpdateDescriptionOutputType = ExtractOutputType<
-    ReturnType<typeof updateDescription>
+    ReturnType<typeof updateExperienceDescription>
 >;

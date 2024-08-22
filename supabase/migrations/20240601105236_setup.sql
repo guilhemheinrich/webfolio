@@ -110,6 +110,25 @@ SELECT
     USING (true);
 
 --#endregion
+--#region short_description
+CREATE TABLE IF NOT EXISTS
+    webfolio_experience_short_description (
+        id uuid default uuid_generate_v4 () primary key,
+        experience_slug text not null,
+        content text not null,
+        language_code VARCHAR(2) not null,
+        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
+        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
+        unique (experience_slug, language_code)
+    );
+
+ALTER TABLE webfolio_experience_short_description ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY default_select_for_all ON webfolio_experience_short_description AS PERMISSIVE FOR
+SELECT
+    USING (true);
+
+--#endregion
 --#endregion
 --#endregion
 --#region Categories

@@ -1,7 +1,7 @@
 <template>
   <div v-if="experiences" class="tw-w-full">
     <q-list class="tw-flex tw-flex-col tw-items-center">
-      <div class="tw-relative tw-w-[1000px] !tw-max-w-[90vw]">
+      <div class="tw-relative tw-w-[1000px] !tw-max-w-[80vw]">
         <div>
           <q-btn
             v-if="editionStore.editable"
@@ -11,6 +11,7 @@
           >
             Add Experience
           </q-btn>
+
           <div
             v-for="(experience, index) in experiences"
             :key="index"
@@ -18,12 +19,22 @@
           >
             <RelativeOverlay position="outside-top-right">
               <template #overlay v-if="editionStore.editable">
-                <q-btn
-                  class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-                  @click="onDeleteExperience(experience.slug)"
-                >
-                  Delete experience
-                </q-btn>
+                <div class="tw- tw-flex tw-flex-col tw-gap-4">
+                  <q-btn
+                    class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+                    :to="['experience', experience.slug].join('/')"
+                    color="positive"
+                  >
+                    Edit experience
+                  </q-btn>
+                  <q-btn
+                    class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+                    @click="onDeleteExperience(experience.slug)"
+                    color="negative"
+                  >
+                    Delete experience
+                  </q-btn>
+                </div>
               </template>
               <template #foreground>
                 <ExperienceElement :experience="experience"></ExperienceElement>
