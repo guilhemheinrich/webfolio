@@ -62,7 +62,7 @@
                 :input-props="{ type: 'textarea' }"
                 field_label="Short Description"
                 @form-validated="onValidateShortDescription"
-                @cancel="dialogTitleVisible = false"
+                @cancel="dialogShortDescriptionVisible = false"
               ></TextInput>
             </div>
           </q-dialog>
