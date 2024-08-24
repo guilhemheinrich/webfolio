@@ -10,6 +10,27 @@
 .bg-brand {
   background: #f72585 !important;
 }
+//    _    _                _
+//   | |  | |              | |
+//   | |__| | ___  __ _  __| | ___ _ __
+//   |  __  |/ _ \/ _` |/ _` |/ _ \ '__|
+//   | |  | |  __/ (_| | (_| |  __/ |
+//   |_|  |_|\___|\__,_|\__,_|\___|_|
+//
+//
+
+header {
+  // Handle dimension of the profil's image
+
+  $square-profil-dimension: 110px;
+  .img-circle {
+    width: $square-profil-dimension; /* La largeur de l'image */
+    height: $square-profil-dimension; /* La hauteur est égale à la largeur pour un ratio carré */
+    object-fit: contain;
+    border-radius: 50%; /* Cela transforme l'image en cercle */
+    background-color: white;
+  }
+}
 
 h2 {
   /* Police */
