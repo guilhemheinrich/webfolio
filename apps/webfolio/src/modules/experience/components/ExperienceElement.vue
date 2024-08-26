@@ -30,7 +30,7 @@
       </RelativeOverlay>
     </q-card-section>
     <q-separator />
-    <q-card-section class="short-description">
+    <q-card-section>
       <RelativeOverlay position="top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn

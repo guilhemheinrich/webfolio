@@ -14,6 +14,7 @@
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogTitleVisible = true"
+            color="warning"
           >
             Edit Title
           </q-btn>
@@ -33,6 +34,7 @@
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="onDeleteExperience(experience.slug)"
+            color="negative"
           >
             Delete Experience
           </q-btn>
@@ -51,6 +53,7 @@
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogShortDescriptionVisible = true"
+            color="warning"
           >
             Edit Short Description
           </q-btn>
@@ -81,6 +84,7 @@
           <q-btn
             class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
             @click="dialogDescriptionVisible = true"
+            color="warning"
           >
             Edit Description
           </q-btn>
