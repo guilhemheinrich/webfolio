@@ -1,7 +1,7 @@
 <template>
   <div v-if="experiences" class="tw-w-full">
     <q-list class="tw-flex tw-flex-col tw-items-center">
-      <div class="tw-relative tw-w-[1000px] !tw-max-w-[80vw]">
+      <div class="tw-relative tw-w-[1000px] !tw-max-w-[60vw]">
         <div>
           <q-btn
             v-if="editionStore.editable"
@@ -19,9 +19,7 @@
           >
             <RelativeOverlay position="outside-top-right">
               <template #overlay v-if="editionStore.editable">
-                <div
-                  class="tw-maxw-[200px] tw-minw-[10vw] tw-mx-4 tw-flex tw-flex-col tw-gap-4"
-                >
+                <div class="tw-mx-4 tw-flex tw-w-[15vw] tw-flex-col tw-gap-4">
                   <q-btn
                     :to="['experience', experience.slug].join('/')"
                     color="positive"
