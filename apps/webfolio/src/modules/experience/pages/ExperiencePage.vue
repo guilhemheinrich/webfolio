@@ -79,7 +79,7 @@
       <RelativeOverlay position="outside-top-right">
         <template #overlay v-if="editionStore.editable">
           <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+            class="tw-maxw-[200px] tw- tw-mx-4 tw-w-[15vw]"
             @click="dialogDescriptionVisible = true"
           >
             Edit Description
