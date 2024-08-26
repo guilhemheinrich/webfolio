@@ -1,48 +1,53 @@
 <template>
-  <div v-if="experiences" class="tw-w-full">
-    <q-list class="tw-flex tw-flex-col tw-items-center">
-      <div class="tw-relative tw-w-[1000px] !tw-max-w-[60vw]">
-        <div>
-          <q-btn
-            v-if="editionStore.editable"
-            class="tw-absolute tw-h-[45px]"
-            style="transform: translateX(-100%)"
-            @click="redirectToNewExperienceModal"
-          >
-            Add Experience
-          </q-btn>
-
-          <div
-            v-for="(experience, index) in experiences"
-            :key="index"
-            class="tw-my-8"
-          >
-            <RelativeOverlay position="outside-top-right">
-              <template #overlay v-if="editionStore.editable">
-                <div class="tw-mx-4 tw-flex tw-w-[15vw] tw-flex-col tw-gap-4">
-                  <q-btn
-                    :to="['experience', experience.slug].join('/')"
-                    color="positive"
-                  >
-                    Edit experience
-                  </q-btn>
-                  <q-btn
-                    @click="onDeleteExperience(experience.slug)"
-                    color="negative"
-                  >
-                    Delete experience
-                  </q-btn>
-                </div>
-              </template>
-              <template #foreground>
-                <ExperienceElement :experience="experience"></ExperienceElement>
-              </template>
-            </RelativeOverlay>
-          </div>
-        </div>
+  <RelativeOverlay position="beneath">
+    <template #overlay v-if="editionStore.editable">
+      <div class="full-width column items-center">
+        <q-btn
+          v-if="editionStore.editable"
+          @click="redirectToNewExperienceModal"
+        >
+          Add Experience
+        </q-btn>
       </div>
-    </q-list>
-  </div>
+    </template>
+    <template #foreground>
+      <div v-if="experiences" class="tw-w-full">
+        <q-list class="tw-flex tw-flex-col tw-items-center">
+          <div class="tw-w-[1000px] !tw-max-w-[60vw]">
+            <div
+              v-for="(experience, index) in experiences"
+              :key="index"
+              class="tw-my-8"
+            >
+              <RelativeOverlay position="outside-top-right">
+                <template #overlay v-if="editionStore.editable">
+                  <div class="tw-mx-4 tw-flex tw-w-[15vw] tw-flex-col tw-gap-4">
+                    <q-btn
+                      :to="['experience', experience.slug].join('/')"
+                      color="positive"
+                    >
+                      Edit experience
+                    </q-btn>
+                    <q-btn
+                      @click="onDeleteExperience(experience.slug)"
+                      color="negative"
+                    >
+                      Delete experience
+                    </q-btn>
+                  </div>
+                </template>
+                <template #foreground>
+                  <ExperienceElement
+                    :experience="experience"
+                  ></ExperienceElement>
+                </template>
+              </RelativeOverlay>
+            </div>
+          </div>
+        </q-list>
+      </div>
+    </template>
+  </RelativeOverlay>
 </template>
 
 <script setup lang="ts">
@@ -74,4 +79,7 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#add-experience-button {
+}
+</style>

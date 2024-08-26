@@ -123,7 +123,6 @@ import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
 import DeleteExperienceModal from 'src/modules/experience/components/DeleteExperienceModal.vue';
 import { useQuasar } from 'quasar';
-
 import {
   updateExperienceDescription,
   updateExperienceShortDescription,
