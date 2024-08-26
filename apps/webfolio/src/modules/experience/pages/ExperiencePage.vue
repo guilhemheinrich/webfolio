@@ -99,8 +99,9 @@
           </q-dialog>
         </template>
         <template #foreground>
+          <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
           <VMarkdownView
-            mode="light"
+            mode="custom"
             :content="experience.description"
           ></VMarkdownView>
         </template>
