@@ -9,6 +9,7 @@
         "supabase-types": "workspace:^"
     },
     "scripts": {
+        "dev": "tsup --watch",
         "build": "tsup",
         "build:watch": "tsup src/**/*.ts --watch"
     },

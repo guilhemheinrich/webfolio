@@ -131,9 +131,8 @@ import {
   updateExperienceDescription,
   updateExperienceShortDescription,
   updateExperienceTitle,
-  uploadMarkdownFile,
 } from 'api-service';
-
+import { saveMarkdownFile } from 'src/modules/admin/functions/saveMarkdownFile';
 const editionStore = useEditionStore();
 const route = useRoute();
 const router = useRouter();
@@ -186,17 +185,6 @@ const onValidateDescription = async (value: string) => {
   });
   if (success) console.log('Successfully run update');
   await refetch();
-};
-
-const saveMarkdownFile = (experience_slug: string) => {
-  return async (file: File) => {
-    console.log(file);
-    const fileOutput = await uploadMarkdownFile(supabase).call({
-      experience_slug: experience_slug,
-      file: file,
-    });
-    return fileOutput.publicUrl;
-  };
 };
 
 const $ = useQuasar();

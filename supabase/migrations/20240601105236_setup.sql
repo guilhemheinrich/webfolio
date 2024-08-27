@@ -131,6 +131,24 @@ SELECT
 --#endregion
 --#endregion
 --#endregion
+--#region section table
+CREATE TABLE IF NOT EXISTS
+    webfolio_section (
+        id uuid default uuid_generate_v4 () primary key,
+        section_slug text not null,
+        content text,
+        language_code VARCHAR(2) not null,
+        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
+        unique (section_slug, language_code)
+    );
+
+ALTER TABLE webfolio_section ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY default_select_for_all ON webfolio_section AS PERMISSIVE FOR
+SELECT
+    USING (true);
+
+--#endregion
 --#region Categories
 CREATE TABLE IF NOT EXISTS
     webfolio_categories (code text primary key);

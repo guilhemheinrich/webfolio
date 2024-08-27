@@ -72,10 +72,8 @@
 import { ref } from 'vue';
 import { ComputedExperienceType } from '../../home/composables';
 import {
-  updateExperienceDescription,
   updateExperienceShortDescription,
   updateExperienceTitle,
-  uploadMarkdownFile,
 } from 'api-service';
 import { supabase } from 'src/modules/supabase';
 import { useEditionStore } from 'src/stores/edition';

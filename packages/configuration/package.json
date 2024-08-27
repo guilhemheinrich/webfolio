@@ -5,6 +5,7 @@
     "main": "index.js",
     "private": true,
     "scripts": {
+        "dev": "tsup --watch",
         "build": "tsup",
         "build:watch": "tsc -w"
     },

@@ -207,6 +207,35 @@ export type Database = {
         }
         Relationships: []
       }
+      webfolio_section: {
+        Row: {
+          content: string | null
+          id: string
+          language_code: string
+          section_slug: string
+        }
+        Insert: {
+          content?: string | null
+          id?: string
+          language_code: string
+          section_slug: string
+        }
+        Update: {
+          content?: string | null
+          id?: string
+          language_code?: string
+          section_slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webfolio_section_language_code_fkey"
+            columns: ["language_code"]
+            isOneToOne: false
+            referencedRelation: "webfolio_languages"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
