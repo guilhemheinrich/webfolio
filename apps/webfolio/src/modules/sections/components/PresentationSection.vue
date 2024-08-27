@@ -51,7 +51,7 @@ import { updateSection, createOneSection } from 'api-service';
 import { useSections } from '../composables';
 import { saveMarkdownFile } from 'src/modules/admin/functions/saveMarkdownFile';
 
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 
 const editionStore = useEditionStore();
 
@@ -61,31 +61,25 @@ const presentationSection = computed(() => {
   const section = sections.value?.find(
     (section) => section.section_slug === 'presentation',
   );
-  if (section === undefined) {
-  }
+  if (section === undefined) initSection();
   return section;
 });
 
-watch(presentationSection, (newVal, oldVal) => {
-  console.log(`La valeur de section a changé de ${oldVal} à ${newVal}`);
-  // Ajoutez ici toute la logique supplémentaire à exécuter lors du changement
-  if (newVal === undefined) {
-    createOneSection(supabase)
-      .call({
-        section_slug: 'presentation',
-        content: 'Write an a moderatly long description about you !',
-        language_code: 'fr',
-      })
-      .then(() => console);
-  }
-});
+const initSection = () => {
+  createOneSection(supabase)
+    .call({
+      section_slug: 'presentation',
+      content: 'Write an a moderatly long description about you !',
+      language_code: 'fr',
+    })
+    .then(() => console.log('created quote section'));
+};
 
 const presentationDialogVisible = ref(false);
 const onValidateDescription = async (value: string) => {
   console.log('before', presentationSection.value);
   if (presentationSection.value === undefined) {
   } else {
-    console.log('Validating');
     presentationDialogVisible.value = false;
     const success = await updateSection(supabase).call({
       section_slug: presentationSection.value.section_slug,
