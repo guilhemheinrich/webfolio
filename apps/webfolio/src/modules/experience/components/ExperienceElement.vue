@@ -70,7 +70,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ComputedExperienceType } from '../../home/composables';
+import { ComputedExperienceType, useExperiences } from '../../home/composables';
 import {
   updateExperienceShortDescription,
   updateExperienceTitle,
@@ -85,6 +85,8 @@ const props = defineProps<{
 
 const editionStore = useEditionStore();
 
+const { refetch } = useExperiences();
+
 const dialogTitleVisible = ref(false);
 const onValidateTitle = async (value: string) => {
   if (props.experience === undefined) return;
@@ -95,6 +97,8 @@ const onValidateTitle = async (value: string) => {
     content: value,
     lang: 'fr',
   });
+  refetch();
+
   if (success) console.log('Successfully run update');
 };
 
@@ -108,6 +112,7 @@ const onValidateShortDescription = async (value: string) => {
     content: value,
     lang: 'fr',
   });
+  refetch();
   if (success) console.log('Successfully run update');
 };
 </script>
