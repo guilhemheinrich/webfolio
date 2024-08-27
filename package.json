@@ -1,11 +1,12 @@
 {
-    "name": "webfolio",
+    "name": "webfolio-root",
+    "private": true,
     "version": "1.0.0",
     "description": "A webfolio project using Quasar and Supabase",
-    "main": "index.js",
+    "nx": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "cd apps/webfolio && pnpm run dev",
+        "dev": "nx run-many --target=dev --parallel --projects=webfolio,api-service,configuration,shared-utilities,supabase-types",
         "build:libs": "pnpm run build:libs:utilities",
         "build:libs:utilities": "cd packages/shared-utilities && pnpm run build",
         "sp:data": "supabase db dump --data-only -s public -f supabase/data.sql",
