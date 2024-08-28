@@ -5,6 +5,7 @@
         <q-btn
           v-if="editionStore.editable"
           @click="redirectToNewExperienceModal"
+          color="positive"
         >
           Add Experience
         </q-btn>
