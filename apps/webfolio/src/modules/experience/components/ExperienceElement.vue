@@ -1,5 +1,5 @@
 <template>
-  <q-card style="border-left-color: red; border-left-width: 4px">
+  <q-card style="border-left-color: red; border-left-width: 4px" hidden>
     <q-card-section>
       <RelativeOverlay position="right">
         <template #overlay v-if="editionStore.editable">
@@ -23,7 +23,7 @@
           </q-dialog>
         </template>
         <template #foreground>
-          <h2 class="tw-te">
+          <h2 class="">
             {{ experience.title }}
           </h2>
         </template>
@@ -65,6 +65,83 @@
         >Voir plus</q-btn
       >
     </q-card-actions>
+  </q-card>
+
+  <q-card>
+    <div class="row">
+      <q-card-section
+        class="col-6 q-pa-none border-radius-inherit"
+        style="height: 400px"
+      >
+        <q-img
+          class="border-radius-inherit tw-h-full tw-rounded-r-none"
+          src="https://cdn.quasar.dev/img/parallax2.jpg"
+          spinner-color="white"
+          fit="cover"
+        >
+          <div class="absolute-bottom text-subtitle1 text-center">Caption</div>
+        </q-img>
+      </q-card-section>
+      <q-card-section class="col-6 q-pa-none">
+        <div class="column tw-overflow-hidden">
+          <div class="row items-center q-pa-sm">
+            <p class="col-2">Date</p>
+
+            <h2 class="col-10 relative-position">
+              {{ experience.title }}
+            </h2>
+          </div>
+          <div v-if="editionStore.editable" class="absolute-top-right q-ma-sm">
+            <q-btn
+              class="tw-mx-4 tw-w-[8vw]"
+              @click="dialogTitleVisible = true"
+              color="warning"
+            >
+              Edit Title
+            </q-btn>
+
+            <q-dialog v-model="dialogTitleVisible">
+              <div class="tw-w-[700px]">
+                <TextInput
+                  :initial_content="experience.title"
+                  field_label="Title"
+                  @form-validated="onValidateTitle"
+                  @cancel="dialogTitleVisible = false"
+                ></TextInput>
+              </div>
+            </q-dialog>
+          </div>
+          <q-separator />
+
+          <div class="relative-position q-pa-sm">
+            <p class="short-description">
+              {{ experience.short_description ?? '' }}
+            </p>
+            <div class="absolute-top-right q-ma-sm">
+              <q-btn
+                class="tw-maxw-[200px] tw-mx-4 tw-w-[13vw]"
+                @click="dialogShortDescriptionVisible = true"
+                color="warning"
+              >
+                Edit Short Description
+              </q-btn>
+
+              <q-dialog v-model="dialogShortDescriptionVisible">
+                <div class="tw-w-[700px]">
+                  <TextInput
+                    :initial_content="experience.short_description"
+                    :input-props="{ type: 'textarea' }"
+                    field_label="Short Description"
+                    @form-validated="onValidateShortDescription"
+                    @cancel="dialogShortDescriptionVisible = false"
+                  ></TextInput>
+                </div>
+              </q-dialog>
+            </div>
+          </div>
+        </div>
+      </q-card-section>
+    </div>
   </q-card>
 </template>
 
