@@ -14,7 +14,6 @@
 
             <q-dialog v-model="quoteDialogVisible" full-width>
               <div class="tw-max-w-[900px]! tw-w-[900px]">
-                <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
                 <TextInput
                   :initial_content="
                     (quoteSection && quoteSection.content) || ''
@@ -26,29 +25,59 @@
               </div>
             </q-dialog>
           </template>
+
           <template #foreground>
+            <!--
+  _____            _    _
+ |  __ \          | |  | |
+ | |  | | ___  ___| | _| |_ ___  _ __
+ | |  | |/ _ \/ __| |/ / __/ _ \| '_ \
+ | |__| |  __/\__ \   <| || (_) | |_) |
+ |_____/ \___||___/_|\_\\__\___/| .__/
+                                | |
+                                |_|
+           -->
+
             <div
-              class="row no-wrap items-center justify-between tw-h-[15dvh] tw-gap-8"
+              class="full-width row inline wrap items-center content-center gt-sm"
             >
-              <figure style="height: 100%" class="col-grow q-mx-xl row">
-                <router-link to="/" class="no-decoration">
-                  <q-img
-                    src="~assets/logo_lite.png"
-                    class="img-circle"
-                    alt="Profil's picture"
-                  ></q-img>
-                </router-link>
+              <router-link to="/" class="col-2 q-pl-xl">
+                <q-img
+                  src="~assets/logo_lite.png"
+                  class="img-circle"
+                  alt="Profil's picture"
+                ></q-img>
+              </router-link>
 
-                <figcaption class="img-caption">
-                  <p class="text-secondary text-italic full-width">
-                    &ldquo; {{ quoteSection?.content }} &rdquo;
-                  </p>
-                </figcaption>
-              </figure>
+              <a class="quote col-8 tw-text-center" style="height: 100%">
+                &ldquo; {{ quoteSection?.content }} &rdquo;
+              </a>
 
-              <div class="column justify-between col-2 tw-h-full">
-                <socials-component></socials-component>
-              </div>
+              <socials-component class="col-2"></socials-component>
+            </div>
+
+            <!--
+  __  __       _     _ _
+ |  \/  |     | |   (_) |
+ | \  / | ___ | |__  _| | ___
+ | |\/| |/ _ \| '_ \| | |/ _ \
+ | |  | | (_) | |_) | | |  __/
+ |_|  |_|\___/|_.__/|_|_|\___|
+
+           -->
+
+            <div class="lt-md tw-flex-col">
+              <router-link to="/" class="q-pt-xl tw-block tw-text-center">
+                <q-img
+                  src="~assets/logo_lite.png"
+                  class="img-circle tw-justify-self-center"
+                  alt="Profil's picture"
+                ></q-img>
+              </router-link>
+
+              <a class="quote q-py-xl tw-block" style="height: 100%">
+                &ldquo; {{ quoteSection?.content }} &rdquo;
+              </a>
             </div>
           </template>
         </RelativeOverlay>
@@ -128,8 +157,11 @@ $square-profil-dimension: 110px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.6); /* Ombre plus intense au hover */
 }
 
-.img-caption {
-  text-align: left;
-  padding-left: $square-profil-dimension * 0.4;
+.quote {
+  text-wrap: balance;
+  text-align: center;
+  word-wrap: break-word;
+  color: $secondary;
+  font-style: italic;
 }
 </style>
