@@ -78,12 +78,12 @@ Deno.serve(async (req) => {
             // Upload if there is one, and set the proper path
             const { data: data_storage, error: error_storage } =
                 await authenticatedClient.storage
-                    .from("public")
+                    .from("public_webfolio")
                     .upload(path, file);
             if (error_storage) throw error_storage;
 
             const { publicUrl } = authenticatedClient.storage
-                .from("public")
+                .from("public_webfolio")
                 .getPublicUrl(path).data;
 
             //* Postprocessing file upload
@@ -102,7 +102,7 @@ Deno.serve(async (req) => {
             console.log(
                 JSON.stringify(
                     authenticatedClient.storage
-                        .from("public")
+                        .from("public_webfolio")
                         .getPublicUrl(path).data,
                 ),
             );
