@@ -36,7 +36,7 @@ Deno.serve(async (req) => {
 
         // Delete if empty
         if (!file) {
-            // remove file
+            //TODO remove file
             return new Response(JSON.stringify(true), {
                 headers: {
                     ...corsHeaders,
@@ -61,10 +61,15 @@ Deno.serve(async (req) => {
             //* Preprocessing file upload
             switch (picture_role) {
                 case "main":
-                    path = [project_slug, `main.png`].join("/");
+                    path = ["experience", project_slug, `main.png`].join("/");
                     break;
                 case "markdown":
-                    path = [project_slug, "content", fileName].join("/");
+                    path = [
+                        "experience",
+                        project_slug,
+                        "content",
+                        fileName,
+                    ].join("/");
                     break;
                 default:
                     break;
@@ -89,7 +94,8 @@ Deno.serve(async (req) => {
                     error: webfolio_experience_error,
                 } = await authenticatedClient
                     .from("webfolio_experience")
-                    .update({ picture: publicUrl });
+                    .update({ picture: publicUrl })
+                    .eq("slug", project_slug);
                 if (webfolio_experience_error) throw webfolio_experience_error;
             }
 

@@ -10,6 +10,15 @@
 .bg-brand {
   background: #f72585 !important;
 }
+
+.edit-button {
+  margin: 8px;
+
+  button {
+    margin: 0px;
+  }
+}
+
 //    _    _                _
 //   | |  | |              | |
 //   | |__| | ___  __ _  __| | ___ _ __
@@ -56,16 +65,4 @@ h2 {
   /* Autres */
   /* direction: ltr; /* Direction du texte (de gauche à droite) */
   /* vertical-align: baseline; /* Alignement vertical */
-}
-
-.short-description {
-  overflow: hidden;
-  height: 8em;
-}
-
-@media (max-width: 600px) {
-  /* Pour les tailles plus grandes que small (sm) */
-  .short-description {
-    height: 20em;
-  }
 }

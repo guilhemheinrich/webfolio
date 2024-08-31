@@ -14,7 +14,7 @@
     <template #foreground>
       <div v-if="experiences" class="tw-w-full">
         <q-list class="tw-flex tw-flex-col tw-items-center">
-          <div class="tw-w-[1000px] !tw-max-w-[60vw]">
+          <div class="card-container">
             <div
               v-for="(experience, index) in experiences"
               :key="index"
@@ -81,6 +81,15 @@ const onDeleteExperience = async (experience_slug: string) => {
 </script>
 
 <style scoped>
-#add-experience-button {
+.card-container {
+  width: 1000px;
+  max-width: 100vw;
+}
+
+@media (max-width: 600px) {
+  /* Pour les tailles plus grandes que small (sm) */
+  .card-container {
+    width: 500px;
+  }
 }
 </style>
