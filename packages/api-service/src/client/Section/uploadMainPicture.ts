@@ -2,12 +2,12 @@ import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
 import { UploadFileOutput } from "supabase-types";
 import { SupabaseTypedClient } from "../../supabase";
 
-export const uploadExperienceMainPicture = (supabase: SupabaseTypedClient) =>
-    new ApiCall(async (parameters: { experience_slug: string; file: File }) => {
+export const uploadSectionMainPicture = (supabase: SupabaseTypedClient) =>
+    new ApiCall(async (parameters: { section_slug: string; file: File }) => {
         const formData = new FormData();
         formData.set("file", parameters.file);
-        formData.set("category_slug", parameters.experience_slug);
-        formData.set("file_role", "experience_main");
+        formData.set("category_slug", parameters.section_slug);
+        formData.set("file_role", "section_main");
         const payload = {
             body: formData,
         };
@@ -23,9 +23,9 @@ export const uploadExperienceMainPicture = (supabase: SupabaseTypedClient) =>
         return data;
     });
 
-export type UploadExperienceMainPictureInputType = ExtractInputType<
-    ReturnType<typeof uploadExperienceMainPicture>
+export type UploadSectionMainPictureInputType = ExtractInputType<
+    ReturnType<typeof uploadSectionMainPicture>
 >;
-export type UploadExperienceMainPictureOutputType = ExtractOutputType<
-    ReturnType<typeof uploadExperienceMainPicture>
+export type UploadSectionMainPictureOutputType = ExtractOutputType<
+    ReturnType<typeof uploadSectionMainPicture>
 >;

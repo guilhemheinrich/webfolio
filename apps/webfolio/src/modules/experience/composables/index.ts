@@ -1,17 +1,8 @@
-import { FetchExperienceOutputType, FetchExperiences } from 'api-service';
+import { FetchExperiences } from 'api-service';
 import { useQuery } from '@tanstack/vue-query';
 import { getLanguage } from 'shared-utilities';
 import { supabase } from 'src/modules/supabase';
-export type ComputedExperienceType = Omit<
-  FetchExperienceOutputType[number],
-  | 'webfolio_experience_description'
-  | 'webfolio_experience_title'
-  | 'webfolio_experience_short_description'
-> & {
-  title: string;
-  description: string;
-  short_description: string;
-};
+import { ComputedExperienceType } from '../model';
 
 export const useExperiences = () =>
   useQuery({
@@ -38,7 +29,7 @@ export const useExperiences = () =>
           title,
           short_description,
           description,
-        };
+        } as ComputedExperienceType;
       });
     },
   });

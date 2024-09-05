@@ -2,12 +2,12 @@ import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
 import { UploadFileInput, UploadFileOutput } from "supabase-types";
 import { SupabaseTypedClient } from "../../supabase";
 
-export const uploadExperienceMarkdownFile = (supabase: SupabaseTypedClient) =>
-    new ApiCall(async (parameters: { experience_slug: string; file: File }) => {
+export const uploadSectionMarkdownFile = (supabase: SupabaseTypedClient) =>
+    new ApiCall(async (parameters: { section_slug: string; file: File }) => {
         const formData = new FormData();
         formData.set("file", parameters.file);
-        formData.set("category_slug", parameters.experience_slug);
-        formData.set("file_role", "experience_markdown");
+        formData.set("category_slug", parameters.section_slug);
+        formData.set("file_role", "section_markdown");
         const payload = {
             body: formData,
         };
@@ -23,9 +23,9 @@ export const uploadExperienceMarkdownFile = (supabase: SupabaseTypedClient) =>
         return data;
     });
 
-export type UploadExperienceMarkdownFileInputType = ExtractInputType<
-    ReturnType<typeof uploadExperienceMarkdownFile>
+export type UploadSectionMarkdownFileInputType = ExtractInputType<
+    ReturnType<typeof uploadSectionMarkdownFile>
 >;
-export type UploadExperienceMarkdownFileOutputType = ExtractOutputType<
-    ReturnType<typeof uploadExperienceMarkdownFile>
+export type UploadSectionMarkdownFileOutputType = ExtractOutputType<
+    ReturnType<typeof uploadSectionMarkdownFile>
 >;

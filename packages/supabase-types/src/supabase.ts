@@ -209,30 +209,58 @@ export type Database = {
       }
       webfolio_section: {
         Row: {
-          content: string | null
+          created_date: string
+          modified_date: string
+          picture: string | null
+          slug: string
+        }
+        Insert: {
+          created_date?: string
+          modified_date?: string
+          picture?: string | null
+          slug: string
+        }
+        Update: {
+          created_date?: string
+          modified_date?: string
+          picture?: string | null
+          slug?: string
+        }
+        Relationships: []
+      }
+      webfolio_section_content: {
+        Row: {
+          content: string
           id: string
           language_code: string
           section_slug: string
         }
         Insert: {
-          content?: string | null
+          content: string
           id?: string
           language_code: string
           section_slug: string
         }
         Update: {
-          content?: string | null
+          content?: string
           id?: string
           language_code?: string
           section_slug?: string
         }
         Relationships: [
           {
-            foreignKeyName: "webfolio_section_language_code_fkey"
+            foreignKeyName: "webfolio_section_content_language_code_fkey"
             columns: ["language_code"]
             isOneToOne: false
             referencedRelation: "webfolio_languages"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "webfolio_section_content_section_slug_fkey"
+            columns: ["section_slug"]
+            isOneToOne: false
+            referencedRelation: "webfolio_section"
+            referencedColumns: ["slug"]
           },
         ]
       }
@@ -241,6 +269,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      upsert_content: {
+        Args: {
+          query_section_slug: string
+          language_tag: string
+          new_content: string
+        }
+        Returns: undefined
+      }
       upsert_description: {
         Args: {
           query_experience_slug: string

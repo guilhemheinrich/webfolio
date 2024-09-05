@@ -95,7 +95,7 @@
               <MarkdownInput
                 :initial_content="experience.description"
                 field_label="Description"
-                :file_upload="saveMarkdownFile(experience.slug)"
+                :file_upload="saveExperienceMarkdownFile(experience.slug)"
                 @form-validated="onValidateDescription"
                 @cancel="dialogDescriptionVisible = false"
               ></MarkdownInput>
@@ -118,7 +118,7 @@
 import { useEditionStore } from 'src/stores/edition';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
-import { ComputedExperienceType, useExperiences } from '../../home/composables';
+import { useExperiences } from '../composables';
 import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
 import { computed, Ref, ref } from 'vue';
@@ -132,7 +132,8 @@ import {
   updateExperienceShortDescription,
   updateExperienceTitle,
 } from 'api-service';
-import { saveMarkdownFile } from 'src/modules/admin/functions/saveMarkdownFile';
+import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
+import { ComputedExperienceType } from '../model';
 const editionStore = useEditionStore();
 const route = useRoute();
 const router = useRouter();

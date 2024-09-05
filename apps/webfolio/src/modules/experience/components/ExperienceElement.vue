@@ -105,16 +105,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ComputedExperienceType, useExperiences } from '../../home/composables';
+import { useExperiences } from '../composables';
 import {
   updateExperienceShortDescription,
   updateExperienceTitle,
-  uploadMainPicture,
+  uploadExperienceMainPicture,
 } from 'api-service';
 import { supabase } from 'src/modules/supabase';
 import { useEditionStore } from 'src/stores/edition';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import PictureInput from 'src/modules/UI/components/form/PictureInput.vue';
+import { ComputedExperienceType } from '../model';
 const props = defineProps<{
   experience: ComputedExperienceType;
 }>();
@@ -157,7 +158,7 @@ const onUpload = async (value: File) => {
   if (props.experience === undefined) return;
   console.log('Validating');
   dialogPictureVisible.value = false;
-  const success = await uploadMainPicture(supabase).call({
+  const success = await uploadExperienceMainPicture(supabase).call({
     experience_slug: props.experience.slug,
     file: value,
   });

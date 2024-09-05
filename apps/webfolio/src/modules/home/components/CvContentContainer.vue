@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
-import { useExperiences } from '../composables';
+import { useExperiences } from '../../experience/composables';
 import { useQuasar } from 'quasar';
 import NewExperienceModal from 'src/modules/experience/components/NewExperienceModal.vue';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';

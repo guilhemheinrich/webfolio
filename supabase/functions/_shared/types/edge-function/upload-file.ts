@@ -1,7 +1,7 @@
 export interface UploadFileInput {
     file: File;
-    project_slug: string;
-    picture_role: "main" | "markdown";
+    category_slug: string;
+    file_role: "logo_main" | "experience_main" | "experience_markdown";
 }
 
 export interface UploadFileOutput {

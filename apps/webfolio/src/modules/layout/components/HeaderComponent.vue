@@ -93,7 +93,7 @@ import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
-import { updateSection, createOneSection } from 'api-service';
+import { createOneSection, updateSectionContent } from 'api-service';
 import { useSections } from '../../sections/composables';
 
 import { computed, ref } from 'vue';
@@ -104,7 +104,7 @@ const { data: sections, refetch } = useSections();
 
 const quoteSection = computed(() => {
   const section = sections.value?.find(
-    (section) => section.section_slug === 'quotation',
+    (section) => section.slug === 'quotation',
   );
   if (section === undefined) initSection();
   return section;
@@ -114,8 +114,6 @@ const initSection = () => {
   createOneSection(supabase)
     .call({
       section_slug: 'quotation',
-      content: 'Profil quote : Tell something quick about you',
-      language_code: 'fr',
     })
     .then(() => console.log('created quote section'));
 };
@@ -125,8 +123,8 @@ const onValidateQuote = async (value: string) => {
   if (quoteSection.value === undefined) {
   } else {
     quoteDialogVisible.value = false;
-    const success = await updateSection(supabase).call({
-      section_slug: quoteSection.value.section_slug,
+    const success = await updateSectionContent(supabase).call({
+      section_slug: quoteSection.value.slug,
       content: value,
       lang: 'fr',
     });

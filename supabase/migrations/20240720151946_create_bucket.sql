@@ -5,3 +5,6 @@ values
 
 alter table webfolio_experience
 add column picture text;
+
+alter table webfolio_section
+add column picture text;
