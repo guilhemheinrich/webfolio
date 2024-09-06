@@ -1,32 +1,32 @@
 --#region utilities function
-CREATE
-OR REPLACE FUNCTION update_modified_date () RETURNS TRIGGER AS $$ 
+create
+or replace function update_modified_date () returns trigger as $$ 
 BEGIN NEW.modified_date := CURRENT_TIMESTAMP;
 
 RETURN NEW;
 
 END;
 
-$$ LANGUAGE plpgsql;
+$$ language plpgsql;
 
 --#endregion
 --#region language setting
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_languages (
-        code VARCHAR(2) PRIMARY KEY,
+        code varchar(2) primary key,
         -- standard ISO 639-1
-        fr_display VARCHAR(255)
+        fr_display varchar(255)
     );
 
-ALTER TABLE webfolio_languages ENABLE ROW LEVEL SECURITY;
+alter table webfolio_languages enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_languages AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_languages as PERMISSIVE for
+select
+    using (true);
 
-INSERT INTO
+insert into
     webfolio_languages (code, fr_display)
-VALUES
+values
     ('zh', 'Chinois'),
     ('es', 'Espagnol'),
     ('en', 'Anglais'),
@@ -50,131 +50,151 @@ VALUES
 
 --#endregion
 --#region Experience table
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_experience (
         slug text primary key,
-        created_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
-        modified_date timestamp with time zone not null DEFAULT CURRENT_TIMESTAMP,
+        created_date timestamp with time zone not null default current_timestamp,
+        modified_date timestamp with time zone not null default current_timestamp,
         start_date timestamp with time zone,
         end_date timestamp with time zone,
-        CONSTRAINT slug CHECK (slug ~ '^[a-zA-Z0-9_-]+$')
+        constraint slug check (slug ~ '^[a-zA-Z0-9_-]+$')
     );
 
-ALTER TABLE webfolio_experience ENABLE ROW LEVEL SECURITY;
+alter table webfolio_experience enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_experience AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_experience as PERMISSIVE for
+select
+    using (true);
 
-CREATE
-OR REPLACE TRIGGER set_modified_date BEFORE
-UPDATE ON webfolio_experience FOR EACH ROW
-EXECUTE FUNCTION update_modified_date ();
+create
+or replace trigger set_modified_date before
+update on webfolio_experience for each row
+execute function update_modified_date ();
 
 --#region Traductible fields
 --#region title
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_experience_title (
         id uuid default uuid_generate_v4 () primary key,
         experience_slug text not null,
         content text not null,
-        language_code VARCHAR(2) not null,
-        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
+        language_code varchar(2) not null,
+        foreign key (language_code) references webfolio_languages (code),
+        foreign key (experience_slug) references webfolio_experience (slug) on delete cascade,
         unique (experience_slug, language_code)
     );
 
-ALTER TABLE webfolio_experience_title ENABLE ROW LEVEL SECURITY;
+alter table webfolio_experience_title enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_experience_title AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_experience_title as PERMISSIVE for
+select
+    using (true);
 
 --#endregion
 --#region description
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_experience_description (
         id uuid default uuid_generate_v4 () primary key,
         experience_slug text not null,
         content text not null,
-        language_code VARCHAR(2) not null,
-        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
+        language_code varchar(2) not null,
+        foreign key (language_code) references webfolio_languages (code),
+        foreign key (experience_slug) references webfolio_experience (slug) on delete cascade,
         unique (experience_slug, language_code)
     );
 
-ALTER TABLE webfolio_experience_description ENABLE ROW LEVEL SECURITY;
+alter table webfolio_experience_description enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_experience_description AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_experience_description as PERMISSIVE for
+select
+    using (true);
 
 --#endregion
 --#region short_description
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_experience_short_description (
         id uuid default uuid_generate_v4 () primary key,
         experience_slug text not null,
         content text not null,
-        language_code VARCHAR(2) not null,
-        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (experience_slug) REFERENCES webfolio_experience (slug) ON DELETE CASCADE,
+        language_code varchar(2) not null,
+        foreign key (language_code) references webfolio_languages (code),
+        foreign key (experience_slug) references webfolio_experience (slug) on delete cascade,
         unique (experience_slug, language_code)
     );
 
-ALTER TABLE webfolio_experience_short_description ENABLE ROW LEVEL SECURITY;
+alter table webfolio_experience_short_description enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_experience_short_description AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_experience_short_description as PERMISSIVE for
+select
+    using (true);
 
 --#endregion
 --#endregion
 --#endregion
 --#region section table
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_section (
+        slug text primary key,
+        created_date timestamp with time zone not null default current_timestamp,
+        modified_date timestamp with time zone not null default current_timestamp,
+        constraint slug check (slug ~ '^[a-zA-Z0-9_-]+$')
+    );
+
+alter table webfolio_section enable row level security;
+
+create policy default_select_for_all on webfolio_section as PERMISSIVE for
+select
+    using (true);
+
+create
+or replace trigger set_modified_date before
+update on webfolio_section for each row
+execute function update_modified_date ();
+
+create table if not exists
+    webfolio_section_content (
         id uuid default uuid_generate_v4 () primary key,
         section_slug text not null,
-        content text,
-        language_code VARCHAR(2) not null,
-        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
+        content text not null,
+        language_code varchar(2) not null,
+        foreign key (language_code) references webfolio_languages (code),
+        foreign key (section_slug) references webfolio_section (slug) on delete cascade,
         unique (section_slug, language_code)
     );
 
-ALTER TABLE webfolio_section ENABLE ROW LEVEL SECURITY;
+alter table webfolio_section_content enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_section AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_section_content as PERMISSIVE for
+select
+    using (true);
 
 --#endregion
 --#region Categories
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_categories (code text primary key);
 
-ALTER TABLE webfolio_categories ENABLE ROW LEVEL SECURITY;
+alter table webfolio_categories enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_categories AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_categories as PERMISSIVE for
+select
+    using (true);
 
-CREATE TABLE IF NOT EXISTS
+create table if not exists
     webfolio_categories_label (
         id uuid default uuid_generate_v4 () primary key,
         category_code text not null,
         content text not null,
-        language_code VARCHAR(2) not null,
-        FOREIGN KEY (language_code) REFERENCES webfolio_languages (code),
-        FOREIGN KEY (category_code) REFERENCES webfolio_categories (code),
+        language_code varchar(2) not null,
+        foreign key (language_code) references webfolio_languages (code),
+        foreign key (category_code) references webfolio_categories (code),
         unique (category_code, language_code)
     );
 
-ALTER TABLE webfolio_categories_label ENABLE ROW LEVEL SECURITY;
+alter table webfolio_categories_label enable row level security;
 
-CREATE POLICY default_select_for_all ON webfolio_categories_label AS PERMISSIVE FOR
-SELECT
-    USING (true);
+create policy default_select_for_all on webfolio_categories_label as PERMISSIVE for
+select
+    using (true);
 
 --#region label
 --#endregion

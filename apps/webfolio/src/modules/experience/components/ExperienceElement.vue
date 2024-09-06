@@ -1,86 +1,38 @@
 <template>
-  <q-card style="border-left-color: red; border-left-width: 4px" hidden>
-    <q-card-section>
-      <RelativeOverlay position="right">
-        <template #overlay v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="dialogTitleVisible = true"
-            color="warning"
-          >
-            Edit Title
-          </q-btn>
-
-          <q-dialog v-model="dialogTitleVisible">
-            <div class="tw-w-[700px]">
-              <TextInput
-                :initial_content="experience.title"
-                field_label="Title"
-                @form-validated="onValidateTitle"
-                @cancel="dialogTitleVisible = false"
-              ></TextInput>
-            </div>
-          </q-dialog>
-        </template>
-        <template #foreground>
-          <h2 class="">
-            {{ experience.title }}
-          </h2>
-        </template>
-      </RelativeOverlay>
-    </q-card-section>
-    <q-separator />
-    <q-card-section>
-      <RelativeOverlay position="top-right">
-        <template #overlay v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="dialogShortDescriptionVisible = true"
-            color="warning"
-          >
-            Edit Short Description
-          </q-btn>
-
-          <q-dialog v-model="dialogShortDescriptionVisible">
-            <div class="tw-w-[700px]">
-              <TextInput
-                :initial_content="experience.short_description"
-                :input-props="{ type: 'textarea' }"
-                field_label="Short Description"
-                @form-validated="onValidateShortDescription"
-                @cancel="dialogShortDescriptionVisible = false"
-              ></TextInput>
-            </div>
-          </q-dialog>
-        </template>
-        <template #foreground>
-          <p class="short-description">
-            {{ experience.short_description ?? '' }}
-          </p>
-        </template>
-      </RelativeOverlay>
-    </q-card-section>
-    <q-card-actions align="right">
-      <q-btn flat :to="['experience', experience.slug].join('/')"
-        >Voir plus</q-btn
-      >
-    </q-card-actions>
-  </q-card>
-
-  <q-card>
+  <q-card class="experience-card">
     <div class="row">
-      <q-card-section
-        class="col-6 q-pa-none border-radius-inherit"
-        style="height: 400px"
-      >
-        <q-img
-          class="border-radius-inherit tw-h-full tw-rounded-r-none"
-          src="https://cdn.quasar.dev/img/parallax2.jpg"
-          spinner-color="white"
-          fit="cover"
-        >
-          <div class="absolute-bottom text-subtitle1 text-center">Caption</div>
-        </q-img>
+      <q-card-section class="col-6 q-pa-none border-radius-inherit">
+        <div class="border-radius-inherit">
+          <q-img
+            v-if="experience.picture"
+            class="border-radius-inherit tw-rounded-r-none"
+            :src="experience.picture"
+            spinner-color="white"
+            fit="cover"
+          >
+          </q-img>
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogPictureVisible = true"
+              color="warning"
+            >
+              Edit Picture
+            </q-btn>
+
+            <q-dialog v-model="dialogPictureVisible">
+              <div class="tw-w-[700px]">
+                <PictureInput
+                  @upload="onUpload"
+                  @cancel="dialogPictureVisible = false"
+                ></PictureInput>
+              </div>
+            </q-dialog>
+          </div>
+        </div>
       </q-card-section>
       <q-card-section class="col-6 q-pa-none">
         <div class="column tw-overflow-hidden">
@@ -91,9 +43,12 @@
               {{ experience.title }}
             </h2>
           </div>
-          <div v-if="editionStore.editable" class="absolute-top-right q-ma-sm">
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
             <q-btn
-              class="tw-mx-4 tw-w-[8vw]"
+              class="tw-mx-4"
               @click="dialogTitleVisible = true"
               color="warning"
             >
@@ -117,9 +72,12 @@
             <p class="short-description">
               {{ experience.short_description ?? '' }}
             </p>
-            <div class="absolute-top-right q-ma-sm">
+            <div
+              v-if="editionStore.editable"
+              class="absolute-top-right edit-button"
+            >
               <q-btn
-                class="tw-maxw-[200px] tw-mx-4 tw-w-[13vw]"
+                class="tw-mx-4"
                 @click="dialogShortDescriptionVisible = true"
                 color="warning"
               >
@@ -147,15 +105,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ComputedExperienceType, useExperiences } from '../../home/composables';
+import { useExperiences } from '../composables';
 import {
   updateExperienceShortDescription,
   updateExperienceTitle,
+  uploadExperienceMainPicture,
 } from 'api-service';
 import { supabase } from 'src/modules/supabase';
 import { useEditionStore } from 'src/stores/edition';
-import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
+import PictureInput from 'src/modules/UI/components/form/PictureInput.vue';
+import { ComputedExperienceType } from '../model';
 const props = defineProps<{
   experience: ComputedExperienceType;
 }>();
@@ -192,6 +152,23 @@ const onValidateShortDescription = async (value: string) => {
   refetch();
   if (success) console.log('Successfully run update');
 };
+
+const dialogPictureVisible = ref(false);
+const onUpload = async (value: File) => {
+  if (props.experience === undefined) return;
+  console.log('Validating');
+  dialogPictureVisible.value = false;
+  const success = await uploadExperienceMainPicture(supabase).call({
+    experience_slug: props.experience.slug,
+    file: value,
+  });
+  refetch();
+  if (success) console.log('Successfully run update');
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.experience-card {
+  width: 1000px;
+}
+</style>

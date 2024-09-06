@@ -6,3 +6,4 @@ export * from "./updateDescription";
 export * from "./updateShortDescription";
 export * from "./updateDate";
 export * from "./uploadMarkdownFile";
+export * from "./uploadMainPicture";

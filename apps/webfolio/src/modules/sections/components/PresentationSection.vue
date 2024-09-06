@@ -19,7 +19,7 @@
               "
               field_label="Description"
               :file_upload="
-                saveMarkdownFile(presentationSection?.section_slug || '')
+                saveExperienceMarkdownFile(presentationSection?.slug || '')
               "
               @form-validated="onValidateDescription"
               @cancel="presentationDialogVisible = false"
@@ -47,9 +47,9 @@ import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
-import { updateSection, createOneSection } from 'api-service';
+import { updateSectionContent, createOneSection } from 'api-service';
 import { useSections } from '../composables';
-import { saveMarkdownFile } from 'src/modules/admin/functions/saveMarkdownFile';
+import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
 
 import { computed, ref } from 'vue';
 
@@ -59,7 +59,7 @@ const { data: sections, refetch } = useSections();
 
 const presentationSection = computed(() => {
   const section = sections.value?.find(
-    (section) => section.section_slug === 'presentation',
+    (section) => section.slug === 'presentation',
   );
   if (section === undefined) initSection();
   return section;
@@ -69,8 +69,6 @@ const initSection = () => {
   createOneSection(supabase)
     .call({
       section_slug: 'presentation',
-      content: 'Write an a moderatly long description about you !',
-      language_code: 'fr',
     })
     .then(() => console.log('created quote section'));
 };
@@ -81,8 +79,8 @@ const onValidateDescription = async (value: string) => {
   if (presentationSection.value === undefined) {
   } else {
     presentationDialogVisible.value = false;
-    const success = await updateSection(supabase).call({
-      section_slug: presentationSection.value.section_slug,
+    const success = await updateSectionContent(supabase).call({
+      section_slug: presentationSection.value.slug,
       content: value,
       lang: 'fr',
     });

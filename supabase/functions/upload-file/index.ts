@@ -5,13 +5,23 @@ import { corsHeaders } from "../_shared/cors.ts";
 import { checkHeaderAndGetAdminClient } from "../_shared/services/auth/getAuthenticatedSupabaseClient.ts";
 import { zfd } from "npm:zod-form-data";
 import { z } from "npm:zod";
+import { updateOrUploadFile } from "../_shared/services/updateOrUploadFile.ts";
 
 const schema = zfd.formData({
     file: zfd.file(),
-    project_slug: zfd.text(),
-    picture_role: zfd.text(z.union([z.literal("main"), z.literal("markdown")])),
+    category_slug: zfd.text(), // Accoding to the file role, carry the slug of the attached resource
+    file_role: zfd.text(
+        z.union([
+            z.literal("section_main"),
+            z.literal("section_markdown"),
+            z.literal("experience_main"),
+            z.literal("experience_markdown"),
+        ]),
+    ),
 });
 
+// TODO Upload or update based already existing resource or not
+// TODO refactor the function to handle path as category/id/file for each resource
 Deno.serve(async (req) => {
     console.log("In update-profil-pic");
 
@@ -30,13 +40,13 @@ Deno.serve(async (req) => {
         const authenticatedClient = checkHeaderAndGetAdminClient(req);
 
         // Parse le FormData de la requête
-        const { file, project_slug, picture_role } = schema.parse(
+        const { file, category_slug, file_role } = schema.parse(
             await req.formData(),
         );
 
         // Delete if empty
         if (!file) {
-            // remove file
+            //TODO remove file
             return new Response(JSON.stringify(true), {
                 headers: {
                     ...corsHeaders,
@@ -57,49 +67,67 @@ Deno.serve(async (req) => {
             console.log(`Taille du fichier : ${fileSize} octets`);
             console.log(`Extension du fichier : ${fileExtension}`);
 
-            let path = "";
+            let path: string[] = [];
             //* Preprocessing file upload
-            switch (picture_role) {
-                case "main":
-                    path = [project_slug, `main.png`].join("/");
+            switch (file_role) {
+                case "section_main":
+                    path = ["section", category_slug, "main.png"];
                     break;
-                case "markdown":
-                    path = [project_slug, "content", fileName].join("/");
+                case "section_markdown":
+                    path = ["section", category_slug, "content", fileName];
+                    break;
+                case "experience_main":
+                    path = ["experience", category_slug, "main.png"];
+                    break;
+                case "experience_markdown":
+                    path = ["experience", category_slug, "content", fileName];
                     break;
                 default:
                     break;
             }
 
-            // Upload if there is one, and set the proper path
-            const { data: data_storage, error: error_storage } =
-                await authenticatedClient.storage
-                    .from("public")
-                    .upload(path, file);
-            if (error_storage) throw error_storage;
-
-            const { publicUrl } = authenticatedClient.storage
-                .from("public")
-                .getPublicUrl(path).data;
+            const { data_storage, publicUrl } = await updateOrUploadFile(
+                authenticatedClient,
+                path,
+                file,
+            );
 
             //* Postprocessing file upload
             // Dans le cas de l'upload d'une image principale, on met à jour le lien public
-            if (picture_role === "main") {
-                const {
-                    data: webfolio_experience_data,
-                    error: webfolio_experience_error,
-                } = await authenticatedClient
-                    .from("webfolio_experience")
-                    .update({ picture: publicUrl });
-                if (webfolio_experience_error) throw webfolio_experience_error;
+
+            switch (file_role) {
+                case "section_main":
+                    {
+                        const {
+                            data: webfolio_section_data,
+                            error: webfolio_section_error,
+                        } = await authenticatedClient
+                            .from("webfolio_section")
+                            .update({ picture: publicUrl })
+                            .eq("slug", category_slug);
+                        if (webfolio_section_error)
+                            throw webfolio_section_error;
+                    }
+                    break;
+                case "experience_main":
+                    {
+                        const {
+                            data: webfolio_experience_data,
+                            error: webfolio_experience_error,
+                        } = await authenticatedClient
+                            .from("webfolio_experience")
+                            .update({ picture: publicUrl })
+                            .eq("slug", category_slug);
+                        if (webfolio_experience_error)
+                            throw webfolio_experience_error;
+                    }
+                    break;
+
+                default:
+                    break;
             }
 
-            console.log(
-                JSON.stringify(
-                    authenticatedClient.storage
-                        .from("public")
-                        .getPublicUrl(path).data,
-                ),
-            );
+            console.log(publicUrl);
 
             return new Response(JSON.stringify({ publicUrl: publicUrl }), {
                 headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -1,10 +1,10 @@
 import { supabase } from 'src/modules/supabase';
-import { uploadMarkdownFile } from 'api-service';
+import { uploadExperienceMarkdownFile } from 'api-service';
 
-export const saveMarkdownFile = (experience_slug: string) => {
+export const saveExperienceMarkdownFile = (experience_slug: string) => {
   return async (file: File) => {
     console.log(file);
-    const fileOutput = await uploadMarkdownFile(supabase).call({
+    const fileOutput = await uploadExperienceMarkdownFile(supabase).call({
       experience_slug: experience_slug,
       file: file,
     });

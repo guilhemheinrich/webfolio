@@ -2,12 +2,12 @@ import ApiCall, { ExtractInputType, ExtractOutputType } from "../../ApiCall";
 import { SupabaseTypedClient } from "../../supabase";
 
 export const FetchSections = (supabase: SupabaseTypedClient) =>
-    new ApiCall(async (parameters: { language_code: "fr" | "en" }) => {
+    new ApiCall(async (parameters: {}) => {
         const { data: webfolio_section_data, error: webfolio_section_error } =
-            await supabase
-                .from("webfolio_section")
-                .select()
-                .eq("language_code", parameters.language_code);
+            await supabase.from("webfolio_section").select(
+                `*
+                    , webfolio_section_content(*)`,
+            );
         if (webfolio_section_error) throw webfolio_section_error;
         return webfolio_section_data;
     });
