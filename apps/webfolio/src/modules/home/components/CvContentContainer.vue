@@ -82,14 +82,7 @@ const onDeleteExperience = async (experience_slug: string) => {
 
 <style scoped>
 .card-container {
-  width: 1000px;
-  max-width: 100vw;
-}
-
-@media (max-width: 600px) {
-  /* Pour les tailles plus grandes que small (sm) */
-  .card-container {
-    width: 500px;
-  }
+  width: var(--main-width);
+  max-width: var(--main-maxwidth);
 }
 </style>

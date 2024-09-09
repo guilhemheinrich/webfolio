@@ -71,8 +71,4 @@ const onValidateDescription = async (value: string) => {
 };
 </script>
 
-<style scoped>
-section {
-  min-height: 50dvh;
-}
-</style>
+<style scoped></style>

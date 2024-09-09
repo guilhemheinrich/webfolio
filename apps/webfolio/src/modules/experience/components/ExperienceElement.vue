@@ -160,8 +160,4 @@ const onUpload = async (value: File) => {
 };
 </script>
 
-<style scoped>
-.experience-card {
-  width: 1000px;
-}
-</style>
+<style scoped></style>

@@ -3,6 +3,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --main-maxwidth {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1000px;
+}
+
+@media (max-width: 600px) {
+  @property --main-maxwidth {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 100dvw;
+  }
+}
+
+@property --main-width {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 80dvw;
+}
+
+@media (max-width: 600px) {
+  @property --main-width {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 100dvw;
+  }
+}
+
 // customize css and css class, as well as quasar related properties: https://quasar.dev/style/color-palette/
 .text-brand {
   color: #f72585 !important;
@@ -11,6 +39,7 @@
   background: #f72585 !important;
 }
 
+// relative to the various edit buttons
 .edit-button {
   margin: 8px;
 

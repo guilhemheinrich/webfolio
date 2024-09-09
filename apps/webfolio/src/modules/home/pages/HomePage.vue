@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 200vh">
+  <div style="min-height: 200vh">
     <PresentationSection></PresentationSection>
     <CvContentContainer></CvContentContainer>
   </div>

@@ -1,11 +1,11 @@
 <template>
   <header class="bg-primary text-white row no-wrap">
-    <q-toolbar class="no-padding col-10">
+    <q-toolbar class="no-padding col-grow">
       <q-toolbar-title>
         <QuotationSection></QuotationSection>
       </q-toolbar-title>
     </q-toolbar>
-    <q-toolbar class="gt-sm col-grow tw-relative">
+    <q-toolbar class="gt-sm col-2 tw-relative">
       <div class="absolute-bottom-right q-pa-sm">
         <socials-component></socials-component>
       </div>
