@@ -9,29 +9,10 @@ import { getLanguage } from 'shared-utilities';
 import { ComputedSectionType } from '../model';
 import { ref, watch } from 'vue';
 
-export const useSections = () =>
-  useQuery({
-    queryKey: ['sections', 'fr'],
-    placeholderData: [],
-    queryFn: async () => {
-      const sectionsData = await FetchSections(supabase).call();
-      return sectionsData.map((section) => {
-        const { webfolio_section_content, ...clean_section } = section;
-        const content = getLanguage(webfolio_section_content, 'fr');
-
-        return {
-          ...clean_section,
-          content,
-        } as ComputedSectionType;
-      });
-    },
-  });
-
 export const useQuerySection = (slug: string) => {
   const hasInitialized = ref(false);
   const query = useQuery({
     queryKey: ['sections', slug, 'fr'],
-    placeholderData: undefined,
     queryFn: async () => {
       const sectionsData = await FetchSections(supabase).call();
       const targetSection = sectionsData
@@ -45,6 +26,7 @@ export const useQuerySection = (slug: string) => {
           } as ComputedSectionType;
         })
         .find((section) => section.slug === slug);
+      console.log('targetSection', targetSection);
       return targetSection;
     },
   });
@@ -53,19 +35,16 @@ export const useQuerySection = (slug: string) => {
   watch(
     () => query.data,
     async (data) => {
+      console.log('data.value', data.value);
       // Si aucune section n'est trouvée et que l'initialisation n'a pas été faite
       if (!data.value && !hasInitialized.value) {
         hasInitialized.value = true; // Marque que l'initialisation a été faite une fois
-
         // Crée la section sur le backend
         await createOneSection(supabase).call({
           section_slug: slug,
         });
-
-        console.log(`Section ${slug} créée`);
       }
     },
-    { immediate: true }, // Déclenche le watch immédiatement
   );
 
   return query;

@@ -1,6 +1,6 @@
 <template>
   <div class="tw-relative">
-    <div class="row inline wrap items-center content-center gt-sm">
+    <div class="row wrap items-center content-center gt-sm">
       <router-link to="/" class="col-3 q-pl-xl">
         <q-img
           v-if="quoteSection?.picture"
