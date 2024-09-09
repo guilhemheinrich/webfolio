@@ -9,3 +9,11 @@ export function dateAsString(
 ): string {
     return date.toLocaleDateString(langage, options);
 }
+
+export function capitalizeWordsPipe(inputString: string) {
+    return inputString
+        ? inputString
+              .toLowerCase()
+              .replace(/(?:^|\s)\S/g, (match) => match.toUpperCase())
+        : "";
+}
