@@ -7,7 +7,6 @@ export async function updateOrUploadFile(
     file: File,
 ) {
     const searchPath = path.slice(0, -1);
-
     const { data, error } = await supabaseClient.storage
         .from("public_webfolio")
         .list("", {
@@ -17,17 +16,21 @@ export async function updateOrUploadFile(
     if (error) throw error;
     const targetPath = path.join("/");
     let data_storage;
-    if (data) {
+    if (Array.isArray(data) && data.some((file) => file.name === file.name)) {
+        console.log("Updating", targetPath);
         const { data, error: error_storage } = await supabaseClient.storage
             .from("public_webfolio")
             .update(targetPath, file);
-        if (error_storage) throw error_storage;
+        if (error_storage)
+            throw { type: "storage_error", error: error_storage };
         data_storage = data;
     } else {
+        console.log("Uploading", targetPath);
         const { data, error: error_storage } = await supabaseClient.storage
             .from("public_webfolio")
             .upload(targetPath, file);
-        if (error_storage) throw error_storage;
+        if (error_storage)
+            throw { type: "storage_error", error: error_storage };
         data_storage = data;
     }
 
