@@ -1,12 +1,20 @@
 <template>
-  <q-card class="experience-card">
+  <q-card class="card">
     <div class="row">
-      <q-card-section class="col-6 q-pa-none border-radius-inherit">
+      <q-card-section class="q-pa-none border-radius-inherit col-6">
         <div class="border-radius-inherit">
           <q-img
             v-if="experience.picture"
-            class="border-radius-inherit tw-rounded-r-none"
+            class="border-radius-inherit image tw-rounded-r-none"
             :src="experience.picture"
+            spinner-color="white"
+            fit="cover"
+          >
+          </q-img>
+          <q-img
+            v-else
+            class="border-radius-inherit image tw-rounded-r-none"
+            src="~assets/logo_lite.png"
             spinner-color="white"
             fit="cover"
           >
@@ -35,11 +43,23 @@
         </div>
       </q-card-section>
       <q-card-section class="col-6 q-pa-none">
-        <div class="column tw-overflow-hidden">
+        <div class="column">
           <div class="row items-center q-pa-sm">
-            <p class="col-2">Date</p>
+            <p class="col-2 text-weight-medium text-subtitle text-italic">
+              {{
+                dateAsString(
+                  new Date(experience.start_date ?? ''),
+                  'fr',
+                  dateDisplayConficguration,
+                )
+              }}{{
+                experience.end_date
+                  ? ` - ${dateAsString(new Date(experience.end_date), 'fr', dateDisplayConficguration)}`
+                  : ''
+              }}
+            </p>
 
-            <h2 class="col-10 relative-position">
+            <h2 class="col-10">
               {{ experience.title }}
             </h2>
           </div>
@@ -116,6 +136,13 @@ import { useEditionStore } from 'src/stores/edition';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import PictureInput from 'src/modules/UI/components/form/PictureInput.vue';
 import { ComputedExperienceType } from '../model';
+import { dateAsString } from 'shared-utilities';
+
+const dateDisplayConficguration: Intl.DateTimeFormatOptions = {
+  month: 'long',
+  year: 'numeric',
+};
+
 const props = defineProps<{
   experience: ComputedExperienceType;
 }>();
@@ -160,4 +187,13 @@ const onUpload = async (value: File) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+  width: var(--main-width);
+  max-width: var(--main-maxwidth);
+}
+
+.image {
+  height: var(--experience-height);
+}
+</style>

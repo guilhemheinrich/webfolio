@@ -1,117 +1,118 @@
 <template>
+  <q-page>
+    <div
+      v-if="experience"
+      class="flex column content-center justify-center item-center tw-gap-8"
+    >
+      <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
+        <RelativeOverlay
+          position="outside-top-right"
+          position2="outside-top-left"
+        >
+          <template #overlay v-if="editionStore.editable">
+            <q-btn
+              class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+              @click="dialogTitleVisible = true"
+              color="warning"
+            >
+              Edit Title
+            </q-btn>
+
+            <q-dialog v-model="dialogTitleVisible">
+              <div class="tw-w-[700px]">
+                <TextInput
+                  :initial_content="experience.title"
+                  field_label="Title"
+                  @form-validated="onValidateTitle"
+                  @cancel="dialogTitleVisible = false"
+                ></TextInput>
+              </div>
+            </q-dialog>
+          </template>
+          <template #overlay2 v-if="editionStore.editable">
+            <q-btn
+              class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+              @click="onDeleteExperience(experience.slug)"
+              color="negative"
+            >
+              Delete Experience
+            </q-btn>
+          </template>
+          <template #foreground>
+            <h1>
+              {{ experience.title }}
+            </h1>
+          </template>
+        </RelativeOverlay>
+      </div>
+
+      <div v-if="editionStore.editable" class="tw-maxw-[700px] tw-w-[60vw]">
+        <RelativeOverlay position="outside-top-right">
+          <template #overlay v-if="editionStore.editable">
+            <q-btn
+              class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+              @click="dialogShortDescriptionVisible = true"
+              color="warning"
+            >
+              Edit Short Description
+            </q-btn>
+
+            <q-dialog v-model="dialogShortDescriptionVisible">
+              <div class="tw-w-[700px]">
+                <TextInput
+                  :initial_content="experience.short_description"
+                  :input-props="{ type: 'textarea' }"
+                  field_label="Short Description"
+                  @form-validated="onValidateShortDescription"
+                  @cancel="dialogShortDescriptionVisible = false"
+                ></TextInput>
+              </div>
+            </q-dialog>
+          </template>
+          <template #foreground>
+            <p class="short-description">
+              {{ experience.short_description }}
+            </p>
+          </template>
+        </RelativeOverlay>
+      </div>
+
+      <div class="tw-maxw-[700px] tw-w-[60vw]">
+        <RelativeOverlay position="outside-top-right">
+          <template #overlay v-if="editionStore.editable">
+            <q-btn
+              class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+              @click="dialogDescriptionVisible = true"
+              color="warning"
+            >
+              Edit Description
+            </q-btn>
+
+            <q-dialog v-model="dialogDescriptionVisible" full-width>
+              <div class="tw-max-w-[900px]! tw-w-[900px]">
+                <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
+                <MarkdownInput
+                  :initial_content="experience.description"
+                  field_label="Description"
+                  :file_upload="saveExperienceMarkdownFile(experience.slug)"
+                  @form-validated="onValidateDescription"
+                  @cancel="dialogDescriptionVisible = false"
+                ></MarkdownInput>
+              </div>
+            </q-dialog>
+          </template>
+          <template #foreground>
+            <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
+            <VMarkdownView
+              mode="custom"
+              :content="experience.description"
+            ></VMarkdownView>
+          </template>
+        </RelativeOverlay>
+      </div>
+    </div>
+  </q-page>
   <!-- <div class="flex column content-center justify-center tw-w-[900px] !tw-max-w-[80vw]"> -->
-
-  <div
-    v-if="experience"
-    class="flex column content-center justify-center item-center tw-gap-8"
-  >
-    <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
-      <RelativeOverlay
-        position="outside-top-right"
-        position2="outside-top-left"
-      >
-        <template #overlay v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="dialogTitleVisible = true"
-            color="warning"
-          >
-            Edit Title
-          </q-btn>
-
-          <q-dialog v-model="dialogTitleVisible">
-            <div class="tw-w-[700px]">
-              <TextInput
-                :initial_content="experience.title"
-                field_label="Title"
-                @form-validated="onValidateTitle"
-                @cancel="dialogTitleVisible = false"
-              ></TextInput>
-            </div>
-          </q-dialog>
-        </template>
-        <template #overlay2 v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="onDeleteExperience(experience.slug)"
-            color="negative"
-          >
-            Delete Experience
-          </q-btn>
-        </template>
-        <template #foreground>
-          <h1>
-            {{ experience.title }}
-          </h1>
-        </template>
-      </RelativeOverlay>
-    </div>
-
-    <div v-if="editionStore.editable" class="tw-maxw-[700px] tw-w-[60vw]">
-      <RelativeOverlay position="outside-top-right">
-        <template #overlay v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="dialogShortDescriptionVisible = true"
-            color="warning"
-          >
-            Edit Short Description
-          </q-btn>
-
-          <q-dialog v-model="dialogShortDescriptionVisible">
-            <div class="tw-w-[700px]">
-              <TextInput
-                :initial_content="experience.short_description"
-                :input-props="{ type: 'textarea' }"
-                field_label="Short Description"
-                @form-validated="onValidateShortDescription"
-                @cancel="dialogShortDescriptionVisible = false"
-              ></TextInput>
-            </div>
-          </q-dialog>
-        </template>
-        <template #foreground>
-          <p class="short-description">
-            {{ experience.short_description }}
-          </p>
-        </template>
-      </RelativeOverlay>
-    </div>
-
-    <div class="tw-maxw-[700px] tw-w-[60vw]">
-      <RelativeOverlay position="outside-top-right">
-        <template #overlay v-if="editionStore.editable">
-          <q-btn
-            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-            @click="dialogDescriptionVisible = true"
-            color="warning"
-          >
-            Edit Description
-          </q-btn>
-
-          <q-dialog v-model="dialogDescriptionVisible" full-width>
-            <div class="tw-max-w-[900px]! tw-w-[900px]">
-              <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
-              <MarkdownInput
-                :initial_content="experience.description"
-                field_label="Description"
-                :file_upload="saveExperienceMarkdownFile(experience.slug)"
-                @form-validated="onValidateDescription"
-                @cancel="dialogDescriptionVisible = false"
-              ></MarkdownInput>
-            </div>
-          </q-dialog>
-        </template>
-        <template #foreground>
-          <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-          <VMarkdownView
-            mode="custom"
-            :content="experience.description"
-          ></VMarkdownView>
-        </template>
-      </RelativeOverlay>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">

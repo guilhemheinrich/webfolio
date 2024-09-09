@@ -80,9 +80,4 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped>
-.card-container {
-  width: var(--main-width);
-  max-width: var(--main-maxwidth);
-}
-</style>
+<style scoped></style>

@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --experience-height {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 300px;
+}
+
 @property --main-maxwidth {
   syntax: '<length>';
   inherits: false;
