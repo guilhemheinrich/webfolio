@@ -23,7 +23,6 @@ export const useExperiences = () =>
         );
         const description = getLanguage(webfolio_experience_description, 'fr');
         const title = getLanguage(webfolio_experience_title, 'fr');
-        console.log('description', description);
         return {
           ...clean_experience,
           title,

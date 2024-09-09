@@ -62,7 +62,6 @@ const {
 const presentationDialogVisible = ref(false);
 
 const onValidateDescription = async (value: string) => {
-  console.log('before', presentationSection.value);
   if (presentationSection.value === undefined) {
   } else {
     presentationDialogVisible.value = false;

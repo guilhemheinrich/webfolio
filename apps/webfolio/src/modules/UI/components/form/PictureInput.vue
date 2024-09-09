@@ -38,10 +38,7 @@ const pictureValidated = () => {
 
     if (files.length > 0) {
       emit('upload', uploader.value.files[0]);
-    } else {
-      console.log('No file selected');
     }
-    console.log('onSubmit');
   }
 };
 </script>

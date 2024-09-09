@@ -3,7 +3,6 @@ import { uploadExperienceMarkdownFile } from 'api-service';
 
 export const saveExperienceMarkdownFile = (experience_slug: string) => {
   return async (file: File) => {
-    console.log(file);
     const fileOutput = await uploadExperienceMarkdownFile(supabase).call({
       experience_slug: experience_slug,
       file: file,

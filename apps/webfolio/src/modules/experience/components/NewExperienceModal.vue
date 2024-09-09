@@ -202,11 +202,9 @@ const max_year_mounth = computed(() => {
 
 const onCheckPeriod = async () => {
   if (periodForm.value !== undefined) {
-    console.log(period.value);
     periodForm.value.validate().then(async (valid) => {
       if (valid && carouselRef.value !== null) {
         loading.value = true;
-        console.log('date value', period.value);
         if (period.value !== undefined) {
           const payload: UpdateDateInputType = {
             experience_slug: slug.value,

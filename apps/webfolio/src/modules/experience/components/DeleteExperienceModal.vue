@@ -37,7 +37,6 @@ const onDeleteExperience = async (experience_slug: string) => {
     experience_slug: experience_slug,
   });
   if (success) {
-    console.log('Successfully deleted experience', experience_slug);
     onDialogOK();
   } else {
     onDialogCancel();

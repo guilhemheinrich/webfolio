@@ -26,7 +26,6 @@ export const useQuerySection = (slug: string) => {
           } as ComputedSectionType;
         })
         .find((section) => section.slug === slug);
-      console.log('targetSection', targetSection);
       return targetSection;
     },
   });
@@ -35,7 +34,6 @@ export const useQuerySection = (slug: string) => {
   watch(
     () => query.data,
     async (data) => {
-      console.log('data.value', data.value);
       // Si aucune section n'est trouvée et que l'initialisation n'a pas été faite
       if (!data.value && !hasInitialized.value) {
         hasInitialized.value = true; // Marque que l'initialisation a été faite une fois
@@ -67,7 +65,6 @@ export function useSection(slug: string) {
       });
 
       if (success) {
-        console.log(`Successfully updated section: ${slug}`);
         refetch(); // Refetch les sections après la mise à jour
       }
     } catch (error) {

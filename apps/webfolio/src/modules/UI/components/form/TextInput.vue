@@ -59,7 +59,6 @@ const onSubmit = () => {
 };
 
 const validateForm = () => {
-  console.log('onSubmit');
   if (form.value) {
     form.value.submit();
   }

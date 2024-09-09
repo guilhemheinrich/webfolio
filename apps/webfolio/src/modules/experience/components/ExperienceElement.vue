@@ -127,43 +127,36 @@ const { refetch } = useExperiences();
 const dialogTitleVisible = ref(false);
 const onValidateTitle = async (value: string) => {
   if (props.experience === undefined) return;
-  console.log('Validating');
   dialogTitleVisible.value = false;
-  const success = await updateExperienceTitle(supabase).call({
+  await updateExperienceTitle(supabase).call({
     experience_slug: props.experience.slug,
     content: value,
     lang: 'fr',
   });
   refetch();
-
-  if (success) console.log('Successfully run update');
 };
 
 const dialogShortDescriptionVisible = ref(false);
 const onValidateShortDescription = async (value: string) => {
   if (props.experience === undefined) return;
-  console.log('Validating');
   dialogShortDescriptionVisible.value = false;
-  const success = await updateExperienceShortDescription(supabase).call({
+  await updateExperienceShortDescription(supabase).call({
     experience_slug: props.experience.slug,
     content: value,
     lang: 'fr',
   });
   refetch();
-  if (success) console.log('Successfully run update');
 };
 
 const dialogPictureVisible = ref(false);
 const onUpload = async (value: File) => {
   if (props.experience === undefined) return;
-  console.log('Validating');
   dialogPictureVisible.value = false;
-  const success = await uploadExperienceMainPicture(supabase).call({
+  await uploadExperienceMainPicture(supabase).call({
     experience_slug: props.experience.slug,
     file: value,
   });
   refetch();
-  if (success) console.log('Successfully run update');
 };
 </script>
 

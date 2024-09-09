@@ -149,42 +149,37 @@ const experience: Ref<ComputedExperienceType | undefined> = computed(() => {
 const dialogTitleVisible = ref(false);
 const onValidateTitle = async (value: string) => {
   if (experience.value === undefined) return;
-  console.log('Validating');
   dialogTitleVisible.value = false;
-  const success = await updateExperienceTitle(supabase).call({
+  await updateExperienceTitle(supabase).call({
     experience_slug: experience.value.slug,
     content: value,
     lang: 'fr',
   });
-  if (success) console.log('Successfully run update');
+
   refetch();
 };
 
 const dialogShortDescriptionVisible = ref(false);
 const onValidateShortDescription = async (value: string) => {
   if (experience.value === undefined) return;
-  console.log('Validating');
   dialogShortDescriptionVisible.value = false;
-  const success = await updateExperienceShortDescription(supabase).call({
+  await updateExperienceShortDescription(supabase).call({
     experience_slug: experience.value.slug,
     content: value,
     lang: 'fr',
   });
-  if (success) console.log('Successfully run update');
   refetch();
 };
 
 const dialogDescriptionVisible = ref(false);
 const onValidateDescription = async (value: string) => {
   if (experience.value === undefined) return;
-  console.log('Validating');
   dialogDescriptionVisible.value = false;
-  const success = await updateExperienceDescription(supabase).call({
+  await updateExperienceDescription(supabase).call({
     experience_slug: experience.value.slug,
     content: value,
     lang: 'fr',
   });
-  if (success) console.log('Successfully run update');
   await refetch();
 };
 

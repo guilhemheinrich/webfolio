@@ -55,7 +55,6 @@ onMounted(() => {
 
     // Accéder au webcomponent
     const webComponent = mkdEditor.value as HTMLElement;
-    console.log(webComponent);
     if (webComponent) {
       // Accéder à la deuxième div à l'intérieur du webcomponent
       const vmdBodyElement = webComponent.querySelector('.vmd-body');
@@ -80,7 +79,6 @@ const onSubmit = () => {
 };
 
 const validateForm = () => {
-  console.log('onSubmit');
   if (form.value) {
     form.value.submit();
   }
