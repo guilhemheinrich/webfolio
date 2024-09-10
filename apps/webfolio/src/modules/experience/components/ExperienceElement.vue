@@ -1,115 +1,69 @@
 <template>
-  <router-link :to="`/experience/${experience.slug}`">
-    <q-card class="card-desktop gt-sm">
-      <div class="row">
-        <q-card-section class="q-pa-none border-radius-inherit col-6">
-          <div class="border-radius-inherit">
-            <q-img
-              v-if="experience.picture"
-              class="border-radius-inherit image tw-rounded-r-none"
-              :src="experience.picture"
-              spinner-color="white"
-              fit="cover"
+  <q-card class="card-desktop gt-sm">
+    <div class="row">
+      <q-card-section class="q-pa-none border-radius-inherit col-6">
+        <div class="border-radius-inherit">
+          <q-img
+            v-if="experience.picture"
+            class="border-radius-inherit image tw-rounded-r-none"
+            :src="experience.picture"
+            spinner-color="white"
+            fit="contain"
+          >
+          </q-img>
+          <q-img
+            v-else
+            class="border-radius-inherit image tw-rounded-r-none"
+            src="~assets/logo_lite.png"
+            spinner-color="white"
+            fit="contain"
+          >
+          </q-img>
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogPictureVisible = true"
+              color="warning"
             >
-            </q-img>
-            <q-img
-              v-else
-              class="border-radius-inherit image tw-rounded-r-none"
-              src="~assets/logo_lite.png"
-              spinner-color="white"
-              fit="cover"
-            >
-            </q-img>
-            <div
-              v-if="editionStore.editable"
-              class="absolute-top-right edit-button"
-            >
-              <q-btn
-                class="tw-mx-4"
-                @click="dialogPictureVisible = true"
-                color="warning"
-              >
-                Edit Picture
-              </q-btn>
-            </div>
+              Edit Picture
+            </q-btn>
           </div>
-        </q-card-section>
-        <q-card-section class="col-6 q-pa-none">
-          <div class="column">
-            <div class="row items-center q-pa-sm">
-              <span class="col-4 text-weight-medium text-subtitle text-italic">
-                {{ dateStringDisplay }}
-              </span>
+        </div>
+      </q-card-section>
+      <q-card-section class="col-6 q-pa-none">
+        <div class="column" style="height: 100%">
+          <div class="row items-center q-pa-sm">
+            <span class="col-4 text-weight-medium text-subtitle text-italic">
+              {{ dateStringDisplay }}
+            </span>
 
-              <h2 class="col-8">
-                {{ experience.title }}
-              </h2>
-            </div>
-            <div
-              v-if="editionStore.editable"
-              class="absolute-top-right edit-button"
-            >
-              <q-btn
-                class="tw-mx-4"
-                @click="dialogTitleVisible = true"
-                color="warning"
-              >
-                Edit Title
-              </q-btn>
-            </div>
-
-            <q-separator />
-
-            <div class="relative-position q-pa-sm">
-              <p class="short-description">
-                {{ experience.short_description ?? '' }}
-              </p>
-              <div
-                v-if="editionStore.editable"
-                class="absolute-top-right edit-button"
-              >
-                <q-btn
-                  class="tw-mx-4"
-                  @click="dialogShortDescriptionVisible = true"
-                  color="warning"
-                >
-                  Edit Short Description
-                </q-btn>
-              </div>
-            </div>
-          </div>
-        </q-card-section>
-      </div>
-    </q-card>
-
-    <q-card class="lt-md">
-      <div class="column">
-        <q-card-section>
-          <div>
-            <h2>
+            <h2 class="col-8">
               {{ experience.title }}
             </h2>
-
-            <div
-              v-if="editionStore.editable"
-              class="absolute-top-right edit-button"
-            >
-              <q-btn
-                class="tw-mx-4"
-                @click="dialogTitleVisible = true"
-                color="warning"
-              >
-                Edit Title
-              </q-btn>
-            </div>
           </div>
-        </q-card-section>
-        <q-separator />
-        <q-card-section class="q-py-md">
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogTitleVisible = true"
+              color="warning"
+            >
+              Edit Title
+            </q-btn>
+          </div>
+
+          <q-separator />
+
           <div class="relative-position q-pa-sm">
             <p class="short-description">
               {{ experience.short_description ?? '' }}
             </p>
+
             <div
               v-if="editionStore.editable"
               class="absolute-top-right edit-button"
@@ -123,42 +77,103 @@
               </q-btn>
             </div>
           </div>
-        </q-card-section>
-        <q-card-section class="q-pa-none border-radius-inherit">
-          <div class="border-radius-inherit">
-            <q-img
-              v-if="experience.picture"
-              class="border-radius-inherit image tw-rounded-r-none"
-              :src="experience.picture"
-              spinner-color="white"
-              fit="cover"
+
+          <div class="q-pa-sm tw-mt-auto">
+            <q-btn
+              color="secondary"
+              class="full-width"
+              :to="`/experience/${experience.slug}`"
             >
-            </q-img>
-            <q-img
-              v-else
-              class="border-radius-inherit image"
-              src="~assets/logo_lite.png"
-              spinner-color="white"
-              fit="cover"
-            >
-            </q-img>
-            <div
-              v-if="editionStore.editable"
-              class="absolute-top-right edit-button"
-            >
-              <q-btn
-                class="tw-mx-4"
-                @click="dialogPictureVisible = true"
-                color="warning"
-              >
-                Edit Picture
-              </q-btn>
-            </div>
+              En savoir plus
+            </q-btn>
           </div>
-        </q-card-section>
-      </div>
-    </q-card>
-  </router-link>
+        </div>
+      </q-card-section>
+    </div>
+  </q-card>
+
+  <q-card class="lt-md" style="width: 100dvw">
+    <div class="column">
+      <q-card-section>
+        <div>
+          <h2>{{ experience.title }}</h2>
+
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogTitleVisible = true"
+              color="warning"
+            >
+              Edit Title
+            </q-btn>
+          </div>
+        </div>
+      </q-card-section>
+      <q-separator />
+      <q-card-section class="q-py-md">
+        <div class="relative-position q-pa-sm">
+          <p class="short-description">
+            {{ experience.short_description ?? '' }}
+          </p>
+
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogShortDescriptionVisible = true"
+              color="warning"
+            >
+              Edit Short Description
+            </q-btn>
+          </div>
+        </div>
+      </q-card-section>
+      <q-card-section class="q-pa-none border-radius-inherit">
+        <div class="border-radius-inherit">
+          <q-img
+            v-if="experience.picture"
+            class="border-radius-inherit image tw-rounded-r-none"
+            :src="experience.picture"
+            spinner-color="white"
+            fit="contain"
+          >
+          </q-img>
+          <q-img
+            v-else
+            class="border-radius-inherit image"
+            src="~assets/logo_lite.png"
+            spinner-color="white"
+            fit="contain"
+          >
+          </q-img>
+          <div
+            v-if="editionStore.editable"
+            class="absolute-top-right edit-button"
+          >
+            <q-btn
+              class="tw-mx-4"
+              @click="dialogPictureVisible = true"
+              color="warning"
+            >
+              Edit Picture
+            </q-btn>
+          </div>
+        </div>
+        <q-btn
+          color="secondary"
+          class="full-width"
+          :to="`/experience/${experience.slug}`"
+        >
+          En savoir plus
+        </q-btn>
+      </q-card-section>
+    </div>
+  </q-card>
 
   <q-dialog v-model="dialogPictureVisible">
     <div class="tw-w-[700px]">
