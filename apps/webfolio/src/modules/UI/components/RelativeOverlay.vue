@@ -1,15 +1,15 @@
 <template>
   <div class="tw-relative">
-    <div class="tw-absolute" :class="overlayClass">
+    <div class="tw-absolute tw-z-10" :class="overlayClass">
       <slot name="overlay"> </slot>
     </div>
-    <div v-if="position2" class="tw-absolute" :class="overlayClass2">
+    <div v-if="position2" class="tw-absolute tw-z-10" :class="overlayClass2">
       <slot name="overlay2"> </slot>
     </div>
-    <div v-if="position3" class="tw-absolute" :class="overlayClass3">
+    <div v-if="position3" class="tw-absolute tw-z-10" :class="overlayClass3">
       <slot name="overlay3"> </slot>
     </div>
-    <div v-if="position4" class="tw-absolute" :class="overlayClass4">
+    <div v-if="position4" class="tw-absolute tw-z-10" :class="overlayClass4">
       <slot name="overlay4"> </slot>
     </div>
     <slot name="foreground"></slot>

@@ -1,7 +1,7 @@
 <template>
   <RelativeOverlay position="beneath">
     <template #overlay v-if="editionStore.editable">
-      <div class="full-width column items-center">
+      <div class="full-width column items-center tw-pt-2">
         <q-btn
           v-if="editionStore.editable"
           @click="redirectToNewExperienceModal"
@@ -33,10 +33,7 @@
                 </div>
               </template>
               <template #foreground>
-                <ExperienceElement
-                  :experience="experience"
-                  class=""
-                ></ExperienceElement>
+                <ExperienceElement :experience="experience"></ExperienceElement>
               </template>
             </RelativeOverlay>
           </div>
