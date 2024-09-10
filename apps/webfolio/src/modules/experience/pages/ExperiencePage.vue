@@ -17,17 +17,6 @@
             >
               Edit Title
             </q-btn>
-
-            <q-dialog v-model="dialogTitleVisible">
-              <div class="tw-w-[700px]">
-                <TextInput
-                  :initial_content="experience.title"
-                  field_label="Title"
-                  @form-validated="onValidateTitle"
-                  @cancel="dialogTitleVisible = false"
-                ></TextInput>
-              </div>
-            </q-dialog>
           </template>
           <template #overlay2 v-if="editionStore.editable">
             <q-btn
@@ -56,18 +45,6 @@
             >
               Edit Short Description
             </q-btn>
-
-            <q-dialog v-model="dialogShortDescriptionVisible">
-              <div class="tw-w-[700px]">
-                <TextInput
-                  :initial_content="experience.short_description"
-                  :input-props="{ type: 'textarea' }"
-                  field_label="Short Description"
-                  @form-validated="onValidateShortDescription"
-                  @cancel="dialogShortDescriptionVisible = false"
-                ></TextInput>
-              </div>
-            </q-dialog>
           </template>
           <template #foreground>
             <p class="short-description">
@@ -87,19 +64,6 @@
             >
               Edit Description
             </q-btn>
-
-            <q-dialog v-model="dialogDescriptionVisible" full-width>
-              <div class="tw-max-w-[900px]! tw-w-[900px]">
-                <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
-                <MarkdownInput
-                  :initial_content="experience.description"
-                  field_label="Description"
-                  :file_upload="saveExperienceMarkdownFile(experience.slug)"
-                  @form-validated="onValidateDescription"
-                  @cancel="dialogDescriptionVisible = false"
-                ></MarkdownInput>
-              </div>
-            </q-dialog>
           </template>
           <template #foreground>
             <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
@@ -110,6 +74,42 @@
           </template>
         </RelativeOverlay>
       </div>
+
+      <q-dialog v-model="dialogTitleVisible">
+        <div class="tw-w-[700px]">
+          <TextInput
+            :initial_content="experience.title"
+            field_label="Title"
+            @form-validated="onValidateTitle"
+            @cancel="dialogTitleVisible = false"
+          ></TextInput>
+        </div>
+      </q-dialog>
+
+      <q-dialog v-model="dialogDescriptionVisible" full-width>
+        <div class="tw-max-w-[900px]! tw-w-[900px]">
+          <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
+          <MarkdownInput
+            :initial_content="experience.description"
+            field_label="Description"
+            :file_upload="saveExperienceMarkdownFile(experience.slug)"
+            @form-validated="onValidateDescription"
+            @cancel="dialogDescriptionVisible = false"
+          ></MarkdownInput>
+        </div>
+      </q-dialog>
+
+      <q-dialog v-model="dialogShortDescriptionVisible">
+        <div class="tw-w-[700px]">
+          <TextInput
+            :initial_content="experience.short_description"
+            :input-props="{ type: 'textarea' }"
+            field_label="Short Description"
+            @form-validated="onValidateShortDescription"
+            @cancel="dialogShortDescriptionVisible = false"
+          ></TextInput>
+        </div>
+      </q-dialog>
     </div>
   </q-page>
   <!-- <div class="flex column content-center justify-center tw-w-[900px] !tw-max-w-[80vw]"> -->
