@@ -4,5 +4,5 @@ import { Database } from 'supabase-types';
 
 export const supabase = createClient<Database>(
   Config.SUPABASE_URL,
-  Config.DEV ? Config.SUPABASE_SERVICE_KEY : Config.SUPABASE_ANON_KEY,
+  Config.ADMIN ? Config.SUPABASE_SERVICE_KEY : Config.SUPABASE_ANON_KEY,
 );

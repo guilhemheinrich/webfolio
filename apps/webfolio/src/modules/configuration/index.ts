@@ -2,12 +2,12 @@ import { Config as shared_config } from 'configuration';
 import { z } from 'zod';
 
 const ConfigSchema = z.object({
-  DEV: z.boolean(),
+  ADMIN: z.boolean(),
 });
 
 export type ConfigWebfolio = z.infer<typeof ConfigSchema>;
 const rawConfig: Partial<ConfigWebfolio> = {
-  DEV: Boolean(process.env.NODE_ENV && process.env.NODE_ENV === 'development'),
+  ADMIN: Boolean(process.env.ADMIN),
 };
 
 export const ConfigWebfolio = ConfigSchema.parse(rawConfig);

@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header height-hint="98">
-      <div v-if="Config.DEV">
+      <div v-if="Config.ADMIN">
         <admin-header></admin-header>
       </div>
     </q-header>

@@ -7,7 +7,7 @@ export const useEditionStore = defineStore('edition-store', () => {
     sessionStorage.setItem('editionStore', 'true');
   const editable: Ref<boolean> = ref(
     Boolean(
-      JSON.parse(sessionStorage.getItem('editionStore') ?? '') ?? Config.DEV,
+      JSON.parse(sessionStorage.getItem('editionStore') ?? '') ?? Config.ADMIN,
     ),
   );
   // Define custom getters and setters
@@ -16,7 +16,7 @@ export const useEditionStore = defineStore('edition-store', () => {
       return editable.value;
     },
     set(value: boolean) {
-      if (!Config.DEV) return;
+      if (!Config.ADMIN) return;
       editable.value = value; // Assure that nobody can swap to editable maliciously
       // Ajoutez ici toute logique que vous souhaitez exécuter lors de la définition de "editable"
       sessionStorage.setItem('editionStore', JSON.stringify(value));
