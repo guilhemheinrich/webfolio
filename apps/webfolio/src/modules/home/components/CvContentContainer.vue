@@ -13,37 +13,32 @@
     </template>
     <template #foreground>
       <div v-if="experiences" class="tw-w-full">
-        <q-list class="tw-flex tw-flex-col tw-items-center">
-          <div class="card-container">
-            <div
-              v-for="(experience, index) in experiences"
-              :key="index"
-              class="tw-my-8"
-            >
-              <RelativeOverlay position="outside-top-right">
-                <template #overlay v-if="editionStore.editable">
-                  <div class="tw-mx-4 tw-flex tw-w-[15vw] tw-flex-col tw-gap-4">
-                    <q-btn
-                      :to="['experience', experience.slug].join('/')"
-                      color="positive"
-                    >
-                      Edit experience
-                    </q-btn>
-                    <q-btn
-                      @click="onDeleteExperience(experience.slug)"
-                      color="negative"
-                    >
-                      Delete experience
-                    </q-btn>
-                  </div>
-                </template>
-                <template #foreground>
-                  <ExperienceElement
-                    :experience="experience"
-                  ></ExperienceElement>
-                </template>
-              </RelativeOverlay>
-            </div>
+        <q-list class="container">
+          <div v-for="(experience, index) in experiences" :key="index">
+            <RelativeOverlay position="outside-top-right">
+              <template #overlay v-if="editionStore.editable">
+                <div class="tw-mx-4 tw-flex tw-w-[15vw] tw-flex-col tw-gap-4">
+                  <q-btn
+                    :to="['experience', experience.slug].join('/')"
+                    color="positive"
+                  >
+                    Edit experience
+                  </q-btn>
+                  <q-btn
+                    @click="onDeleteExperience(experience.slug)"
+                    color="negative"
+                  >
+                    Delete experience
+                  </q-btn>
+                </div>
+              </template>
+              <template #foreground>
+                <ExperienceElement
+                  :experience="experience"
+                  class=""
+                ></ExperienceElement>
+              </template>
+            </RelativeOverlay>
           </div>
         </q-list>
       </div>
@@ -80,4 +75,17 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    margin-bottom: 1rem;
+  }
+}
+</style>
