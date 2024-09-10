@@ -7,7 +7,7 @@ const ConfigSchema = z.object({
 
 export type ConfigWebfolio = z.infer<typeof ConfigSchema>;
 const rawConfig: Partial<ConfigWebfolio> = {
-  DEV: Boolean(process.env.NODE_ENV === 'development'),
+  DEV: Boolean(process.env.NODE_ENV && process.env.NODE_ENV === 'development'),
 };
 
 export const ConfigWebfolio = ConfigSchema.parse(rawConfig);
