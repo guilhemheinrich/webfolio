@@ -31,7 +31,7 @@ jobs:
               run: pnpm run build
 
             - name: Check build output
-              run: ls -al ./apps/webfolio/dist/spa
+              run: ls -al .
 
             # - name: Deploy to GitHub Pages
             #   uses: peaceiris/actions-gh-pages@v3
