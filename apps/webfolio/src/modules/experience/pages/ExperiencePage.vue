@@ -2,7 +2,7 @@
   <q-page>
     <div
       v-if="experience"
-      class="flex column content-center justify-center item-center tw-gap-8"
+      class="flex column content-center justify-center item-center q-pa-xl tw-gap-16"
     >
       <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
         <RelativeOverlay
