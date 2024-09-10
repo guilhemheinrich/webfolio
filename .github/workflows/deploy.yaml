@@ -30,9 +30,20 @@ jobs:
             - name: Build the project
               run: pnpm run build
 
-            - name: Check build output
+            - name: Check build output 1
               run: ls -al .
 
+            - name: Check build output 2
+              run: ls -al ./apps
+
+            - name: Check build output 3
+              run: ls -al ./apps/webfolio
+
+            - name: Check build output 4
+              run: ls -al ./apps/webfolio/dist
+
+            - name: Check build output 5
+              run: ls -al ./apps/webfolio/dist/spa
             # - name: Deploy to GitHub Pages
             #   uses: peaceiris/actions-gh-pages@v3
             #   with:
