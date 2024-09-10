@@ -32,4 +32,4 @@ jobs:
               uses: peaceiris/actions-gh-pages@v3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./apps/webfolio/dist/spa # Remplace par le répertoire de build de ton projet
+                  publish_dir: ../apps/webfolio/dist/spa # Remplace par le répertoire de build de ton projet
