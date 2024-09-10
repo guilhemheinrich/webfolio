@@ -7,6 +7,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nx run-many --target=dev --parallel --projects=webfolio,api-service,configuration,shared-utilities,supabase-types",
+        "build": "npx nx run-many --target=build --projects=webfolio,api-service,configuration,shared-utilities,supabase-types",
         "build:libs": "pnpm run build:libs:utilities",
         "build:libs:utilities": "cd packages/shared-utilities && pnpm run build",
         "sp:data": "supabase db dump --data-only -s public -f supabase/data.sql",
