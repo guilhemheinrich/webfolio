@@ -13,7 +13,7 @@ export const useEditionStore = defineStore('edition-store', () => {
   // Define custom getters and setters
   const editableComputed = computed({
     get() {
-      return editable.value;
+      return editable.value && Config.ADMIN;
     },
     set(value: boolean) {
       if (!Config.ADMIN) return;
