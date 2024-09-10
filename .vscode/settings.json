@@ -30,5 +30,8 @@
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format",
         "files.eol": "\n"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     } // set as "true" to run 'prettier' last not first
 }

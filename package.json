@@ -3,6 +3,10 @@
     "private": true,
     "version": "1.0.0",
     "description": "A webfolio project using Quasar and Supabase",
+    "packageManager": "pnpm@8.9.0",
+    "engines": {
+        "node": ">=18"
+    },
     "nx": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",

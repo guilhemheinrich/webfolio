@@ -1,33 +1,35 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches:
-      - main  # Remplace par la branche que tu veux suivre pour le déploiement
+    push:
+        branches:
+            - main # Remplace par la branche que tu veux suivre pour le déploiement
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          ref: main  # Remplace par ta branche, ex : "production"
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              with:
+                  ref: main # Remplace par ta branche, ex : "production"
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'  # Choisis la version de Node.js requise par ton projet
+            - uses: pnpm/action-setup@v4
 
-      - name: Install dependencies
-        run: npm install
+            # - name: Set up Node.js
+            #   uses: actions/setup-node@v3
+            #   with:
+            #       node-version: "20" # Choisis la version de Node.js requise par ton projet
 
-      - name: Build the project
-        run: npm run build
+            - name: Install dependencies
+              run: pnpm install
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./apps/webfolio/dist/spa  # Remplace par le répertoire de build de ton projet
+            - name: Build the project
+              run: pnpm run build
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./apps/webfolio/dist/spa # Remplace par le répertoire de build de ton projet
