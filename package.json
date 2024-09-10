@@ -20,7 +20,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ID2L/webfolio.git"
+        "url": "git+https://github.com/guilhemheinrich/webfolio.git"
     },
     "keywords": [
         "Supabase",
@@ -30,9 +30,9 @@
     "author": "Guilhem Heinrich <guilhem.heinrich@id2l.fr>",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/ID2L/webfolio/issues"
+        "url": "https://github.com/guilhemheinrich/webfolio/issues"
     },
-    "homepage": "https://github.com/ID2L/webfolio#readme",
+    "homepage": "https://github.com/guilhemheinrich/webfolio#readme",
     "devDependencies": {
         "@nx/eslint": "19.2.2",
         "eslint": "~8.57.0",
