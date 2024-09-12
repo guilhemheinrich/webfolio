@@ -28,7 +28,7 @@
             </q-btn>
           </template>
           <template #foreground>
-            <h1>
+            <h1 class="tw-text-center">
               {{ experience.title }}
             </h1>
           </template>

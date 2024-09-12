@@ -300,4 +300,8 @@ const onUpload = async (value: File) => {
 .image {
   height: var(--experience-height);
 }
+
+p {
+  text-indent: 2rem;
+}
 </style>
