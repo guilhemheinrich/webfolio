@@ -92,3 +92,26 @@ h2 {
   /* direction: ltr; /* Direction du texte (de gauche à droite) */
   /* vertical-align: baseline; /* Alignement vertical */
 }
+
+.markdown-body {
+  a {
+    text-decoration: underline; /* Supprime le soulignement par défaut */
+    color: #007bff; /* Couleur du texte */
+  }
+
+  a:hover {
+    color: #0056b3; /* Change la couleur du lien lors du survol */
+  }
+
+  a:focus {
+    outline: none; /* Supprime le contour par défaut lorsqu'il est focus */
+  }
+
+  a:visited {
+    color: #551a8b; /* Couleur des liens visités */
+  }
+
+  a:active {
+    color: #0056b3; /* Couleur du lien au clic */
+  }
+}

@@ -196,4 +196,6 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
