@@ -17,5 +17,9 @@ export const Config = {
   ...ConfigWebfolio,
 };
 
-console.log(process.env.ADMIN);
-console.log(Boolean(JSON.parse(process.env.ADMIN ?? '')));
+console.log('ConfigWebfolio.ADMIN', ConfigWebfolio.ADMIN);
+console.log('process.env.ADMIN', process.env.ADMIN);
+console.log(
+  'Boolean(JSON.parse(process.env.ADMIN ?? "")',
+  Boolean(JSON.parse(process.env.ADMIN ?? '')),
+);
