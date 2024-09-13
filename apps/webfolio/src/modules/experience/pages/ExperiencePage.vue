@@ -2,9 +2,9 @@
   <q-page>
     <div
       v-if="experience"
-      class="flex column content-center justify-center item-center q-pa-xl tw-gap-16"
+      class="flex column content-center justify-center item-center q-px-sm tw-gap-16"
     >
-      <div class="tw-maxw-[700px] tw-w-[60vw] tw-text-lg">
+      <div class="tw-max-w-[700px] tw-text-lg">
         <RelativeOverlay
           position="outside-top-right"
           position2="outside-top-left"
@@ -35,26 +35,7 @@
         </RelativeOverlay>
       </div>
 
-      <div v-if="editionStore.editable" class="tw-maxw-[700px] tw-w-[60vw]">
-        <RelativeOverlay position="outside-top-right">
-          <template #overlay v-if="editionStore.editable">
-            <q-btn
-              class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-              @click="dialogShortDescriptionVisible = true"
-              color="warning"
-            >
-              Edit Short Description
-            </q-btn>
-          </template>
-          <template #foreground>
-            <p class="short-description">
-              {{ experience.short_description }}
-            </p>
-          </template>
-        </RelativeOverlay>
-      </div>
-
-      <div class="tw-maxw-[700px] tw-w-[60vw]">
+      <div class="tw-max-w-[700px]">
         <RelativeOverlay position="outside-top-right">
           <template #overlay v-if="editionStore.editable">
             <q-btn
@@ -196,6 +177,4 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
