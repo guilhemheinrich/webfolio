@@ -297,11 +297,15 @@ const onUpload = async (value: File) => {
   max-width: var(--main-maxwidth);
 }
 
-.image {
-  height: var(--experience-height);
+span {
+  text-wrap: balance;
 }
 
-p {
-  text-indent: 2rem;
+h2 {
+  text-wrap: balance;
+}
+
+.image {
+  height: var(--experience-height);
 }
 </style>
