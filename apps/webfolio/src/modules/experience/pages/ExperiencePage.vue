@@ -1,10 +1,7 @@
 <template>
   <q-page>
-    <div
-      v-if="experience"
-      class="flex column content-center justify-center item-center q-px-sm tw-gap-16"
-    >
-      <div class="tw-max-w-[700px] tw-text-lg">
+    <div v-if="experience" class="container tw-gap-16">
+      <div class="tw-text-lg">
         <RelativeOverlay
           position="outside-top-right"
           position2="outside-top-left"
@@ -35,7 +32,7 @@
         </RelativeOverlay>
       </div>
 
-      <div class="tw-max-w-[700px]">
+      <div>
         <RelativeOverlay position="outside-top-right">
           <template #overlay v-if="editionStore.editable">
             <q-btn
@@ -177,4 +174,10 @@ const onDeleteExperience = async (experience_slug: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

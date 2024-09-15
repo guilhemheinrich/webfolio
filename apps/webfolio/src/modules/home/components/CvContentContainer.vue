@@ -1,5 +1,5 @@
 <template>
-  <RelativeOverlay position="beneath">
+  <RelativeOverlay position="above">
     <template #overlay v-if="editionStore.editable">
       <div class="full-width column items-center tw-pt-2">
         <q-btn

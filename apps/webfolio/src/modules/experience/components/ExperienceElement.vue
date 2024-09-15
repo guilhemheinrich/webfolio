@@ -192,7 +192,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import { useExperiences } from '../composables';
 import {
   updateExperienceShortDescription,

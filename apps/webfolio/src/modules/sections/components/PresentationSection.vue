@@ -1,34 +1,17 @@
 <template>
   <section id="presentation">
-    <RelativeOverlay position="top-right">
-      <template #overlay v-if="editionStore.editable">
-        <q-btn
-          class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
-          @click="presentationDialogVisible = true"
-          color="warning"
-        >
-          Edit Description
-        </q-btn>
-
-        <q-dialog v-model="presentationDialogVisible" full-width>
-          <div class="tw-max-w-[900px]! tw-w-[900px]">
-            <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
-            <MarkdownInput
-              :initial_content="
-                (presentationSection && presentationSection.content) || ''
-              "
-              field_label="Description"
-              :file_upload="
-                saveExperienceMarkdownFile(presentationSection?.slug || '')
-              "
-              @form-validated="onValidateDescription"
-              @cancel="presentationDialogVisible = false"
-            ></MarkdownInput>
-          </div>
-        </q-dialog>
-      </template>
-      <template #foreground>
-        <div class="container">
+    <div class="container">
+      <RelativeOverlay position="top-right">
+        <template #overlay v-if="editionStore.editable">
+          <q-btn
+            class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
+            @click="presentationDialogVisible = true"
+            color="warning"
+          >
+            Edit Description
+          </q-btn>
+        </template>
+        <template #foreground>
           <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
           <VMarkdownView
             v-if="presentationSection"
@@ -39,9 +22,25 @@
               (presentationSection && presentationSection.content) || ''
             "
           ></VMarkdownView>
-        </div>
-      </template>
-    </RelativeOverlay>
+        </template>
+      </RelativeOverlay>
+    </div>
+    <q-dialog v-model="presentationDialogVisible" full-width>
+      <div class="tw-max-w-[900px]! tw-w-[900px]">
+        <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
+        <MarkdownInput
+          :initial_content="
+            (presentationSection && presentationSection.content) || ''
+          "
+          field_label="Description"
+          :file_upload="
+            saveExperienceMarkdownFile(presentationSection?.slug || '')
+          "
+          @form-validated="onValidateDescription"
+          @cancel="presentationDialogVisible = false"
+        ></MarkdownInput>
+      </div>
+    </q-dialog>
   </section>
 </template>
 

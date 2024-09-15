@@ -111,9 +111,9 @@ const overlayClass4 = computed(() => {
 }
 
 .overlay-above {
-  top: -100%;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -100%);
 }
 
 .overlay-beneath {
