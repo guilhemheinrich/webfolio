@@ -23,7 +23,7 @@ const schema = zfd.formData({
 // TODO Upload or update based already existing resource or not
 // TODO refactor the function to handle path as category/id/file for each resource
 Deno.serve(async (req) => {
-    console.log("In update-profil-pic");
+    console.log("In update-file");
 
     if (req.method === "OPTIONS") {
         return new Response("ok", { headers: corsHeaders });
