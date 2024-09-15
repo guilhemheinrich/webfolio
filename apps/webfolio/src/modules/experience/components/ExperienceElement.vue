@@ -4,21 +4,13 @@
       <q-card-section class="q-pa-none border-radius-inherit col-6">
         <div class="border-radius-inherit">
           <q-img
-            v-if="experience.picture"
             class="border-radius-inherit image tw-rounded-r-none"
-            :src="experience.picture"
+            :src="experiencePicture"
             spinner-color="white"
             fit="contain"
           >
           </q-img>
-          <q-img
-            v-else
-            class="border-radius-inherit image tw-rounded-r-none"
-            src="~assets/logo_lite.png"
-            spinner-color="white"
-            fit="contain"
-          >
-          </q-img>
+
           <div
             v-if="editionStore.editable"
             class="absolute-top-right edit-button"
@@ -136,17 +128,8 @@
       <q-card-section class="q-pa-none border-radius-inherit">
         <div class="border-radius-inherit">
           <q-img
-            v-if="experience.picture"
             class="border-radius-inherit image tw-rounded-r-none"
-            :src="experience.picture"
-            spinner-color="white"
-            fit="contain"
-          >
-          </q-img>
-          <q-img
-            v-else
-            class="border-radius-inherit image"
-            src="~assets/logo_lite.png"
+            :src="experiencePicture"
             spinner-color="white"
             fit="contain"
           >
@@ -209,7 +192,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, Ref, ref, watch } from 'vue';
 import { useExperiences } from '../composables';
 import {
   updateExperienceShortDescription,
@@ -222,6 +205,13 @@ import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import PictureInput from 'src/modules/UI/components/form/PictureInput.vue';
 import { ComputedExperienceType } from '../model';
 import { dateAsString, capitalizeWordsPipe } from 'shared-utilities';
+import { Config } from 'src/modules/configuration';
+
+const experiencePicture = computed(() => {
+  if (props.experience.picture)
+    return `${props.experience.picture}${Config.ADMIN ? '?' + new Date().toISOString() : ''}`;
+  return 'src/assets/logo_lite.png';
+});
 
 const dateDisplayConficguration: Intl.DateTimeFormatOptions = {
   month: 'long',
@@ -283,6 +273,7 @@ const dialogPictureVisible = ref(false);
 const onUpload = async (value: File) => {
   if (props.experience === undefined) return;
   dialogPictureVisible.value = false;
+  console.log('value', value);
   await uploadExperienceMainPicture(supabase).call({
     experience_slug: props.experience.slug,
     file: value,

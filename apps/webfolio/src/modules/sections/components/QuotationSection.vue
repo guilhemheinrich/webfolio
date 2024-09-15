@@ -3,14 +3,7 @@
     <div class="row wrap items-center content-center gt-sm">
       <router-link to="/" class="col-3 q-pl-xl tw-relative">
         <q-img
-          v-if="quoteSection?.picture"
-          :src="quoteSection.picture"
-          class="img-circle tw-justify-self-center"
-          alt="Profil's picture"
-        ></q-img>
-        <q-img
-          v-else
-          src="~assets/logo_lite.png"
+          :src="quotationPicture"
           class="img-circle tw-justify-self-center"
           alt="Profil's picture"
         ></q-img>
@@ -42,14 +35,7 @@
     <div class="lt-md tw-flex-col">
       <router-link to="/" class="q-pt-xl tw-relative tw-block tw-text-center">
         <q-img
-          v-if="quoteSection?.picture"
-          :src="quoteSection.picture"
-          class="img-circle tw-justify-self-center"
-          alt="Profil's picture"
-        ></q-img>
-        <q-img
-          v-else
-          src="~assets/logo_lite.png"
+          :src="quotationPicture"
           class="img-circle tw-justify-self-center"
           alt="Profil's picture"
         ></q-img>
@@ -107,9 +93,16 @@ import { useEditionStore } from 'src/stores/edition';
 import { useSection } from '../composables';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import PictureInput from 'src/modules/UI/components/form/PictureInput.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { uploadSectionMainPicture } from 'api-service';
 import { supabase } from 'src/modules/supabase';
+import { Config } from 'src/modules/configuration';
+
+const quotationPicture = computed(() => {
+  if (quoteSection.value && quoteSection.value.picture)
+    return `${quoteSection.value.picture}${Config.ADMIN ? '?' + new Date().toISOString() : ''}`;
+  return 'src/assets/logo_lite.png';
+});
 
 const editionStore = useEditionStore();
 const { section: quoteSection, refetch, onValidate } = useSection('quotation');

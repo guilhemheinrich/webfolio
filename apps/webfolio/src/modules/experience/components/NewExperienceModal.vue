@@ -151,6 +151,7 @@ const step: Ref<'slug' | 'title' | 'period'> = ref<'slug' | 'title' | 'period'>(
   'slug',
 );
 const loading = ref<boolean>(false);
+
 const slug: Ref<string> = ref('');
 const slugForm = ref<QForm>();
 const onCheckSlug = async () => {
