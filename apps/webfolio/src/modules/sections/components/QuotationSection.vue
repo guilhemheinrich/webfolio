@@ -81,6 +81,7 @@
         <PictureInput
           @upload="onUpload"
           @cancel="dialogPictureVisible = false"
+          :cropper-props="{ stencil: 'circle' }"
         ></PictureInput>
       </div>
     </q-dialog>

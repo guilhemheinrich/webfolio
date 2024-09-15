@@ -27,8 +27,11 @@
             ref="cropper"
             class="cropper"
             :src="img"
+            :stencil-component="
+              cropperProps?.stencil ? CircleStencil : RectangleStencil
+            "
             :stencil-props="{
-              aspectRatio: 500 / 300,
+              aspectRatio: props.cropperProps?.aspectRatio ?? 500 / 300,
             }"
           ></Cropper>
         </q-carousel-slide>
@@ -76,19 +79,22 @@
 <script setup lang="ts">
 import { DefineComponent, Ref, ref } from 'vue';
 import { QCarousel, QUploader } from 'quasar';
-import { Cropper } from 'vue-advanced-cropper';
+import { Cropper, CircleStencil, RectangleStencil } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
 import Compressor from 'compressorjs';
 
 //* Uncomment when needed
-// type UploaderProps = InstanceType<typeof QUploader>['$props'];
-// type CropperProps = InstanceType<typeof Cropper>['$props'];
+type UploaderProps = InstanceType<typeof QUploader>['$props'];
+type CropperProps = InstanceType<typeof Cropper>['$props'];
 
-// const props = defineProps<{
-//   uploaderProps?: Partial<UploaderProps>;
-//   cropperProps?: Partial<CropperProps>;
-//   compressorOptions?: Compressor.Options;
-// }>();
+const props = defineProps<{
+  uploaderProps?: Partial<UploaderProps>;
+  cropperProps?: Partial<{
+    aspectRatio: string;
+    stencil: 'rectangle' | 'circle';
+  }>;
+  compressorOptions?: Compressor.Options;
+}>();
 
 const carouselRef = ref();
 const step: Ref<'select' | 'crop'> = ref('select');
@@ -141,3 +147,9 @@ const savePicture = () => {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.stencil {
+  border-radius: 50%;
+}
+</style>
