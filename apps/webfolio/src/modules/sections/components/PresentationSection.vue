@@ -28,14 +28,18 @@
         </q-dialog>
       </template>
       <template #foreground>
-        <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-        <VMarkdownView
-          v-if="presentationSection"
-          class="q-ma-md"
-          aria-label="Long presentation"
-          mode="custom"
-          :content="(presentationSection && presentationSection.content) || ''"
-        ></VMarkdownView>
+        <div class="container">
+          <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
+          <VMarkdownView
+            v-if="presentationSection"
+            class="q-ma-md"
+            aria-label="Long presentation"
+            mode="custom"
+            :content="
+              (presentationSection && presentationSection.content) || ''
+            "
+          ></VMarkdownView>
+        </div>
       </template>
     </RelativeOverlay>
   </section>
@@ -71,4 +75,10 @@ const onValidateDescription = async (value: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
