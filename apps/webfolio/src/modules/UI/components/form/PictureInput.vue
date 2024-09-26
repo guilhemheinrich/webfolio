@@ -85,7 +85,7 @@ import Compressor from 'compressorjs';
 
 //* Uncomment when needed
 type UploaderProps = InstanceType<typeof QUploader>['$props'];
-type CropperProps = InstanceType<typeof Cropper>['$props'];
+// type CropperProps = InstanceType<typeof Cropper>['$props'];
 
 const props = defineProps<{
   uploaderProps?: Partial<UploaderProps>;

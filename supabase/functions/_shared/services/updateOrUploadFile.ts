@@ -7,11 +7,10 @@ export async function updateOrUploadFile(
     file: File,
 ) {
     const searchPath = path.slice(0, -1);
+    console.log(searchPath);
     const { data, error } = await supabaseClient.storage
         .from("public_webfolio")
-        .list("", {
-            search: searchPath.join("/"), // Rechercher dans le répertoire cible
-        });
+        .list(searchPath.join("/"));
 
     if (error) throw error;
     const targetPath = path.join("/");
