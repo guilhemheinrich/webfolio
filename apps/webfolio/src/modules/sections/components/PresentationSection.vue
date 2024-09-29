@@ -75,6 +75,10 @@ const onValidateDescription = async (value: string) => {
 </script>
 
 <style scoped>
+section {
+  margin: 0px;
+  padding: 1rem;
+}
 .container {
   display: flex;
   flex-direction: column;

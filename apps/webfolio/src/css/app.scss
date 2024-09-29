@@ -33,7 +33,7 @@
   @property --experience-height {
     syntax: '<length>';
     inherits: false;
-    initial-value: 200px;
+    initial-value: 250px;
   }
 
   @property --main-maxwidth {
@@ -61,7 +61,7 @@
 h2 {
   /* Police */
   /* font-family: "Arial", sans-serif; */
-  font-size: 24px; /* Taille de police */
+  font-size: 1.5rem; /* Taille de police */
   font-weight: 600; /* Épaisseur légèrement plus gras */
   font-style: normal; /* Peut être italic ou oblique */
   font-variant: small-caps; /* Variante, comme small-caps */
