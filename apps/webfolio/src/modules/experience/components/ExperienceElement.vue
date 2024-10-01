@@ -7,7 +7,7 @@
             class="border-radius-inherit image tw-rounded-r-none"
             :src="experiencePicture"
             spinner-color="white"
-            fit="contain"
+            fit="cover"
           >
           </q-img>
 
