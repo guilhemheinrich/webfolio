@@ -101,6 +101,7 @@ section.markdown-body {
   width: var(--main-width);
   max-width: var(--main-maxwidth);
 
+  line-height: 1.7;
   a {
     text-decoration: underline; /* Supprime le soulignement par défaut */
     color: #007bff; /* Couleur du texte */
