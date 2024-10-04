@@ -126,7 +126,7 @@
         </div>
       </q-card-section>
       <q-card-section class="q-pa-none border-radius-inherit">
-        <div class="border-radius-inherit">
+        <div class="no-border-radius relative-position">
           <q-img
             class="border-radius-inherit image tw-rounded-r-none"
             :src="experiencePicture"
@@ -146,14 +146,14 @@
               Edit Picture
             </q-btn>
           </div>
+          <q-btn
+            color="secondary"
+            class="more-button"
+            :to="`/experience/${experience.slug}`"
+          >
+            En savoir plus
+          </q-btn>
         </div>
-        <q-btn
-          color="secondary"
-          class="full-width"
-          :to="`/experience/${experience.slug}`"
-        >
-          En savoir plus
-        </q-btn>
       </q-card-section>
     </div>
   </q-card>
@@ -283,6 +283,14 @@ const onUpload = async (value: File) => {
 </script>
 
 <style scoped>
+.more-button {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
 .card-desktop {
   width: var(--main-width);
   max-width: var(--main-maxwidth);
