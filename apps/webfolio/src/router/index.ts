@@ -31,15 +31,12 @@ export default route(function (/* { store, ssrContext } */) {
       // Si la position est sauvegardée (comme avec le bouton Précédent)
       if (savedPosition) {
         return savedPosition;
-      } else if (to.hash) {
-        // Si un hash est présent, scroller jusqu'à cet élément
-        return { selector: to.hash };
       } else if (to.params.scrollPosition) {
         // Restaurer la position de scroll manuellement sauvegardée
-        return { x: 0, y: to.params.scrollPosition };
+        return { top: to.params.scrollPosition };
       } else {
         // Sinon, scroller en haut de la page
-        return { x: 0, y: 0 };
+        return { top: 0 };
       }
     },
     routes,
