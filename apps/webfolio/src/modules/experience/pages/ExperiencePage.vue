@@ -74,6 +74,14 @@
             @form-validated="onValidateDescription"
             @cancel="dialogDescriptionVisible = false"
           ></MarkdownInput>
+
+          <!-- <WysiwygInput
+            height="80dvh"
+            field_label="Description"
+            :initial_content="experience.description"
+            @form-validated="onValidateDescription"
+            @cancel="dialogDescriptionVisible = false"
+          ></WysiwygInput> -->
         </div>
       </q-dialog>
 
@@ -113,6 +121,7 @@ import {
 } from 'api-service';
 import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
 import { ComputedExperienceType } from '../model';
+import WysiwygInput from 'src/modules/UI/components/form/WysiwygInput.vue';
 const editionStore = useEditionStore();
 const route = useRoute();
 const router = useRouter();
