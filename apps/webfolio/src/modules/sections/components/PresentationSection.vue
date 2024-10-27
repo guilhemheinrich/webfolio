@@ -13,7 +13,12 @@
         </template>
         <template #foreground>
           <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-          <VMarkdownView
+          <div
+            class="q-ma-md"
+            aria-label="Long presentation"
+            v-html="(presentationSection && presentationSection.content) || ''"
+          ></div>
+          <!-- <VMarkdownView
             v-if="presentationSection"
             class="q-ma-md"
             aria-label="Long presentation"
@@ -21,24 +26,21 @@
             :content="
               (presentationSection && presentationSection.content) || ''
             "
-          ></VMarkdownView>
+          ></VMarkdownView> -->
         </template>
       </RelativeOverlay>
     </div>
     <q-dialog v-model="presentationDialogVisible" full-width>
       <div class="tw-max-w-[900px]! tw-w-[900px]">
-        <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
-        <MarkdownInput
+        <WysiwygInput
+          height="80dvh"
+          field_label="Description"
           :initial_content="
             (presentationSection && presentationSection.content) || ''
           "
-          field_label="Description"
-          :file_upload="
-            saveExperienceMarkdownFile(presentationSection?.slug || '')
-          "
           @form-validated="onValidateDescription"
           @cancel="presentationDialogVisible = false"
-        ></MarkdownInput>
+        ></WysiwygInput>
       </div>
     </q-dialog>
   </section>
@@ -46,12 +48,8 @@
 
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
-import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
-import { VMarkdownView } from 'vue3-markdown';
-import 'vue3-markdown/dist/style.css';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { useSection } from '../composables';
-import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
 import { ref } from 'vue';
 
 const editionStore = useEditionStore();

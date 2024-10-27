@@ -33,7 +33,7 @@
       </div>
 
       <div>
-        <RelativeOverlay position="outside-top-right">
+        <RelativeOverlay position="top-right">
           <template #overlay v-if="editionStore.editable">
             <q-btn
               class="tw-maxw-[200px] tw-mx-4 tw-w-[15vw]"
@@ -44,11 +44,7 @@
             </q-btn>
           </template>
           <template #foreground>
-            <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-            <VMarkdownView
-              mode="custom"
-              :content="experience.description"
-            ></VMarkdownView>
+            <div v-html="experience.description"></div>
           </template>
         </RelativeOverlay>
       </div>
@@ -66,22 +62,13 @@
 
       <q-dialog v-model="dialogDescriptionVisible" full-width>
         <div class="tw-max-w-[900px]! tw-w-[900px]">
-          <!-- <ExperienceForm :initial_content="content"></ExperienceForm>  -->
-          <MarkdownInput
-            :initial_content="experience.description"
-            field_label="Description"
-            :file_upload="saveExperienceMarkdownFile(experience.slug)"
-            @form-validated="onValidateDescription"
-            @cancel="dialogDescriptionVisible = false"
-          ></MarkdownInput>
-
-          <!-- <WysiwygInput
+          <WysiwygInput
             height="80dvh"
             field_label="Description"
             :initial_content="experience.description"
             @form-validated="onValidateDescription"
             @cancel="dialogDescriptionVisible = false"
-          ></WysiwygInput> -->
+          ></WysiwygInput>
         </div>
       </q-dialog>
 
@@ -104,10 +91,7 @@
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
-import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
 import { useExperiences } from '../composables';
-import { VMarkdownView } from 'vue3-markdown';
-import 'vue3-markdown/dist/style.css';
 import { computed, Ref, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
@@ -119,7 +103,6 @@ import {
   updateExperienceShortDescription,
   updateExperienceTitle,
 } from 'api-service';
-import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
 import { ComputedExperienceType } from '../model';
 import WysiwygInput from 'src/modules/UI/components/form/WysiwygInput.vue';
 const editionStore = useEditionStore();
