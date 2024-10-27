@@ -23,17 +23,11 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/experience/:experience_id',
-    name: 'experience_page',
     component: () => import('layouts/MainLayout.vue'),
-    // component: () =>
-    //   import(
-    //     ['xs', 'sm'].includes(Screen.name)
-    //       ? 'layouts/QanopeeHeaderlessLayout.vue'
-    //       : 'layouts/QanopeeLayout.vue'
-    //   ),
     children: [
       {
         path: '',
+        name: 'experience_page',
         component: () => import('modules/experience/pages/ExperiencePage.vue'),
       },
     ],
