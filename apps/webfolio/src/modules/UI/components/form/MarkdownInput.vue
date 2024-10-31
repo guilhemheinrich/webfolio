@@ -54,7 +54,7 @@ const isLoaded = ref<boolean>(false);
 onMounted(async () => {
   content.value = props.initial_content;
   import('vue3-markdown').then((module) => {
-    VMarkdownEditor = module.VMarkdownEditor;
+    VMarkdownEditor = module.VMarkdownEditor as Component;
     isLoaded.value = true;
   });
   if (outer_div.value && mkdEditor.value) {

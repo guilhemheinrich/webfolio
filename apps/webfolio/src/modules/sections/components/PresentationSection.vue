@@ -59,7 +59,7 @@ let VMarkdownView: Component | null = null;
 const isLoaded = ref<boolean>(false);
 onMounted(() => {
   import('vue3-markdown').then((module) => {
-    VMarkdownView = module.VMarkdownView;
+    VMarkdownView = module.VMarkdownView as Component;
     isLoaded.value = true;
   });
 });
