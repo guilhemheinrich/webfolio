@@ -45,10 +45,12 @@
           </template>
           <template #foreground>
             <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-            <VMarkdownView
-              mode="custom"
-              :content="experience.description"
-            ></VMarkdownView>
+            <div v-if="isLoaded">
+              <VMarkdownView
+                mode="custom"
+                :content="experience.description"
+              ></VMarkdownView>
+            </div>
           </template>
         </RelativeOverlay>
       </div>
@@ -98,9 +100,8 @@ import { useEditionStore } from 'src/stores/edition';
 import TextInput from 'src/modules/UI/components/form/TextInput.vue';
 import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
 import { useExperiences } from '../composables';
-import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
-import { computed, Ref, ref } from 'vue';
+import { computed, onMounted, Ref, ref, Component } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { supabase } from 'src/modules/supabase';
@@ -113,6 +114,17 @@ import {
 } from 'api-service';
 import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
 import { ComputedExperienceType } from '../model';
+
+// Déclarons une variable pour le composant VMarkdownView
+let VMarkdownView: Component | null = null;
+const isLoaded = ref<boolean>(false);
+onMounted(() => {
+  import('vue3-markdown').then((module) => {
+    VMarkdownView = module.VMarkdownView;
+    isLoaded.value = true;
+  });
+});
+
 const editionStore = useEditionStore();
 const route = useRoute();
 const router = useRouter();
@@ -179,5 +191,9 @@ const onDeleteExperience = async (experience_slug: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+section.markdown-body {
+  padding: 8px;
 }
 </style>

@@ -13,15 +13,17 @@
         </template>
         <template #foreground>
           <!-- mode="custom" utilise les styles globaux (comme n'importe quoi d'autre que "light" et "dark") -->
-          <VMarkdownView
-            v-if="presentationSection"
-            class="q-ma-md"
-            aria-label="Long presentation"
-            mode="custom"
-            :content="
-              (presentationSection && presentationSection.content) || ''
-            "
-          ></VMarkdownView>
+          <div v-if="isLoaded">
+            <VMarkdownView
+              v-if="presentationSection"
+              class="q-ma-md"
+              aria-label="Long presentation"
+              mode="custom"
+              :content="
+                (presentationSection && presentationSection.content) || ''
+              "
+            ></VMarkdownView>
+          </div>
         </template>
       </RelativeOverlay>
     </div>
@@ -47,12 +49,20 @@
 <script setup lang="ts">
 import { useEditionStore } from 'src/stores/edition';
 import MarkdownInput from 'src/modules/UI/components/form/MarkdownInput.vue';
-import { VMarkdownView } from 'vue3-markdown';
 import 'vue3-markdown/dist/style.css';
 import RelativeOverlay from 'src/modules/UI/components/RelativeOverlay.vue';
 import { useSection } from '../composables';
 import { saveExperienceMarkdownFile } from 'src/modules/experience/functions/saveExperienceMarkdownFile';
-import { ref } from 'vue';
+import { Component, onMounted, ref } from 'vue';
+
+let VMarkdownView: Component | null = null;
+const isLoaded = ref<boolean>(false);
+onMounted(() => {
+  import('vue3-markdown').then((module) => {
+    VMarkdownView = module.VMarkdownView;
+    isLoaded.value = true;
+  });
+});
 
 const editionStore = useEditionStore();
 
@@ -79,9 +89,14 @@ section {
   margin: 0px;
   padding: 1rem;
 }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+section.markdown-body {
+  padding: 0px;
 }
 </style>

@@ -3,6 +3,10 @@ import { Config } from 'src/modules/configuration';
 import { Ref, computed, ref } from 'vue';
 
 export const useEditionStore = defineStore('edition-store', () => {
+  if (!process.env.CLIENT)
+    return {
+      editable: true,
+    };
   if (!sessionStorage.getItem('editionStore'))
     sessionStorage.setItem('editionStore', 'true');
   const editable: Ref<boolean> = ref(
