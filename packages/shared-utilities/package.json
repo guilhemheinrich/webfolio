@@ -10,7 +10,8 @@
         "build:watch": "tsc -w"
     },
     "dependencies": {
-        "supabase-types": "workspace:^"
+        "supabase-types": "workspace:^",
+        "tsup": "^8.0.2"
     },
     "keywords": [],
     "author": "",

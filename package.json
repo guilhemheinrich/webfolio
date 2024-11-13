@@ -39,5 +39,7 @@
         "nx": "19.2.2",
         "supabase": "^1.136.3"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@types/node": "^12.20.21"
+    }
 }

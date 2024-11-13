@@ -120,6 +120,9 @@ module.exports = configure(function (/* ctx */) {
           { server: false },
         ],
       ],
+      rollupOptions: {
+        external: ['@vue/runtime-dom'],
+      },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer

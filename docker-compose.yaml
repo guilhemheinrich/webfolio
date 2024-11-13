@@ -1,0 +1,25 @@
+services:
+  webfolio:
+    # Nom du build: référence au Dockerfile dans le dossier apps/qanopee-core
+    build:
+      context: .
+      dockerfile: ./apps/webfolio/Dockerfile
+    # Recrée le conteneur quand les fichiers changent
+    # volumes:
+    #   - .:/app
+    # Utiliser le port 3000 en local et à l'intérieur du conteneur
+    ports:
+      - '9000:9000'
+    # Variables d'environnement si nécessaire
+    environment:
+      ADMIN: ${ADMIN}
+      CONTACT_MAIL: ${CONTACT_MAIL}
+      FACEBOOK_PROFIL: ${FACEBOOK_PROFIL}
+      GITHUB_PROFIL: ${GITHUB_PROFIL}
+      LINKDIN_PROFIL: ${LINKDIN_PROFIL}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SUPABASE_SERVICE_KEY}
+    # Démarrer le serveur
+    # command: sh -c "node dist/apps/qanopee-core/main.js"
+    command: sh -c "sleep infinity"
