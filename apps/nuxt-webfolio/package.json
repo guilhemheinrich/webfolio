@@ -14,6 +14,7 @@
         "nuxt": "^3.14.159",
         "quasar": "^2.8.0",
         "vue": "latest",
-        "vue-router": "latest"
+        "vue-router": "latest",
+        "configuration": "workspace:^"
     }
 }

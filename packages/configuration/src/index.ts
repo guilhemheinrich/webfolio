@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const ConfigSchema = z.object({
+export const SharedConfigSchema = z.object({
     SUPABASE_URL: z.string(),
     SUPABASE_ANON_KEY: z.string(),
     SUPABASE_SERVICE_KEY: z.string(),
@@ -13,7 +13,7 @@ const ConfigSchema = z.object({
     INSTAGRAM_PROFIL: z.string().optional(),
 });
 
-export type Config = z.infer<typeof ConfigSchema>;
+export type Config = z.infer<typeof SharedConfigSchema>;
 const rawConfig: Partial<Config> = {
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
@@ -26,4 +26,4 @@ const rawConfig: Partial<Config> = {
     INSTAGRAM_PROFIL: process.env.INSTAGRAM_PROFIL,
     DISCORD_SERVER: process.env.DISCORD_SERVER,
 };
-export const Config = ConfigSchema.parse(rawConfig);
+export const Config = SharedConfigSchema.parse(rawConfig);
