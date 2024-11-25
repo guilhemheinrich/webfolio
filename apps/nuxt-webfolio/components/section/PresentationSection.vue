@@ -39,7 +39,9 @@
                     "
                     field_label="Description"
                     :file_upload="
-                        saveMarkdownFile(presentationSection?.slug || '')
+                        saveMarkdownFile(
+                            presentationSection?.slug || 'presentation',
+                        )
                     "
                     @form-validated="onValidateDescription"
                     @cancel="presentationDialogVisible = false"

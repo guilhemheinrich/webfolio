@@ -3,8 +3,8 @@
         <div ref="outer_div">
             <q-card-section class="tw-h-[80dvh]">
                 <q-form ref="form" @submit="onSubmit">
-                    <div v-if="isLoaded">
-                        <div ref="mkdEditor">
+                    <div v-if="isLoaded" ref="mkdEditor">
+                        <div>
                             <VMarkdownEditor
                                 v-model="content"
                                 locale="en"
@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { QForm } from "quasar";
-import { type Component, onMounted, ref, type PropType } from "vue";
+import { type Component, onMounted, ref, type PropType, nextTick } from "vue";
 
 const props = defineProps({
     field_label: {
@@ -45,37 +45,46 @@ const props = defineProps({
 
 const content = ref("");
 const mkdEditor = ref<HTMLElement | null>(null);
-
 const outer_div = ref<HTMLElement | null>(null);
 
 // Déclarons une variable pour le composant VMarkdownView
 let VMarkdownEditor: Component | null = null;
 const isLoaded = ref<boolean>(false);
 onMounted(async () => {
+    await nextTick();
     content.value = props.initial_content;
-    import("vue3-markdown").then((module) => {
+    console.log("before loading module");
+    await import("vue3-markdown").then((module) => {
         VMarkdownEditor = module.VMarkdownEditor as Component;
         isLoaded.value = true;
+        console.log("here");
+        console.log(form.value);
+        // const webComponent = mkdEditor.value as HTMLElement;
     });
-    if (outer_div.value && mkdEditor.value) {
-        const content_heigh = outer_div.value.clientHeight;
-        // Vous pouvez maintenant manipuler mkdEditor
+    console.log("after loading module");
 
-        // Accéder au webcomponent
-        const webComponent = mkdEditor.value as HTMLElement;
-        if (webComponent) {
-            // Accéder à la deuxième div à l'intérieur du webcomponent
-            const vmdBodyElement = webComponent.querySelector(".vmd-body");
-            const vmdHeaderElement = webComponent.querySelector(".vmd-toolbar");
-            if (vmdBodyElement) {
-                (vmdBodyElement as HTMLElement).style.height =
-                    content_heigh -
-                    (vmdHeaderElement?.clientHeight ?? 0) -
-                    30 +
-                    "px";
-            }
-        }
-    }
+    // await nextTick();
+
+    // if (outer_div.value) {
+    //     const content_heigh = outer_div.value.clientHeight;
+    //     // Vous pouvez maintenant manipuler mkdEditor
+    //     console.log(JSON.stringify(mkdEditor.value));
+    //     // Accéder au webcomponent
+    //     const webComponent = mkdEditor.value as HTMLElement;
+    //     if (webComponent) {
+    //         // Accéder à la deuxième div à l'intérieur du webcomponent
+    //         const vmdBodyElement = webComponent.querySelector(".vmd-body");
+    //         const vmdHeaderElement = webComponent.querySelector(".vmd-toolbar");
+    //         if (vmdBodyElement) {
+    //             (vmdBodyElement as HTMLElement).style.height =
+    //                 content_heigh -
+    //                 (vmdHeaderElement?.clientHeight ?? 0) -
+    //                 30 +
+    //                 "px";
+    //         }
+    //         console.log("there");
+    //     }
+    // }
 });
 const emit = defineEmits<{
     (e: "formValidated", value: string): void;
