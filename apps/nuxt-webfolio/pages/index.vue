@@ -1,14 +1,12 @@
 <template>
     <div>
-        <h1>Hello world</h1>
-        Here is my mail: {{ Config.public.CONTACT_MAIL }}
-
-        Full Config: {{ Config.public }}
+        <PresentationSection></PresentationSection>
     </div>
 </template>
 
 <script setup lang="ts">
-const Config = useRuntimeConfig();
+import PresentationSection from "@components/section/PresentationSection.vue";
+import TextInput from "@components/UI/form/TextInput.vue";
 </script>
 
 <style scoped></style>

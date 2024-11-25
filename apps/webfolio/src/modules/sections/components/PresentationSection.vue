@@ -65,7 +65,6 @@ onMounted(() => {
 });
 
 const editionStore = useEditionStore();
-
 const {
   section: presentationSection,
   refetch,

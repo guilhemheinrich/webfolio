@@ -1,3 +1,5 @@
+import { fileURLToPath } from "url";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     compatibilityDate: "2024-04-03",
@@ -14,14 +16,26 @@ export default defineNuxtConfig({
             TWITTER_PROFIL: process.env.TWITTER_PROFIL || "",
             INSTAGRAM_PROFIL: process.env.INSTAGRAM_PROFIL || "",
             DISCORD_SERVER: process.env.DISCORD_SERVER || "",
-        },
-        private: {
             SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
         },
+        private: {},
     },
-    hooks: {
-        ready: async (params: any) => {
-            console.log("nuxt ready hook");
-        },
+    // hooks: {
+    //     ready: async (params: any) => {
+    //         console.log("nuxt ready hook");
+    //     },
+    // },
+    alias: {
+        "@composables": fileURLToPath(
+            new URL("./composables", import.meta.url),
+        ),
+        "@models": fileURLToPath(new URL("./models", import.meta.url)),
+        "@components": fileURLToPath(new URL("./components", import.meta.url)),
     },
+    modules: [
+        "nuxt-quasar-ui",
+        "@pinia/nuxt",
+        "@hebilicious/vue-query-nuxt",
+        "@nuxtjs/tailwindcss",
+    ],
 });
