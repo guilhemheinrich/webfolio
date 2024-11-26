@@ -58,10 +58,17 @@
   }
 }
 
+body {
+  font-size: 1rem; /* Taille de police */
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
 h2 {
   /* Police */
   /* font-family: "Arial", sans-serif; */
-  font-size: 1.5rem; /* Taille de police */
+
   font-weight: 600; /* Épaisseur légèrement plus gras */
   font-style: normal; /* Peut être italic ou oblique */
   font-variant: small-caps; /* Variante, comme small-caps */
@@ -117,5 +124,16 @@ h2 {
 
   a:active {
     color: #0056b3; /* Couleur du lien au clic */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Taille de police */
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  p {
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 }
