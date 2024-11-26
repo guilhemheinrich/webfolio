@@ -3,14 +3,12 @@
     <div ref="outer_div">
       <q-card-section class="tw-h-[80dvh]">
         <q-form ref="form" @submit="onSubmit">
-          <div v-if="isLoaded">
-            <div ref="mkdEditor">
-              <VMarkdownEditor
-                v-model="content"
-                locale="en"
-                :upload-action="file_upload"
-              ></VMarkdownEditor>
-            </div>
+          <div ref="mkdEditor">
+            <VMarkdownEditor
+              v-model="content"
+              locale="en"
+              :upload-action="file_upload"
+            ></VMarkdownEditor>
           </div>
         </q-form>
       </q-card-section>
@@ -24,8 +22,8 @@
 
 <script setup lang="ts">
 import { QForm } from 'quasar';
-import { Component, onMounted, ref, type PropType } from 'vue';
-
+import { onMounted, ref, type PropType } from 'vue';
+import { VMarkdownEditor } from 'vue3-markdown';
 const props = defineProps({
   field_label: {
     type: String as PropType<string>,
@@ -48,19 +46,12 @@ const mkdEditor = ref<HTMLElement | null>(null);
 
 const outer_div = ref<HTMLElement | null>(null);
 
-// Déclarons une variable pour le composant VMarkdownView
-let VMarkdownEditor: Component | null = null;
-const isLoaded = ref<boolean>(false);
 onMounted(async () => {
   content.value = props.initial_content;
-  import('vue3-markdown').then((module) => {
-    VMarkdownEditor = module.VMarkdownEditor as Component;
-    isLoaded.value = true;
-  });
+
   if (outer_div.value && mkdEditor.value) {
     const content_heigh = outer_div.value.clientHeight;
     // Vous pouvez maintenant manipuler mkdEditor
-
     // Accéder au webcomponent
     const webComponent = mkdEditor.value as HTMLElement;
     if (webComponent) {
